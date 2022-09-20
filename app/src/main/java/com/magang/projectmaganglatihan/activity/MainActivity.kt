@@ -1,7 +1,8 @@
-package com.magang.projectmaganglatihan
+package com.magang.projectmaganglatihan.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.magang.projectmaganglatihan.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
