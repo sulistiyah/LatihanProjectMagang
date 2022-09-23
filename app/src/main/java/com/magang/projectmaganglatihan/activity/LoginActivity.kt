@@ -52,8 +52,8 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
 
-//                                SharedPrefManager.getInstance(applicationContext)
-//                                    .savelogin(true)
+                                SharedPrefManager.getInstance(applicationContext)
+                                    .savelogin(true)
 //                                SharedPrefManager.getInstance(applicationContext)
 //                                    .saveToken(response.body()?.token.toString())
 
