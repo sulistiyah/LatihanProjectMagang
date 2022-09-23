@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.widget.Toast
 import com.magang.projectmaganglatihan.Api.RetrofitClient
 import com.magang.projectmaganglatihan.Models.LoginParam
@@ -25,10 +24,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        etEmail.setText("userdev@gmail.com")
-        etPass.setText("123123")
 
         sharedPref = SharedPrefManager(this)
+
+        tvdaftar.setOnClickListener {
+            intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
         btnmasuk.setOnClickListener {
             val email = etEmail.text.toString().trim()
@@ -49,30 +51,25 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
-                                Toast.makeText(
-                                    this@LoginActivity, "to next page",
-                                    Toast.LENGTH_SHORT
-                                ).show()
 
-                                SharedPrefManager.getInstance(applicationContext)
-                                    .savelogin(true)
-                                SharedPrefManager.getInstance(applicationContext)
-                                    .saveToken(response.body()?.token.toString())
-                                val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
-                                startActivity(intentlogin)
+//                                SharedPrefManager.getInstance(applicationContext)
+//                                    .savelogin(true)
+//                                SharedPrefManager.getInstance(applicationContext)
+//                                    .saveToken(response.body()?.token.toString())
+
 
                             } else {
                                 Toast.makeText(
                                     this@LoginActivity, response.body()?.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                    Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             Toast.makeText(
-                                this@LoginActivity, response.code()?.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                this@LoginActivity, response.errorBody().toString(),
+                                Toast.LENGTH_SHORT).show()
                         }
+                        val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intentlogin)
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -82,11 +79,9 @@ class LoginActivity : AppCompatActivity() {
                 })
 
         }
-        //       txt_SignUp.setOnClickListener {
-//            intent = Intent(applicationContext, SignUpActivity::class.java)
-//            startActivity(intent)
-        //on off visibility password
 
+
+        //on off visibility password
         imgeye.setOnClickListener{
             mIsShowPass =! mIsShowPass
             showPassword(mIsShowPass)

@@ -104,6 +104,7 @@
         android:textColor="@color/white"/>
 
     <TextView
+        android:id="@+id/tvdaftar"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
@@ -117,6 +118,7 @@
         android:text="@string/daftar_sekarang"
         android:textAppearance="@style/daftar_sekarang"
         android:textColor="@color/red"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        android:onClick="@+id/daftar"/>
 
 </RelativeLayout>
