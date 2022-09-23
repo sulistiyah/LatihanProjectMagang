@@ -122,5 +122,4 @@
         android:textColor="@color/red"
         android:textSize="14dp"
         android:onClick="@+id/daftar"/>
-
 </RelativeLayout>
