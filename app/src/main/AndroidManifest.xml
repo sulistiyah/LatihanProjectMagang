@@ -18,22 +18,28 @@
 
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="true" >
+            android:exported="true"
+            tools:ignore="MissingClass"/>
+
+        <activity
+        android:name=".activity.RegisterActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="true" />
+            android:exported="true"
+            tools:ignore="MissingClass" />
 
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true"/>
-
-
+            android:exported="true"
+            tools:ignore="MissingClass" />
     </application>
 
 </manifest>

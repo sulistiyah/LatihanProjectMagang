@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ProjectMagangLatihan</string>
+<<<<<<< HEAD
     <string name="lupa_kata_s">Lupa Kata Sandi</string>
     <string name="daftar_sekarang">Daftar Sekarang</string>
     <string name="belum_mempunyai_akun">belum mempunyai akun?</string>
+=======
+    <string name="daftar">DAFTAR</string>
+>>>>>>> origin/master
 </resources>

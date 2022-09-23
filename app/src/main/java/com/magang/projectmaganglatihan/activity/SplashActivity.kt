@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.magang.projectmaganglatihan.R
 
-@SuppressLint("CustomSplashScreen")
+//@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

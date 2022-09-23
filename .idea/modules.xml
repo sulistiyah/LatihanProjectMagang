@@ -7,6 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.unitTest.iml" />
     </modules>
   </component>
 </project>
