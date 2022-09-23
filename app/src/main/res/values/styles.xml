@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="lupa_kata_s">Lupa Kata Sandi</style>
+
+    <style name="belum_mempunyai_akun">belum mempunyai akun?</style>
+
+    <style name="daftar_sekarang">Daftar Sekarang</style>
+</resources>
