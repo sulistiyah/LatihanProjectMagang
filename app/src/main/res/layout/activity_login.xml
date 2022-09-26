@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <View
             android:id="@+id/Viewselamatdatang"
@@ -21,7 +21,7 @@
             android:background="@drawable/selamatdatang" />
 
         <androidx.viewpager.widget.ViewPager
-            android:layout_width="301.87dp"
+            android:layout_width="wrap_content"
             android:layout_height="217.45dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="56.56dp"
@@ -54,23 +54,23 @@
 
         <ImageView
             android:id="@+id/imgeye"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="345dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="50dp"
-            android:layout_marginTop="525dp"
-            android:background="@drawable/eyefill" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/etEmail"
+            android:layout_alignEnd="@id/etEmail"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/ic_show_password" />
 
 
         <View
             android:id="@+id/btnmasuk"
             android:layout_width="374dp"
             android:layout_height="63dp"
+            android:layout_below="@id/etPass"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="617dp"
+            android:layout_marginTop="47dp"
             android:background="@drawable/img"
             android:onClick="@id/btnmasuk" />
 
@@ -79,45 +79,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnmasuk"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="120dp"
             android:gravity="center"
-            android:lineSpacingExtra="-4sp"
             android:text="@string/lupa_kata_s"
             android:textAppearance="@style/lupa_kata_s"
             android:textColor="@color/white"
             android:textSize="12dp" />
 
-        <TextView
-            android:id="@+id/tvbelummempunyaiakun"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lupa_kata_s"
-            android:layout_alignBaseline="@+id/tvdaftar"
-            android:layout_alignBottom="@+id/tvdaftar"
-            android:layout_marginTop="80dp"
-            android:layout_marginRight="20dp"
-            android:lineSpacingExtra="-1sp"
-            android:text="@string/belum_mempunyai_akun"
-            android:textAppearance="@style/belum_mempunyai_akun"
-            android:textColor="@color/white"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/tvdaftar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_below="@id/lupa_kata_s"
-            android:layout_alignEnd="@+id/lupa_kata_s"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="80dp"
-            android:lineSpacingExtra="-1sp"
-            android:onClick="@+id/daftar"
-            android:paddingStart="20dp"
-            android:text="@string/daftar_sekarang"
-            android:textAppearance="@style/daftar_sekarang"
-            android:textColor="@color/red"
-            android:textSize="14dp" />
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tvbelummempunyaiakun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="-1sp"
+                android:text="@string/belum_mempunyai_akun"
+                android:textAppearance="@style/belum_mempunyai_akun"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tvdaftar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:onClick="@+id/daftar"
+                android:paddingStart="10dp"
+                android:text="@string/daftar_sekarang"
+                android:textAppearance="@style/daftar_sekarang"
+                android:textColor="@color/red"
+                android:textSize="12dp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

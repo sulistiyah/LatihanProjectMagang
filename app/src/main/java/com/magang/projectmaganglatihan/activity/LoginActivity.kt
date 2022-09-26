@@ -93,10 +93,10 @@ class LoginActivity : AppCompatActivity() {
         private  fun showPassword(isShow: Boolean){
             if (isShow){
                 etPass.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                imgeye.setImageResource(R.drawable.ic_visibilityoff)
+                imgeye.setImageResource(R.drawable.ic_hide_password)
             }else{
                 etPass.transformationMethod = PasswordTransformationMethod.getInstance()
-                imgeye.setImageResource(R.drawable.eyefill)
+                imgeye.setImageResource(R.drawable.ic_show_password)
             }
             etPass.setSelection(etPass.text.toString().length)
         }
