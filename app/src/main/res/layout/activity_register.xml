@@ -50,27 +50,33 @@
           android:id="@+id/etKodePerusahaan"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:inputType="text"
           android:background="@drawable/bg_insert_register"
           android:hint="Kode Perusahaan"
-          android:paddingStart="15dp"/>
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"/>
 
       <EditText
           android:id="@+id/etIdKaryawan"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:inputType="text"
           android:background="@drawable/bg_insert_register"
           android:hint="ID Karyawan*"
           android:layout_marginTop="20dp"
-          android:paddingStart="15dp"/>
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"/>
 
       <EditText
           android:id="@+id/etNamaLengkap"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:background="@drawable/bg_insert_register"
+          android:inputType="text"
           android:hint="Nama Lengkap*"
           android:layout_marginTop="20dp"
-          android:paddingStart="15dp"/>
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"/>
 
       <EditText
           android:id="@+id/etEmail"
@@ -78,8 +84,10 @@
           android:layout_height="match_parent"
           android:background="@drawable/bg_insert_register"
           android:hint="Email*"
+          android:inputType="textEmailAddress"
           android:layout_marginTop="20dp"
-          android:paddingStart="15dp"/>
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"/>
 
       <EditText
           android:id="@+id/etJobDeskDepartemen"
@@ -88,16 +96,19 @@
           android:background="@drawable/bg_insert_register"
           android:hint="Job Desk / Departemen*"
           android:layout_marginTop="20dp"
-          android:paddingStart="15dp"/>
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"/>
 
       <EditText
           android:id="@+id/etNomorTelepon"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:background="@drawable/bg_insert_register"
-          android:hint="NomorTelepon / Phone*"
+          android:hint="Nomor Telepon / Phone*"
+          android:inputType="phone"
           android:layout_marginTop="20dp"
-          android:paddingStart="15dp"/>
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"/>
 
       <ImageView
           android:layout_width="match_parent"
@@ -128,7 +139,9 @@
           android:layout_marginTop="20dp"
           android:background="@drawable/bg_insert_register"
           android:hint="Masukan Kata Sandi*"
-          android:paddingStart="15dp" />
+          android:inputType="textPassword"
+          android:paddingStart="15dp"
+          android:paddingEnd="5dp"/>
 
       <ImageView
           android:id="@+id/imgShowPass"
@@ -137,7 +150,7 @@
           android:layout_below="@id/tvMasukanPassword"
           android:layout_alignEnd="@+id/tvMasukanPassword"
           android:layout_marginTop="40dp"
-          android:layout_marginEnd="20dp"
+          android:layout_marginEnd="30dp"
           android:src="@drawable/ic_show_password" />
 
       <EditText
@@ -148,7 +161,9 @@
           android:layout_marginTop="20dp"
           android:background="@drawable/bg_insert_register"
           android:hint="Konfimasi Kata Sandi*"
-          android:paddingStart="15dp" />
+          android:inputType="textPassword"
+          android:paddingStart="15dp"
+          android:paddingEnd="5dp"/>
 
       <ImageView
           android:id="@+id/imgShowKonfirmasiPass"
@@ -157,7 +172,7 @@
           android:layout_below="@id/etMasukanPassword"
           android:layout_alignEnd="@+id/etMasukanPassword"
           android:layout_marginTop="40dp"
-          android:layout_marginEnd="20dp"
+          android:layout_marginEnd="30dp"
           android:src="@drawable/ic_show_password" />
 
       <ImageView

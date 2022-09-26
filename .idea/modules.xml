@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PROJECTMAGANG.ProjectMagangLatihan.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PROJECTMAGANG.ProjectMagangLatihan.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PROJECTMAGANG.ProjectMagangLatihan.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PROJECTMAGANG.ProjectMagangLatihan.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PROJECTMAGANG.ProjectMagangLatihan.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PROJECTMAGANG.ProjectMagangLatihan.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ProjectMagangLatihan.iml" filepath="$PROJECT_DIR$/.idea/modules/ProjectMagangLatihan.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.ProjectMagangLatihan.app.unitTest.iml" />
     </modules>
   </component>
 </project>

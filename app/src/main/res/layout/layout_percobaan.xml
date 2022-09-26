@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_layer"
+    tools:context=".activity.RegisterActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/back_top"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_back"
+                android:background="@drawable/bg_back_top"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daftar"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/linearLayout1">
+
+            <EditText
+                android:id="@+id/etKodePerusahaan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="@drawable/bg_insert_register"
+                android:hint="Kode Perusahaan"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvMessageKodePerusahaan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp" />
+
+            <EditText
+                android:id="@+id/etIdKaryawan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:background="@drawable/bg_insert_register"
+                android:hint="ID Karyawan*"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvMessageIdKaryawaan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp" />
+
+
+            <EditText
+                android:id="@+id/etNamaLengkap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_insert_register"
+                android:inputType="text"
+                android:hint="Nama Lengkap*"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvMessageNamaLengkap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_insert_register"
+                android:hint="Email*"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvMessageEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp" />
+
+            <EditText
+                android:id="@+id/etJobDeskDepartemen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_insert_register"
+                android:hint="Job Desk / Departemen*"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvMessageJobDeskDepartement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp" />
+
+            <EditText
+                android:id="@+id/etNomorTelepon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_insert_register"
+                android:hint="Nomor Telepon / Phone*"
+                android:inputType="phone"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"/>
+
+            <TextView
+                android:id="@+id/tvMessageNomorTelepon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/line_register_activity"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout2">
+
+            <TextView
+                android:id="@+id/tvMasukanPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Masukan Password"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/etMasukanPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tvMasukanPassword"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_insert_register"
+                android:hint="Masukan Kata Sandi*"
+                android:inputType="textPassword"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp"/>
+
+            <ImageView
+                android:id="@+id/imgShowPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMasukanPassword"
+                android:layout_alignEnd="@+id/tvMasukanPassword"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/ic_show_password" />
+
+            <EditText
+                android:id="@+id/etKonfirmasiPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/etMasukanPassword"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_insert_register"
+                android:hint="Konfimasi Kata Sandi*"
+                android:inputType="textPassword"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp"/>
+
+            <ImageView
+                android:id="@+id/imgShowKonfirmasiPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/etMasukanPassword"
+                android:layout_alignEnd="@+id/etMasukanPassword"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/ic_show_password" />
+
+            <ImageView
+                android:id="@+id/btn_daftar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/etKonfirmasiPassword"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="40dp"
+                android:src="@drawable/button_daftar" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+</ScrollView>

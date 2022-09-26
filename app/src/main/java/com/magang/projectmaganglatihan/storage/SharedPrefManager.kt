@@ -36,6 +36,22 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.commit()
     }
 
+    val register: String
+        get() {
+            val sharedPreferences =
+                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("register", null).toString()
+        }
+
+    fun saveDataRegister(dataRegister: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("register", dataRegister)
+        editor.apply()
+    }
+
+
     fun clear() {
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
