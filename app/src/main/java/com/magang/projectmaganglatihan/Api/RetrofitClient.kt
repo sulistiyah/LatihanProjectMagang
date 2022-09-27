@@ -1,4 +1,4 @@
-package com.magang.projectmaganglatihan.Api
+package com.magang.projectmaganglatihan.api
 
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 object RetrofitClient {
 
-    private const val  BASE_URL = "128.199.125.236/hrdku-dev/gateway/public/api"
+    private const val  BASE_URL = "128.199.125.236/hrdku-dev/gateway/public/api/"
 
 
     var httpClient: OkHttpClient =

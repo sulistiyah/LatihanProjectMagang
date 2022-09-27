@@ -1,6 +1,6 @@
-package com.magang.projectmaganglatihan.Api
+package com.magang.projectmaganglatihan.api
 
-import com.magang.projectmaganglatihan.Models.*
+import com.magang.projectmaganglatihan.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,9 +24,10 @@ interface Api {
     ): Call<ArrayList<RegisterCompanyCheck>>
 
 
-    @GET("v1/departement_list")
+    @GET("v1/departement_list/{company_id}")
     fun getJobDeskDapartemen(
-        @QueryMap parameters : HashMap<String, String>
+        @Path("company_id") company_id: String
     ): Call<ArrayList<RegisterDepartementList>>
+
 
 }

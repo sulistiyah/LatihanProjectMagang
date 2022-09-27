@@ -1,4 +1,4 @@
-package com.magang.projectmaganglatihan.Models
+package com.magang.projectmaganglatihan.model
 
 import com.google.gson.annotations.SerializedName
 

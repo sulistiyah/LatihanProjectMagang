@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
-import com.magang.projectmaganglatihan.Api.RetrofitClient
-import com.magang.projectmaganglatihan.Models.LoginParam
-import com.magang.projectmaganglatihan.Models.LoginResponse
+import com.magang.projectmaganglatihan.api.RetrofitClient
+import com.magang.projectmaganglatihan.model.LoginParam
+import com.magang.projectmaganglatihan.model.LoginResponse
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_login.*

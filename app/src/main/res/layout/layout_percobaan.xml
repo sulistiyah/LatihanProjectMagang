@@ -38,128 +38,129 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_below="@+id/linearLayout1"
             android:layout_marginTop="40dp"
-            android:layout_below="@+id/linearLayout1">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/etKodePerusahaan"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:background="@drawable/bg_insert_register"
-                android:hint="Kode Perusahaan"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
-
-            <TextView
-                android:id="@+id/tvMessageKodePerusahaan"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/kodeperusahaanContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp" />
+                app:helperText="Perusahaan Tidak Ditemukan"
+                app:helperTextTextColor="@android:color/holo_red_dark">
 
-            <EditText
-                android:id="@+id/etIdKaryawan"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
-                android:background="@drawable/bg_insert_register"
-                android:hint="ID Karyawan*"
-                android:layout_marginTop="10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etKodePerusahaan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/kode_perusahaan"
+                    android:inputType="text"
+                    android:lines="1" />
 
-            <TextView
-                android:id="@+id/tvMessageIdKaryawaan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/etNamaLengkap"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_insert_register"
-                android:inputType="text"
-                android:hint="Nama Lengkap*"
-                android:layout_marginTop="10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
-
-            <TextView
-                android:id="@+id/tvMessageNamaLengkap"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/idKaryawaanContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp" />
+                android:layout_marginTop="10dp">
 
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_insert_register"
-                android:hint="Email*"
-                android:inputType="textEmailAddress"
-                android:layout_marginTop="10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etIdKaryawan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/id_karyawan"
+                    android:inputType="text"
+                    android:lines="1" />
 
-            <TextView
-                android:id="@+id/tvMessageEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="5dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/etJobDeskDepartemen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_insert_register"
-                android:hint="Job Desk / Departemen*"
-                android:layout_marginTop="10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
-
-            <TextView
-                android:id="@+id/tvMessageJobDeskDepartement"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/namaLengkapContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp" />
+                android:layout_marginTop="10dp">
 
-            <EditText
-                android:id="@+id/etNomorTelepon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_insert_register"
-                android:hint="Nomor Telepon / Phone*"
-                android:inputType="phone"
-                android:layout_marginTop="10dp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNamaLengkap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/nama_lengkap"
+                    android:inputType="text"
+                    android:lines="1" />
 
-            <TextView
-                android:id="@+id/tvMessageNomorTelepon"
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp" />
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:lines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/jobDeskContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etJobDeskDepartemen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/job_desk_departement" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/noTeleponContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNomorTelepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/nomor_telepon"
+                    android:inputType="number"
+                    android:lines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/line_register_activity"/>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linearLayout2">
+                android:src="@drawable/line_register_activity" />
 
             <TextView
                 android:id="@+id/tvMasukanPassword"
@@ -168,49 +169,43 @@
                 android:text="Masukan Password"
                 android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/etMasukanPassword"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/tvMasukanPassword"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_insert_register"
-                android:hint="Masukan Kata Sandi*"
-                android:inputType="textPassword"
-                android:paddingStart="15dp"
-                android:paddingEnd="5dp"/>
-
-            <ImageView
-                android:id="@+id/imgShowPass"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvMasukanPassword"
-                android:layout_alignEnd="@+id/tvMasukanPassword"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
-                android:src="@drawable/ic_show_password" />
+                android:layout_marginTop="10dp"
+                app:passwordToggleEnabled="true">
 
-            <EditText
-                android:id="@+id/etKonfirmasiPassword"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMasukanPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/masukkan_password"
+                    android:inputType="textPassword"
+                    android:lines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/konfirmPassContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/etMasukanPassword"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg_insert_register"
-                android:hint="Konfimasi Kata Sandi*"
-                android:inputType="textPassword"
-                android:paddingStart="15dp"
-                android:paddingEnd="5dp"/>
-
-            <ImageView
-                android:id="@+id/imgShowKonfirmasiPass"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/etMasukanPassword"
-                android:layout_alignEnd="@+id/etMasukanPassword"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
-                android:src="@drawable/ic_show_password" />
+                android:layout_marginTop="10dp"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etKonfirmasiPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_insert_register"
+                    android:hint="@string/konfirmasi_password"
+                    android:inputType="textPassword"
+                    android:lines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
                 android:id="@+id/btn_daftar"
@@ -221,11 +216,10 @@
                 android:layout_marginBottom="40dp"
                 android:src="@drawable/button_daftar" />
 
+        </LinearLayout>
 
-        </RelativeLayout>
 
     </RelativeLayout>
-
 
 
 </ScrollView>

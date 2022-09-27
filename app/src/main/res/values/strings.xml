@@ -1,7 +1,29 @@
 <resources>
     <string name="app_name">ProjectMagangLatihan</string>
+
+    //Login
     <string name="lupa_kata_s">Lupa Kata Sandi</string>
     <string name="daftar_sekarang">Daftar Sekarang</string>
     <string name="belum_mempunyai_akun">belum mempunyai akun?</string>
     <string name="daftar">DAFTAR</string>
+
+    //Register
+    <string name="kode_perusahaan">Kode Perusahaan</string>
+    <string name="id_karyawan">ID Karyawan*</string>
+    <string name="nama_lengkap">Nama Lengkap*</string>
+    <string name="email">Email*</string>
+    <string name="job_desk_departement">Job Desk / Departement*</string>
+    <string name="nomor_telepon">Nomor Telepon / Phone*</string>
+    <string name="masukkan_password">Masukan Kata Sandi*</string>
+    <string name="konfirmasi_password">Konfrimasi Kata Sandi*</string>
+    <string name="list_job_desk">List Job Desk</string>
+
+    //Tumbal
+    <string name="email_tumbal">Email</string>
+    <string name="required">Required</string>
+    <string name="password">Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="submit">Submit</string>
+
+
 </resources>

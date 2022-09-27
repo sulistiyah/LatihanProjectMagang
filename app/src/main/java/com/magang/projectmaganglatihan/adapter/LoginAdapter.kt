@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.magang.projectmaganglatihan.Models.LoginResponse
+import com.magang.projectmaganglatihan.model.LoginResponse
 import com.magang.projectmaganglatihan.R
 
 class LoginAdapter(private  val list : ArrayList<LoginResponse>):RecyclerView.Adapter<LoginAdapter.LoginViewHolder>() {

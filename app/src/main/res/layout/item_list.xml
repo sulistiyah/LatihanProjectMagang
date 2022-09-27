@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_listJobDesk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="@string/list_job_desk"
+            android:orientation="vertical" />
+
+</androidx.cardview.widget.CardView>
