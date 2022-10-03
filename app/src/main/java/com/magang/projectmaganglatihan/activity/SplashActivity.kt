@@ -2,10 +2,20 @@ package com.magang.projectmaganglatihan.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
+import android.widget.Toast
 import com.magang.projectmaganglatihan.R
+import com.magang.projectmaganglatihan.api.RetrofitClient
+import com.magang.projectmaganglatihan.model.TokenParam
+import com.magang.projectmaganglatihan.model.TokenResponse
+import com.magang.projectmaganglatihan.storage.SharedPrefManager
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 //@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -13,10 +23,31 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        Handler().postDelayed({
-        val intent = Intent(this,LoginActivity ::class.java)
-            startActivity(intent)
-        },3000)
+
+
+        RetrofitClient.instance.token(TokenParam(client = "app-android", secret = "TWTpknTux7PzuqDh6qLJQPXNvRT3an7B"))
+            .enqueue(object : Callback<TokenResponse>{
+                override fun onResponse(
+                    call: Call<TokenResponse>,
+                    response: Response<TokenResponse>
+                ) {
+                    if(response.isSuccessful){
+                        if (response.code()==200){
+                            SharedPrefManager.getInstance(this@SplashActivity)
+                                .saveToken(response.body()!!.data.token)
+                            val intent = Intent(this@SplashActivity,LoginActivity ::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
+                    Log.e("test senin", "onFailure: ${t.message}" )
+                    Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
 
     }
 

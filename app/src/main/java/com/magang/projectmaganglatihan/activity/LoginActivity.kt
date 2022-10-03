@@ -7,9 +7,9 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import com.magang.projectmaganglatihan.api.RetrofitClient
-import com.magang.projectmaganglatihan.model.LoginParam
 import com.magang.projectmaganglatihan.model.LoginResponse
 import com.magang.projectmaganglatihan.R
+import com.magang.projectmaganglatihan.api.Api
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
@@ -46,21 +46,27 @@ class LoginActivity : AppCompatActivity() {
                 etPass.requestFocus()
                 return@setOnClickListener
             }
-            RetrofitClient.instance.userLogin(LoginParam(email, password))
+            RetrofitClient.instance.userLogin()
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
+                                if (email.isNotEmpty() && password.isNotEmpty()){
 
-                                SharedPrefManager.getInstance(applicationContext)
-                                    .savelogin(true)
+
+//                                SharedPrefManager.getInstance(applicationContext)
+//                                    .savelogin(true)
 //                                SharedPrefManager.getInstance(applicationContext)
 //                                    .saveToken(response.body()?.token.toString())
 
+                                val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
+                                startActivity(intentlogin)
+                                    Toast.makeText(applicationContext,"berhasil",Toast.LENGTH_SHORT).show()
 
+                                }
                             } else {
                                 Toast.makeText(
-                                    this@LoginActivity, response.body()?.error,
+                                    this@LoginActivity, response.body()?.Message,
                                     Toast.LENGTH_SHORT).show()
                             }
                         } else {
@@ -68,8 +74,6 @@ class LoginActivity : AppCompatActivity() {
                                 this@LoginActivity, response.errorBody().toString(),
                                 Toast.LENGTH_SHORT).show()
                         }
-                        val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intentlogin)
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {

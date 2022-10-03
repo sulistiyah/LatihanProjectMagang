@@ -136,8 +136,7 @@
             android:hint="@string/job_desk_departement"
             android:inputType="text"
             android:lines="1"
-            android:onClick="listJobeDesk"
-            tools:ignore="OnClick" />
+            android:onClick="@+id/listjobdesk"/>
 
       </com.google.android.material.textfield.TextInputLayout>
 

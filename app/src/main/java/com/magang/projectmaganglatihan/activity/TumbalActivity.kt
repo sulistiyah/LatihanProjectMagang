@@ -7,7 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.databinding.ActivityTumbalBinding
 
-class TumbalActivity : AppCompatActivity() {
+class  TumbalActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTumbalBinding
 
@@ -21,9 +21,9 @@ class TumbalActivity : AppCompatActivity() {
         passwordFocusListener()
         phoneFocusListener()
 
-        binding.submitButton.setOnClickListener {
-            submitForm()
-        }
+//        binding.submitButton.setOnClickListener {
+//            submitForm()
+//        }
     }
 
     private fun submitForm()

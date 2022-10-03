@@ -9,15 +9,17 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92b9f66b-237f-4cba-a80c-c39f8c16552a" name="Changes" comment="Project Magang Latihan">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/TumbalActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tumbal.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/TokenParam.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/TokenResponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_sheet.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/sheet_bottom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.lock" afterDir="false" />
@@ -27,19 +29,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Api/Api.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Api/Api.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Api/RetrofitClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Api/RetrofitClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Models/LoginParam.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/LoginParam.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Models/LoginResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/LoginResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Models/RegisterCompanyCheck.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/RegisterCompanyCheck.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Models/RegisterDepartementList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/RegisterDepartementList.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Models/RegisterResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/RegisterResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Api/Api.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/Api/RetrofitClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/RetrofitClient.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/RegisterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/RegisterActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/LoginAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/LoginAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/RegisterAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/ListJobDeskAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/SplashActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/SplashActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/TumbalActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/TumbalActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/LoginResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/LoginResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_percobaan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_percobaan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tumbal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tumbal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
@@ -48,7 +46,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Windows\.android\avd\Pixel_4_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RR8R401FCDE]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -58,26 +56,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Data Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
   <component name="ProjectId" id="2F1QuBGEu8kuuTFRcUjwSU96xDt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -92,10 +82,12 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ProjectAndroidSulis/SutelProject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -107,16 +99,16 @@
     <key name="android.template.1300758742">
       <recent name="com.magang.projectmaganglatihan.activity" />
     </key>
-    <key name="android.template.785631939">
+    <key name="android.template.963639709">
       <recent name="com.magang.projectmaganglatihan.activity" />
     </key>
-    <key name="android.template.1454648773">
+    <key name="android.template.785631939">
       <recent name="com.magang.projectmaganglatihan.activity" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="PROJECTMAGANG.ProjectMagangLatihan.app.main" />
+      <module name="app.ProjectMagangLatihan.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -203,7 +195,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663912940330</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Project Magang Latihan">
+      <created>1663920351103</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663920351103</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Project Magang Latihan">
+      <created>1664161347741</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664161347741</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
