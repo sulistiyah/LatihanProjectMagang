@@ -53,7 +53,9 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:helperText=""
-          app:helperTextTextColor="@color/black">
+          app:helperTextTextColor="@color/black"
+          app:errorEnabled="true"
+          app:helperTextEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etKodePerusahaan"
@@ -72,7 +74,8 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="10dp">
+          android:layout_marginTop="10dp"
+          app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etIdKaryawan"
@@ -90,6 +93,7 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          app:errorEnabled="true"
           android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -103,49 +107,71 @@
 
       </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/emailContainer"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+
+      <RelativeLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="10dp">
+          android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmail"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_insert_register"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:lines="1" />
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:layout_marginTop="10dp">
 
-      </com.google.android.material.textfield.TextInputLayout>
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/etEmail"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_insert_register"
+              android:hint="@string/email"
+              android:inputType="textEmailAddress"
+              android:lines="1" />
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/jobDeskContainer"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="10dp">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etJobDeskDepartement"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jobDeskContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_insert_register"
-            android:hint="@string/job_desk_departement"
-            android:inputType="text"
-            android:lines="1"
-            android:onClick="listJobeDesk"
-            tools:ignore="OnClick" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailContainer"
+            app:errorEnabled="true"
+            android:layout_marginTop="10dp">
 
-      </com.google.android.material.textfield.TextInputLayout>
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/etJobDeskDepartement"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_insert_register"
+              android:hint="@string/job_desk_departement"
+              android:inputType="text"
+              android:lines="1" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/imgDropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailContainer"
+            android:layout_alignEnd="@id/emailContainer"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_drop_down" />
+
+      </RelativeLayout>
+
 
       <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/noTeleponContainer"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          app:errorEnabled="true"
           android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -179,6 +205,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
+          app:errorEnabled="true"
           app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -198,6 +225,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
+          app:errorEnabled="true"
           app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText

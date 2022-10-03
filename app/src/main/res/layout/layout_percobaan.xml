@@ -52,8 +52,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:helperText="Perusahaan Tidak Ditemukan"
-                app:helperTextTextColor="@android:color/holo_red_dark">
+                app:helperText=""
+                app:helperTextTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etKodePerusahaan"
@@ -129,11 +129,15 @@
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etJobDeskDepartemen"
+                    android:id="@+id/etJobDeskDepartement"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_insert_register"
-                    android:hint="@string/job_desk_departement" />
+                    android:hint="@string/job_desk_departement"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:onClick="listJobeDesk"
+                    tools:ignore="OnClick" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,7 +164,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/line_register_activity" />
+                android:src="@drawable/line_register_activity"/>
 
             <TextView
                 android:id="@+id/tvMasukanPassword"

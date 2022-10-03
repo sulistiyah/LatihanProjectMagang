@@ -25,5 +25,8 @@
     <string name="phone_number">Phone Number</string>
     <string name="submit">Submit</string>
 
+    //Error
+    <string name="error"></string>
+
 
 </resources>
