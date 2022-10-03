@@ -2,35 +2,35 @@ package com.magang.projectmaganglatihan.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.model.RegisterDepartementList
 import com.magang.projectmaganglatihan.model.RegisterResponse
 import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
 import com.magang.projectmaganglatihan.databinding.ActivityRegisterBinding
-import com.magang.projectmaganglatihan.storage.SharedPrefManager
+import com.magang.projectmaganglatihan.model.RegisterCompanyCheck
+import com.magang.projectmaganglatihan.model.RegisterParam
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.item_list.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.nio.file.attribute.AclEntry
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
 
-    private lateinit var sharedPrefManager: SharedPrefManager
-    private lateinit var layoutManager: LinearLayoutManager
-    private var showPass = false
-    private var showKonfirmasiPass = false
-    private lateinit var registerAdapter: ListJobDeskAdapter
+    private lateinit var dialog: BottomSheetDialog
+    private lateinit var recyclerView: RecyclerView
     private lateinit var listJobDeskAdapter : ListJobDeskAdapter
     private var listJobDesk: ArrayList<RegisterDepartementList> = arrayListOf()
+    private var companyCode = 0
 //    private lateinit var companyCheck : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,61 +50,73 @@ class RegisterActivity : AppCompatActivity() {
             val idKaryawaan = binding.etIdKaryawan.text.toString()
             val namaLengkap = binding.etNamaLengkap.text.toString()
             val email = binding.etEmail.text.toString()
-            val jobDeskDepartement = binding.etJobDeskDepartement.text.toString()
+            var jobDeskDepartement = binding.etJobDeskDepartement.text.toString()
             val nomorTelepon = binding.etNomorTelepon.text.toString()
             val password = binding.etMasukanPassword.text.toString()
             val konfirmasiPass = binding.etKonfirmasiPassword.text.toString()
 
             if (kodePerusahaan.isEmpty()) {
-                etKodePerusahaan.error = "Tidak Boleh Kosog"
+                etKodePerusahaan.error = getString(R.string.error)
                 etKodePerusahaan.requestFocus()
                 return@setOnClickListener
             }
 
             if (idKaryawaan.isEmpty()) {
-                etIdKaryawan.error = "Tidak Boleh Kosog"
+                etIdKaryawan.error = getString(R.string.error)
                 etIdKaryawan.requestFocus()
                 return@setOnClickListener
             }
 
             if (namaLengkap.isEmpty()) {
-                etNamaLengkap.error = "Tidak Boleh Kosong"
+                etNamaLengkap.error = getString(R.string.error)
                 etNamaLengkap.requestFocus()
                 return@setOnClickListener
             }
 
             if (email.isEmpty()) {
-                etEmail.error = "Tidak Boleh Kosog"
+                etEmail.error = getString(R.string.error)
                 etEmail.requestFocus()
                 return@setOnClickListener
             }
 
             if (jobDeskDepartement.isEmpty()) {
-                etJobDeskDepartement.error = "Tidak Boleh Kosog"
+                etJobDeskDepartement.error = getString(R.string.error)
                 etJobDeskDepartement.requestFocus()
                 return@setOnClickListener
             }
 
             if (nomorTelepon.isEmpty()) {
-                etNomorTelepon.error = "Tidak Boleh Kosog"
+                etNomorTelepon.error = getString(R.string.error)
                 etNomorTelepon.requestFocus()
                 return@setOnClickListener
             }
 
             if (password.isEmpty()) {
-                etMasukanPassword.error = "Tidak Boleh Kosog"
+                etMasukanPassword.error = getString(R.string.error)
                 etMasukanPassword.requestFocus()
                 return@setOnClickListener
             }
 
             if (konfirmasiPass.isEmpty()) {
-                etKonfirmasiPassword.error = "Tidak Boleh Kosog"
+                etKonfirmasiPassword.error = getString(R.string.error)
                 etKonfirmasiPassword.requestFocus()
                 return@setOnClickListener
             }
 
+            val registerParam = RegisterParam(
+                companyId = 1,
+                employeeDepartmentId = 1,
+                employeeEmail = "sulis@gmail.com",
+                employeeFullname = "Sulis Tiyah",
+                employeeNik = "987654321",
+                employeePassword = "12345",
+                employeePhoneNo = "081292323052"
 
-            RetrofitClient.instance.postDaftar().enqueue(object  : Callback<RegisterResponse> {
+            )
+
+
+            RetrofitClient.instance.postDaftar(registerParam)
+                .enqueue(object  : Callback<RegisterResponse> {
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
@@ -118,58 +130,107 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    Log.e("testError", "onFailure: ${t.message}", )
                     Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
 
                 }
             })
 
-            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
+//            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
 
-            binding.etJobDeskDepartement.setOnClickListener {
-                rv_listJobDesk.setHasFixedSize(true)
-                rv_listJobDesk.layoutManager = LinearLayoutManager(this)
-
-                RetrofitClient.instance.getJobDeskDapartemen("v1/departement_list/1").enqueue(object : Callback<ArrayList<RegisterDepartementList>>{
-                    override fun onResponse(
-                        call: Call<ArrayList<RegisterDepartementList>>,
-                        response: Response<ArrayList<RegisterDepartementList>>
-                    ) {
-                        response.body()?.let { listJobDesk.addAll(it) }
-                        val adapterJobDesk = ListJobDeskAdapter(listJobDesk)
-                        rv_listJobDesk.adapter = adapterJobDesk
-                    }
-
-                    override fun onFailure(call: Call<ArrayList<RegisterDepartementList>>, t: Throwable) {
-
-                    }
-
-                })
+            binding.imgDropDown.setOnClickListener {
+                showBottomSheet()
             }
 
         }
 
 
+    }
+
+    private fun showBottomSheet() {
+        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet,null)
+        dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        dialog.setContentView(dialogView)
+        recyclerView = dialogView.findViewById(R.id.rvItemJobDesk)
+        dialog.show()
+
+        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<ArrayList<RegisterDepartementList>>{
+            override fun onResponse(
+                call: Call<ArrayList<RegisterDepartementList>>,
+                response: Response<ArrayList<RegisterDepartementList>>
+            ) {
+                listJobDeskAdapter = ListJobDeskAdapter(listJobDesk)
+                recyclerView.adapter = listJobDeskAdapter
+            }
+
+            override fun onFailure(call: Call<ArrayList<RegisterDepartementList>>, t: Throwable) {
+                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     private fun kodePerusahaanFocusListener() {
-        binding.etKodePerusahaan.setOnFocusChangeListener { _, focused ->
-            if(!focused)
-            {
-                binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
+        binding.etKodePerusahaan.addTextChangedListener(object :TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             }
-        }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null) {
+                    if (p0.isNotEmpty()) {
+                        validKodePerusahaan(p0.toString())
+                    }
+                }
+            }
+
+        })
+//        binding.etKodePerusahaan.setOnFocusChangeListener { _, focused ->
+//            if(!focused)
+//            {
+//                binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
+//            }
+//        }
     }
 
 
-    private fun validKodePerusahaan(): String {
-        val codeText = binding.etKodePerusahaan.text.toString()
-        if(!codeText.matches("codelabs".toRegex())) {
-            return "Kode Perusahaan Tidak Ditemukan"
-        }
-        return "Kode Perusahaan Ditemukan"
+    private fun validKodePerusahaan(code : String){
+        val paramater = HashMap<String, String>()
+            paramater["company_code"] = "$code"
+        RetrofitClient.instance.getKodePerusahaan(paramater).enqueue(object : Callback<RegisterCompanyCheck> {
+            override fun onResponse(call: Call<RegisterCompanyCheck>, response: Response<RegisterCompanyCheck>) {
+               if (response.isSuccessful) {
+                   if (response.code() == 200) {
+                       companyCode = response.body()?.data!!.id
+                       binding.kodeperusahaanContainer.isHelperTextEnabled = true
+                       binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
+                   } else {
+                       Toast.makeText(this@RegisterActivity, response.code(), Toast.LENGTH_SHORT).show()
+                   }
+               } else {
+                   Toast.makeText(this@RegisterActivity, response.errorBody().toString(), Toast.LENGTH_SHORT).show()
+               }
+
+            }
+
+            override fun onFailure(call: Call<RegisterCompanyCheck>, t: Throwable) {
+                Log.e("test", "onFailure: " + t.message )
+            }
+
+        })
+
+//        val codeText = binding.etKodePerusahaan.text.toString()
+//        if(!codeText.matches("codelabs".toRegex())) {
+//            return "Kode Perusahaan Tidak Ditemukan"
+//        }
+//        return "Kode Perusahaan Ditemukan"
     }
 
-//    fun listJobeDesk(view: View) {
+//    fun listJobDesk(view: View) {
 //        val onClickJobDesk = AlertDialog.Builder(this)
 //        onClickJobDesk.setTitle("Job Desk")
 //

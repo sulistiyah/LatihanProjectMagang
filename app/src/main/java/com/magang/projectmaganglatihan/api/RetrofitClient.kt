@@ -10,7 +10,6 @@ object RetrofitClient {
     private const val  BASE_URL = "https://128.199.125.236/hrdku-dev/gateway/public/api/"
 
 
-
     var httpClient: OkHttpClient =
         OkHttpClient.Builder() //here we can add Interceptor for dynamical adding headers
             .addNetworkInterceptor(object : Interceptor {
