@@ -10,10 +10,13 @@ interface Api {
     @POST("v1/staff/authenticate")
     fun userLogin() : Call<LoginResponse>
 
-    @Headers("Accept:application/json","X-APP-TOKEN:TWTpknTux7PzuqDh6qLJQPXNvRT3an7B")
+    @Headers(
+        "Accept: application/json",
+        "X-APP-TOKEN: TWTpknTux7PzuqDh6qLJQPXNvRT3an7B"
+    )
     @POST("v1/auth/token")
-    fun token (@QueryMap tokenParam: TokenParam):Call<TokenResponse>
-//    fun token(@Body tokenParam : TokenParam ) : Call<TokenResponse>
+//    fun token (@QueryMap tokenParam: TokenParam):Call<TokenResponse>
+    fun token(@Body tokenParam : TokenParam ) : Call<TokenResponse>
 //
 //    @GET("users")
 //    fun getUsers(
