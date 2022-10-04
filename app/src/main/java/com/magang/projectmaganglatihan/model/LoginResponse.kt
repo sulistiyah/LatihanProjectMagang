@@ -2,71 +2,128 @@ package com.magang.projectmaganglatihan.model
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse(
-    val Data: Data,
-    val Message: String,
-    val StatusCode: Int
-)
-
-data class Data(
-    val token: String,
-    val user: User
-)
-
-data class User(
-    val company_id: Int,
-    val created_at: String,
-    val deleted_at: Any,
-    val employee_base_salary: String,
-    val employee_branch: Any,
-    val employee_branch_id: Int,
-    val employee_code: String,
-    val employee_contract_end_date: Any,
-    val employee_contract_start_date: Any,
-    val employee_contract_type: Int,
-    val employee_created_by: Int,
-    val employee_department_id: Int,
-    val employee_email: String,
-    val employee_fullname: String,
-    val employee_id: Int,
-    val employee_image: String,
-    val employee_info: Any,
-    val employee_is_active: Int,
-    val employee_is_suspended: Int,
-    val employee_join_date: Any,
-    val employee_nik: String,
-    val employee_position_id: Int,
-    val employee_schedule_id: Int,
-    val employee_sex: String,
-    val employee_updated_by: Int,
-    val fcm_id: Any,
-    val has_priviledge: Int,
-    val last_logged_in: String,
-    val profile: Profile,
-    val updated_at: String
-)
-
-data class Profile(
-    val address: Any,
-    val address_alt: Any,
-    val color: String,
-    val date_of_birth: Any,
-    val employee_avatar: String,
-    val firstname: String,
-    val fullname: String,
-    val identity_filename: Any,
-    val identity_no: Any,
-    val identity_type: Int,
-    val lastname: String,
-    val middlename: String,
-    val mobile_no: Any,
-    val mobile_no_alt: Any,
-    val npwp_no: Any,
-    val phone_no: Any,
-    val phone_no_alt: Any,
-    val place_of_birth: Any,
-    val profile_employee_id: Int,
-    val profile_id: Int,
-    val salutation: String,
-    val shortname: String
-)
+class LoginResponse(
+    @SerializedName("Data")
+    var `data`: Data,
+    @SerializedName("Message")
+    var message: String,
+    @SerializedName("StatusCode")
+    var statusCode: Int
+) {
+    class Data(
+        @SerializedName("token")
+        var token: String,
+        @SerializedName("user")
+        var user: User
+    ) {
+        class User(
+            @SerializedName("company_id")
+            var companyId: Int,
+            @SerializedName("created_at")
+            var createdAt: String,
+            @SerializedName("deleted_at")
+            var deletedAt: Any,
+            @SerializedName("employee_base_salary")
+            var employeeBaseSalary: String,
+            @SerializedName("employee_branch")
+            var employeeBranch: Any,
+            @SerializedName("employee_branch_id")
+            var employeeBranchId: Int,
+            @SerializedName("employee_code")
+            var employeeCode: String,
+            @SerializedName("employee_contract_end_date")
+            var employeeContractEndDate: Any,
+            @SerializedName("employee_contract_start_date")
+            var employeeContractStartDate: Any,
+            @SerializedName("employee_contract_type")
+            var employeeContractType: Int,
+            @SerializedName("employee_created_by")
+            var employeeCreatedBy: Int,
+            @SerializedName("employee_department_id")
+            var employeeDepartmentId: Int,
+            @SerializedName("employee_email")
+            var employeeEmail: String,
+            @SerializedName("employee_fullname")
+            var employeeFullname: String,
+            @SerializedName("employee_id")
+            var employeeId: Int,
+            @SerializedName("employee_image")
+            var employeeImage: String,
+            @SerializedName("employee_info")
+            var employeeInfo: Any,
+            @SerializedName("employee_is_active")
+            var employeeIsActive: Int,
+            @SerializedName("employee_is_suspended")
+            var employeeIsSuspended: Int,
+            @SerializedName("employee_join_date")
+            var employeeJoinDate: Any,
+            @SerializedName("employee_nik")
+            var employeeNik: String,
+            @SerializedName("employee_position_id")
+            var employeePositionId: Int,
+            @SerializedName("employee_schedule_id")
+            var employeeScheduleId: Int,
+            @SerializedName("employee_sex")
+            var employeeSex: String,
+            @SerializedName("employee_updated_by")
+            var employeeUpdatedBy: Int,
+            @SerializedName("fcm_id")
+            var fcmId: Any,
+            @SerializedName("has_priviledge")
+            var hasPriviledge: Int,
+            @SerializedName("last_logged_in")
+            var lastLoggedIn: String,
+            @SerializedName("profile")
+            var profile: Profile,
+            @SerializedName("updated_at")
+            var updatedAt: String
+        ) {
+            class Profile(
+                @SerializedName("address")
+                var address: Any,
+                @SerializedName("address_alt")
+                var addressAlt: Any,
+                @SerializedName("color")
+                var color: String,
+                @SerializedName("date_of_birth")
+                var dateOfBirth: Any,
+                @SerializedName("employee_avatar")
+                var employeeAvatar: String,
+                @SerializedName("firstname")
+                var firstname: String,
+                @SerializedName("fullname")
+                var fullname: String,
+                @SerializedName("identity_filename")
+                var identityFilename: Any,
+                @SerializedName("identity_no")
+                var identityNo: Any,
+                @SerializedName("identity_type")
+                var identityType: Int,
+                @SerializedName("lastname")
+                var lastname: String,
+                @SerializedName("middlename")
+                var middlename: String,
+                @SerializedName("mobile_no")
+                var mobileNo: Any,
+                @SerializedName("mobile_no_alt")
+                var mobileNoAlt: Any,
+                @SerializedName("npwp_no")
+                var npwpNo: Any,
+                @SerializedName("phone_no")
+                var phoneNo: Any,
+                @SerializedName("phone_no_alt")
+                var phoneNoAlt: Any,
+                @SerializedName("place_of_birth")
+                var placeOfBirth: Any,
+                @SerializedName("profile_employee_id")
+                var profileEmployeeId: Int,
+                @SerializedName("profile_id")
+                var profileId: Int,
+                @SerializedName("salutation")
+                var salutation: String,
+                @SerializedName("shortname")
+                var shortname: String
+            )
+        }
+    }
+}
