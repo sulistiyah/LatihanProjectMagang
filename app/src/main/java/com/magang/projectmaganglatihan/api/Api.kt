@@ -6,6 +6,9 @@ import retrofit2.http.*
 
 interface Api {
 
+    @Headers(
+        "Accept: application/json"
+    )
     @POST("v1/staff/authenticate")
     fun userLogin() : Call<LoginResponse>
 

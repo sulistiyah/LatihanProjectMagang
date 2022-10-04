@@ -65,12 +65,12 @@ class LoginActivity : AppCompatActivity() {
                                 }
                             } else {
                                 Toast.makeText(
-                                    this@LoginActivity, response.body()?.Message,
+                                    this@LoginActivity, response.body()?.message,
                                     Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             Toast.makeText(
-                                this@LoginActivity, response.errorBody().toString(),
+                                this@LoginActivity, response.body()?.message,
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
