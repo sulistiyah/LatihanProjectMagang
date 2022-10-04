@@ -138,9 +138,9 @@ class RegisterActivity : AppCompatActivity() {
 
 //            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
 
-            binding.imgDropDown.setOnClickListener {
-                showBottomSheet()
-            }
+//            binding.imgDropDown.setOnClickListener {
+//                showBottomSheet()
+//            }
 
         }
 
