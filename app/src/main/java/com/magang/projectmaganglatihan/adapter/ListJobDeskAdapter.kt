@@ -32,15 +32,15 @@ class ListJobDeskAdapter(private val listJobDesk: ArrayList<RegisterDepartementL
     }
 
 
-    fun addListJobDesk(items: ArrayList<RegisterDepartementList>){
-        listJobDesk.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    fun clear(){
-        listJobDesk.clear()
-        notifyDataSetChanged()
-    }
+//    fun addListJobDesk(items: ArrayList<RegisterDepartementList>){
+//        listJobDesk.addAll(items)
+//        notifyDataSetChanged()
+//    }
+//
+//    fun clear(){
+//        listJobDesk.clear()
+//        notifyDataSetChanged()
+//    }
 
 
 

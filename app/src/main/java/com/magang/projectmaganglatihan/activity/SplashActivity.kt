@@ -1,11 +1,9 @@
 package com.magang.projectmaganglatihan.activity
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import com.magang.projectmaganglatihan.R

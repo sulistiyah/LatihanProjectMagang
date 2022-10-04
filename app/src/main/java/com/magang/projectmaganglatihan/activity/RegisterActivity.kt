@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
             val idKaryawaan = binding.etIdKaryawan.text.toString()
             val namaLengkap = binding.etNamaLengkap.text.toString()
             val email = binding.etEmail.text.toString()
-            var jobDeskDepartement = binding.etJobDeskDepartement.text.toString()
+            val jobDeskDepartement = binding.etJobDeskDepartement.text.toString()
             val nomorTelepon = binding.etNomorTelepon.text.toString()
             val password = binding.etMasukanPassword.text.toString()
             val konfirmasiPass = binding.etKonfirmasiPassword.text.toString()
@@ -130,7 +130,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                    Log.e("testError", "onFailure: ${t.message}", )
+                    Log.e("testError", "onFailure: ${t.message}" )
                     Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
 
                 }
@@ -138,9 +138,7 @@ class RegisterActivity : AppCompatActivity() {
 
 //            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
 
-//            binding.imgDropDown.setOnClickListener {
-//                showBottomSheet()
-//            }
+            showBottomSheet()
 
         }
 
@@ -154,16 +152,16 @@ class RegisterActivity : AppCompatActivity() {
         recyclerView = dialogView.findViewById(R.id.rvItemJobDesk)
         dialog.show()
 
-        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<ArrayList<RegisterDepartementList>>{
+        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<RegisterDepartementList>{
             override fun onResponse(
-                call: Call<ArrayList<RegisterDepartementList>>,
-                response: Response<ArrayList<RegisterDepartementList>>
+                call: Call<RegisterDepartementList>,
+                response: Response<RegisterDepartementList>
             ) {
                 listJobDeskAdapter = ListJobDeskAdapter(listJobDesk)
                 recyclerView.adapter = listJobDeskAdapter
             }
 
-            override fun onFailure(call: Call<ArrayList<RegisterDepartementList>>, t: Throwable) {
+            override fun onFailure(call: Call<RegisterDepartementList>, t: Throwable) {
                 Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 
@@ -199,9 +197,9 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private fun validKodePerusahaan(code : String){
-        val paramater = HashMap<String, String>()
-            paramater["company_code"] = "$code"
-        RetrofitClient.instance.getKodePerusahaan(paramater).enqueue(object : Callback<RegisterCompanyCheck> {
+        val parameter = HashMap<String, String>()
+            parameter["company_code"] = "$code"
+        RetrofitClient.instance.getKodePerusahaan(parameter).enqueue(object : Callback<RegisterCompanyCheck> {
             override fun onResponse(call: Call<RegisterCompanyCheck>, response: Response<RegisterCompanyCheck>) {
                if (response.isSuccessful) {
                    if (response.code() == 200) {
@@ -249,9 +247,9 @@ class RegisterActivity : AppCompatActivity() {
 //        listJobDeskAdapter = ListJobDeskAdapter(listJobDesk)
 //        rv_listJobDesk.adapter = registerAdapter
 //        etJobDeskDepartement.setOnClickListener {
-//            val paramater = HashMap<String, String>()
-//            paramater["company_id"] = "1"
-//            RetrofitClient.instance.getJobDeskDapartemen(paramater).enqueue(object : Callback<ArrayList<RegisterDepartementList>>{
+//            val parameter = HashMap<String, String>()
+//            parameter["company_id"] = "1"
+//            RetrofitClient.instance.getJobDeskDapartemen(parameter).enqueue(object : Callback<ArrayList<RegisterDepartementList>>{
 //                override fun onResponse(call: Call<ArrayList<RegisterDepartementList>>, response: Response<ArrayList<RegisterDepartementList>>) {
 //                    val listDepartementResponse = response.body()
 //                    if (listDepartementResponse != null) {
