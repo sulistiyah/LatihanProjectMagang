@@ -52,6 +52,7 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          app:errorEnabled="true"
           app:helperText=""
           app:helperTextTextColor="@color/black">
 
@@ -62,7 +63,8 @@
             android:background="@drawable/bg_insert_register"
             android:hint="@string/kode_perusahaan"
             android:inputType="text"
-            android:lines="1" />
+            android:lines="1"
+            android:textColorHint="@color/abuabu"/>
 
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +83,8 @@
             android:background="@drawable/bg_insert_register"
             android:hint="@string/id_karyawan"
             android:inputType="text"
-            android:lines="1" />
+            android:lines="1"
+            android:textColor="@color/abuabu"/>
 
       </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,22 +124,27 @@
 
       </com.google.android.material.textfield.TextInputLayout>
 
+      <TextView
+          android:id="@+id/tvJobDeskDepartement"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/bg_insert_register"
+          android:hint="@string/job_desk_departement"
+          android:inputType="text"
+          android:lines="1"
+          android:textSize="16sp"
+          android:paddingStart="16dp"
+          android:gravity="center_vertical"
+          android:textColorHint="@color/abuabu"
+          android:layout_marginTop="15dp"/>
+
+
       <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/jobDeskContainer"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etJobDeskDepartement"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_insert_register"
-            android:hint="@string/job_desk_departement"
-            android:inputType="text"
-            android:lines="1"
-            android:onClick="@+id/listjobdesk"/>
+          android:layout_marginTop="15dp">
 
       </com.google.android.material.textfield.TextInputLayout>
 

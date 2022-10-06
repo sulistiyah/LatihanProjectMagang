@@ -6,9 +6,7 @@ import retrofit2.http.*
 
 interface Api {
 
-    @Headers(
-        "Accept: application/json"
-    )
+    @Headers("Accept: application/json")
     @POST("v1/staff/authenticate")
     fun userLogin() : Call<LoginResponse>
 
@@ -17,19 +15,9 @@ interface Api {
         "X-APP-TOKEN: TWTpknTux7PzuqDh6qLJQPXNvRT3an7B"
     )
     @POST("v1/auth/token")
-//    fun token (@QueryMap tokenParam: TokenParam):Call<TokenResponse>
     fun token(@Body tokenParam : TokenParam ) : Call<TokenResponse>
-//
-//    @GET("users")
-//    fun getUsers(
-//        @QueryMap parameters : HashMap<String, String>):Call<UsersResponse>
 
-
-
-    @Headers(
-        "Accept: application/json",
-        "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZpY2UiLCJzdWIiOjEsImlhdCI6MTY2NDc4Mzk2NywiZXhwIjoxNjY0ODcwMzY3LCJzY29wZSI6ImRldmVsb3BtZW50IiwicGxhdGZvcm0iOiJhbmRyb2lkIiwiY29tcGFueV9pZCI6MSwiZGF0YSI6eyJwbGF0Zm9ybSI6ImFuZHJvaWQifX0.QbHdvYDBy0p2HV7EVEQ-TXWCwkWP4Ygv_8_PoOZzaf4"
-    )
+    @Headers("Accept: application/json")
     @POST("v1/register")
     fun postDaftar(@Body registerParam: RegisterParam): Call<RegisterResponse>
 

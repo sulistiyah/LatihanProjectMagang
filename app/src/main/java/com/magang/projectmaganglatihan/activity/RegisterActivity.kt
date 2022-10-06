@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var dialog: BottomSheetDialog
     private lateinit var recyclerView: RecyclerView
     private lateinit var listJobDeskAdapter : ListJobDeskAdapter
-    private var listJobDesk: ArrayList<RegisterDepartementList> = arrayListOf()
+    private var list: ArrayList<RegisterDepartementList> = arrayListOf()
     private var companyCode = 0
 //    private lateinit var companyCheck : String
 
@@ -37,6 +37,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val kodePerusahaan = binding.etKodePerusahaan.text.toString()
+        val idKaryawaan = binding.etIdKaryawan.text.toString()
+        val namaLengkap = binding.etNamaLengkap.text.toString()
+        val email = binding.etEmail.text.toString()
+        val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
+        val nomorTelepon = binding.etNomorTelepon.text.toString()
+        val password = binding.etMasukanPassword.text.toString()
+        val konfirmasiPass = binding.etKonfirmasiPassword.text.toString()
 
         kodePerusahaanFocusListener()
 
@@ -46,14 +55,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnDaftar.setOnClickListener {
-            val kodePerusahaan = binding.etKodePerusahaan.text.toString()
-            val idKaryawaan = binding.etIdKaryawan.text.toString()
-            val namaLengkap = binding.etNamaLengkap.text.toString()
-            val email = binding.etEmail.text.toString()
-            val jobDeskDepartement = binding.etJobDeskDepartement.text.toString()
-            val nomorTelepon = binding.etNomorTelepon.text.toString()
-            val password = binding.etMasukanPassword.text.toString()
-            val konfirmasiPass = binding.etKonfirmasiPassword.text.toString()
+
 
             if (kodePerusahaan.isEmpty()) {
                 etKodePerusahaan.error = getString(R.string.error)
@@ -80,8 +82,8 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             if (jobDeskDepartement.isEmpty()) {
-                etJobDeskDepartement.error = getString(R.string.error)
-                etJobDeskDepartement.requestFocus()
+                tvJobDeskDepartement.error = getString(R.string.error)
+                tvJobDeskDepartement.requestFocus()
                 return@setOnClickListener
             }
 
@@ -123,10 +125,10 @@ class RegisterActivity : AppCompatActivity() {
                             val intentDaftar = Intent(applicationContext, LoginActivity::class.java)
                             startActivity(intentDaftar)
                         } else {
-                            Toast.makeText(this@RegisterActivity,response.message(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity,response.code(), Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@RegisterActivity, response.code().toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
@@ -138,7 +140,12 @@ class RegisterActivity : AppCompatActivity() {
 
 //            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
 
-            showBottomSheet()
+
+            binding.tvJobDeskDepartement.setOnClickListener {
+               showBottomSheet()
+            }
+
+
 
         }
 
@@ -150,22 +157,27 @@ class RegisterActivity : AppCompatActivity() {
         dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         dialog.setContentView(dialogView)
         recyclerView = dialogView.findViewById(R.id.rvItemJobDesk)
+        listJobDeskAdapter = ListJobDeskAdapter(list)
+        recyclerView.adapter = listJobDeskAdapter
         dialog.show()
 
-        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<RegisterDepartementList>{
-            override fun onResponse(
-                call: Call<RegisterDepartementList>,
-                response: Response<RegisterDepartementList>
-            ) {
-                listJobDeskAdapter = ListJobDeskAdapter(listJobDesk)
-                recyclerView.adapter = listJobDeskAdapter
-            }
 
-            override fun onFailure(call: Call<RegisterDepartementList>, t: Throwable) {
-                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
-            }
-
-        })
+//        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<RegisterDepartementList>{
+//            override fun onResponse(
+//                call: Call<RegisterDepartementList>,
+//                response: Response<RegisterDepartementList>
+//            ) {
+//                val listResponse = response.body()?.data
+//                if (listResponse != null) {
+//                    listJobDeskAdapter.addListJobDesk(listResponse)
+//
+//            }
+//
+//            override fun onFailure(call: Call<RegisterDepartementList>, t: Throwable) {
+//                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
+//            }
+//
+//        })
     }
 
     private fun kodePerusahaanFocusListener() {
@@ -207,16 +219,19 @@ class RegisterActivity : AppCompatActivity() {
                        binding.kodeperusahaanContainer.isHelperTextEnabled = true
                        binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
                    } else {
-                       Toast.makeText(this@RegisterActivity, response.code(), Toast.LENGTH_SHORT).show()
+                       Toast.makeText(this@RegisterActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                    }
                } else {
-                   Toast.makeText(this@RegisterActivity, response.errorBody().toString(), Toast.LENGTH_SHORT).show()
+                   Log.e("error", "onResponse: ${response.message()}" )
+                   binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Tidak Ditemukan"
+                   Toast.makeText(this@RegisterActivity, response.code().toString() , Toast.LENGTH_SHORT).show()
                }
 
             }
 
             override fun onFailure(call: Call<RegisterCompanyCheck>, t: Throwable) {
                 Log.e("test", "onFailure: " + t.message )
+                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 
         })

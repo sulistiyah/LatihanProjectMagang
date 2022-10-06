@@ -3,17 +3,15 @@ package com.magang.projectmaganglatihan.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.magang.projectmaganglatihan.model.RegisterDepartementList
 import com.magang.projectmaganglatihan.R
+import kotlinx.android.synthetic.main.item_list.view.*
 
-class ListJobDeskAdapter(private val listJobDesk: ArrayList<RegisterDepartementList>):
+class ListJobDeskAdapter (var listJobDesk: ArrayList<RegisterDepartementList>):
     RecyclerView.Adapter<ListJobDeskAdapter.RegisterViewHolder>() {
 
-    class RegisterViewHolder( itemView : View): RecyclerView.ViewHolder(itemView){
-        val itemListJob : TextView = itemView.findViewById(R.id.listJobDesk)
-    }
+    class RegisterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegisterViewHolder {
@@ -23,24 +21,25 @@ class ListJobDeskAdapter(private val listJobDesk: ArrayList<RegisterDepartementL
 
     override fun onBindViewHolder(holder: RegisterViewHolder, position: Int) {
         val itemList = listJobDesk[position]
-//        holder.itemListJob.text = itemList.toString()
-        holder.itemListJob.text = itemList.data.toString()
+        holder.itemView.listJobDesk.text = itemList.data.toString()
+        //        holder.itemListJob.text = itemList.toString()
+//        val list = list[position]
+//        holder.itemView.tv_email.text = list.email
+//        holder.itemView.tv_name.text = list.first_name + " " + list.last_name
     }
 
-    override fun getItemCount(): Int {
-        return listJobDesk.size
+    override fun getItemCount() = listJobDesk.size
+
+
+    fun addListJobDesk(items: ArrayList<RegisterDepartementList>){
+        listJobDesk.addAll(items)
+        notifyDataSetChanged()
     }
 
-
-//    fun addListJobDesk(items: ArrayList<RegisterDepartementList>){
-//        listJobDesk.addAll(items)
-//        notifyDataSetChanged()
-//    }
-//
-//    fun clear(){
-//        listJobDesk.clear()
-//        notifyDataSetChanged()
-//    }
+    fun clear(){
+        listJobDesk.clear()
+        notifyDataSetChanged()
+    }
 
 
 

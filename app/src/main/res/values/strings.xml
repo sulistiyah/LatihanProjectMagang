@@ -15,7 +15,7 @@
     <string name="job_desk_departement">Job Desk / Departement*</string>
     <string name="nomor_telepon">Nomor Telepon / Phone*</string>
     <string name="masukkan_password">Masukan Kata Sandi*</string>
-    <string name="konfirmasi_password">Konfrimasi Kata Sandi*</string>
+    <string name="konfirmasi_password">Konfirmasi Kata Sandi*</string>
     <string name="list_job_desk">List Job Desk</string>
 
     //Tumbal
@@ -27,6 +27,8 @@
 
     //Error
     <string name="error"></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
