@@ -31,10 +31,10 @@ interface Api {
         @QueryMap parameters : HashMap<String, String>
     ): Call<RegisterCompanyCheck>
 
-    @GET("v1/departement_list/{company_id}")
-    fun getJobDeskDapartemen(
-        @Path("company_id") company_id: String
-    ): Call<RegisterDepartementList>
+    @GET("v1/departement_list")
+    fun getJobDeskDapartement(
+        @QueryMap parameter: HashMap<String, Int>
+    ): Call<RegisterDepartementListResponse>
 
 
 }

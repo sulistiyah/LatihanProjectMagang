@@ -3,42 +3,51 @@ package com.magang.projectmaganglatihan.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.magang.projectmaganglatihan.model.RegisterDepartementList
 import com.magang.projectmaganglatihan.R
+import com.magang.projectmaganglatihan.databinding.ItemListBinding
+import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
 import kotlinx.android.synthetic.main.item_list.view.*
 
-class ListJobDeskAdapter (var listJobDesk: ArrayList<RegisterDepartementList>):
+class ListJobDeskAdapter (var listJobDesk: ArrayList<RegisterDepartementListResponse.Data>):
     RecyclerView.Adapter<ListJobDeskAdapter.RegisterViewHolder>() {
-    class RegisterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    inner class RegisterViewHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind (get : RegisterDepartementListResponse.Data) {
+            binding.tvTitleJobDesk.text = get.departementTitle
+        }
+//        val item: TextView = itemView.findViewById(R.id.tvTitleJobDesk)
+//        fun bind(registerDepartementListResponse: RegisterDepartementListResponse.Data) {
+//            with(itemView) {
+//                val text = "${registerDepartementListResponse.departementTitle}"
+//                tvTitleJobDesk.text = text
+//            }
+//        }
+
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegisterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
-        return RegisterViewHolder(view)
+//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
+//        return RegisterViewHolder(view)
+        val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RegisterViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RegisterViewHolder, position: Int) {
-        val itemList = listJobDesk[position]
-        holder.itemView.listJobDesk.text = itemList.data.toString()
-        //        holder.itemListJob.text = itemList.toString()
-//        val list = list[position]
-//        holder.itemView.tv_email.text = list.email
-//        holder.itemView.tv_name.text = list.first_name + " " + list.last_name
+//        val itemList = listJobDesk[position]
+//        holder.itemView.tvTitleJobDesk.text = itemList.departementTitle
+//        holder.bind(list[position])
+        holder.bind(listJobDesk.get(position))
+
     }
 
-    override fun getItemCount() = listJobDesk.size
-
-
-    fun addListJobDesk(items: ArrayList<RegisterDepartementList>){
-        listJobDesk.addAll(items)
-        notifyDataSetChanged()
+    override fun getItemCount() : Int {
+        return listJobDesk.size
     }
 
-    fun clear(){
-        listJobDesk.clear()
-        notifyDataSetChanged()
-    }
 
 
 

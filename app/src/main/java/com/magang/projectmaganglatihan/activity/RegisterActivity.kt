@@ -8,17 +8,18 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
-import com.magang.projectmaganglatihan.model.RegisterDepartementList
-import com.magang.projectmaganglatihan.model.RegisterResponse
 import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
 import com.magang.projectmaganglatihan.databinding.ActivityRegisterBinding
-import com.magang.projectmaganglatihan.model.RegisterCompanyCheck
-import com.magang.projectmaganglatihan.model.RegisterParam
+import com.magang.projectmaganglatihan.fragment.JobDeskBottomSheetFragment
+import com.magang.projectmaganglatihan.model.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,29 +28,25 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
 
-    private lateinit var selectItem: TextView
-    private lateinit var dialog: BottomSheetDialog
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var listJobDeskAdapter : ListJobDeskAdapter
-    private var list: ArrayList<RegisterDepartementList> = arrayListOf()
+//    private lateinit var selectItem: TextView
+//    private lateinit var dialog: BottomSheetDialog
+//    private lateinit var recyclerView: RecyclerView
+//    private lateinit var listJobDeskAdapter : ListJobDeskAdapter
+    private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
     private var companyCode = 0
-//    private lateinit var companyCheck : String
+    private var companyId = 0
+    private var bottomSheetDialogFragment = JobDeskBottomSheetFragment()
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val kodePerusahaan = binding.etKodePerusahaan.text.toString()
-        val idKaryawaan = binding.etIdKaryawan.text.toString()
-        val namaLengkap = binding.etNamaLengkap.text.toString()
-        val email = binding.etEmail.text.toString()
-        val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
-        val nomorTelepon = binding.etNomorTelepon.text.toString()
-        val password = binding.etMasukanPassword.text.toString()
-        val konfirmasiPass = binding.etKonfirmasiPassword.text.toString()
-
+        layoutManager = LinearLayoutManager(this)
         kodePerusahaanFocusListener()
+        showBottomSheetDialogFragment()
+
 
         binding.backTop.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -58,6 +55,14 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnDaftar.setOnClickListener {
 
+            val kodePerusahaan = binding.etKodePerusahaan.text.toString()
+            val idKaryawaan = binding.etIdKaryawan.text.toString()
+            val namaLengkap = binding.etNamaLengkap.text.toString()
+            val email = binding.etEmail.text.toString()
+            val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
+            val nomorTelepon = binding.etNomorTelepon.text.toString()
+            val password = binding.etMasukanPassword.text.toString()
+            val konfirmasiPass = binding.etKonfirmasiPassword.text.toString()
 
             if (kodePerusahaan.isEmpty()) {
                 etKodePerusahaan.error = getString(R.string.error)
@@ -143,27 +148,32 @@ class RegisterActivity : AppCompatActivity() {
 
 //            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
 
-
-            binding.tvJobDeskDepartement.setOnClickListener {
-               showBottomSheet()
-            }
-
-
+//            showBottomSheet()
 
         }
 
 
     }
 
-    private fun showBottomSheet() {
-        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet,null)
-        dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
-        dialog.setContentView(dialogView)
-        recyclerView = dialogView.findViewById(R.id.rvItemJobDesk)
-        listJobDeskAdapter = ListJobDeskAdapter(list)
-        recyclerView.adapter = listJobDeskAdapter
-        dialog.show()
+    private fun showBottomSheetDialogFragment() {
+        val tvJobDesk = findViewById<TextView>(R.id.tvJobDeskDepartement)
+        tvJobDesk.setOnClickListener {
+            bottomSheetDialogFragment.companyId = companyId
+            bottomSheetDialogFragment.show(supportFragmentManager, "")
 
+        }
+    }
+
+
+//    private fun showBottomSheet() {
+//        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet,null)
+//        dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+//        dialog.setContentView(dialogView)
+//        recyclerView = dialogView.findViewById(R.id.rvItemJobDesk)
+//        listJobDeskAdapter = ListJobDeskAdapter(list)
+//        recyclerView.adapter = listJobDeskAdapter
+//        dialog.show()
+//
 
 //        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<RegisterDepartementList>{
 //            override fun onResponse(
@@ -181,7 +191,7 @@ class RegisterActivity : AppCompatActivity() {
 //            }
 //
 //        })
-    }
+//    }
 
     private fun kodePerusahaanFocusListener() {
         binding.etKodePerusahaan.addTextChangedListener(object :TextWatcher {
@@ -218,7 +228,7 @@ class RegisterActivity : AppCompatActivity() {
             override fun onResponse(call: Call<RegisterCompanyCheck>, response: Response<RegisterCompanyCheck>) {
                if (response.isSuccessful) {
                    if (response.code() == 200) {
-                       companyCode = response.body()?.data!!.id
+                       companyId = response.body()?.data!!.id
                        binding.kodeperusahaanContainer.isHelperTextEnabled = true
                        binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
                    } else {

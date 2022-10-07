@@ -2,14 +2,26 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:cardElevation="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <TextView
-            android:id="@+id/listJobDesk"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="List Job Desk / Departement"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitleJobDesk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:padding="10dp"/>
+
+
+        </LinearLayout>
 
 </androidx.cardview.widget.CardView>
