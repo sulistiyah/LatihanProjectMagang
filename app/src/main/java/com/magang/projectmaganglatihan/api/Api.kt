@@ -1,6 +1,8 @@
 package com.magang.projectmaganglatihan.api
 
+import android.content.Context
 import com.magang.projectmaganglatihan.model.*
+import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -8,7 +10,9 @@ interface Api {
 
     @Headers("Accept: application/json")
     @POST("v1/staff/authenticate")
-    fun userLogin() : Call<LoginResponse>
+    fun userLogin(@Body loginParam: LoginParam,
+    @Header("Authorization")token:String
+                  ) : Call<LoginResponse>
 
     @Headers(
         "Accept: application/json",

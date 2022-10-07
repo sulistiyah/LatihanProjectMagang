@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.item_list.view.*
 
 class ListJobDeskAdapter (var listJobDesk: ArrayList<RegisterDepartementList>):
     RecyclerView.Adapter<ListJobDeskAdapter.RegisterViewHolder>() {
-
     class RegisterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 

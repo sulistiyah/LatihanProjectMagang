@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
 
+    private lateinit var selectItem: TextView
     private lateinit var dialog: BottomSheetDialog
     private lateinit var recyclerView: RecyclerView
     private lateinit var listJobDeskAdapter : ListJobDeskAdapter
@@ -122,6 +124,7 @@ class RegisterActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
+                            
                             val intentDaftar = Intent(applicationContext, LoginActivity::class.java)
                             startActivity(intentDaftar)
                         } else {

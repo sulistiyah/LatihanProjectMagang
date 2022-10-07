@@ -28,6 +28,7 @@ class SplashActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<TokenResponse>,
                     response: Response<TokenResponse>
+
                 ) {
                     if(response.isSuccessful){
                         if (response.code()==200){
