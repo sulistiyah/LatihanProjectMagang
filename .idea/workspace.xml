@@ -16,28 +16,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92b9f66b-237f-4cba-a80c-c39f8c16552a" name="Changes" comment="Project Magang Latihan">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/RegisterDepartementListResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/RegisterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/RegisterActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/LoginActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/ListJobDeskAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/ListJobDeskAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/JobDeskBottomSheetFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/JobDeskBottomSheetFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/RegisterDepartementList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/RegisterDepartementList.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_job_desk_bottom_sheet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_job_desk_bottom_sheet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_list.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[JBLZOJSSAI4PS8WG]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Windows\.android\avd\Pixel_4_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -213,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664852082443</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Project Magang Latihan">
+      <created>1665130005752</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665130005752</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

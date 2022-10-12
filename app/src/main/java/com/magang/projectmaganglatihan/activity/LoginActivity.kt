@@ -24,8 +24,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        etEmail.setText("aldo@gmail.com")
-        etPass.setText("123123")
+
 
         sharedPref = SharedPrefManager(this)
 
@@ -53,20 +52,14 @@ class LoginActivity : AppCompatActivity() {
             sharedPref = SharedPrefManager(this)
 
 
-            RetrofitClient.instance.userLogin(
-                LoginParam(username = "${etEmail.text}"
-                    , password = "${etPass.text}"),
-            "Bearer ${sharedPref.token}")
+            RetrofitClient.instance.userLogin(LoginParam(username = "${etEmail.text}", password = "${etPass.text}"), "Bearer ${sharedPref.token}")
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
 
-
-                                    SharedPrefManager.getInstance(applicationContext)
-                                    .savelogin(true)
-                                    SharedPrefManager.getInstance(applicationContext)
-                                    .saveToken(response.body()?.data!!.token)
+                                    SharedPrefManager.getInstance(applicationContext).savelogin(true)
+                                    SharedPrefManager.getInstance(applicationContext).saveToken(response.body()?.data!!.token)
 
                                     val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
                                     startActivity(intentlogin)

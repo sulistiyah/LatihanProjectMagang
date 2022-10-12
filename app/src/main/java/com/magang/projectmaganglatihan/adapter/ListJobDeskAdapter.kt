@@ -1,17 +1,12 @@
 package com.magang.projectmaganglatihan.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.magang.projectmaganglatihan.model.RegisterDepartementList
-import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.databinding.ItemListBinding
 import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
-import kotlinx.android.synthetic.main.item_list.view.*
 
-class ListJobDeskAdapter (var listJobDesk: ArrayList<RegisterDepartementListResponse.Data>):
+class ListJobDeskAdapter (private var listJobDesk: ArrayList<RegisterDepartementListResponse.Data>):
     RecyclerView.Adapter<ListJobDeskAdapter.RegisterViewHolder>() {
 
     inner class RegisterViewHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {

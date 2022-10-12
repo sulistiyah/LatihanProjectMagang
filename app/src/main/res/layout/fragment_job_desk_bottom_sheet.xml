@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItemJobDesk"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         tools:listitem="@layout/item_list"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 

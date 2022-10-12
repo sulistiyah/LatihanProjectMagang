@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
@@ -28,6 +29,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var listJobDeskAdapter: ListJobDeskAdapter
     private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
     lateinit var layoutManager: LinearLayoutManager
+    lateinit var  recyclerView: RecyclerView
 
 
 
@@ -38,7 +40,10 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         _binding = FragmentJobDeskBottomSheetBinding.inflate(inflater, container, false)
 
-        layoutManager = LinearLayoutManager(activity)
+
+        layoutManager = LinearLayoutManager(context)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+
 
         val parameter = HashMap<String, Int>()
         parameter["company_id"] = 1
@@ -46,14 +51,11 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
             override fun onResponse(call: Call<RegisterDepartementListResponse>, response: Response<RegisterDepartementListResponse>) {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
-//                            val listResponse = response.body()?.data
-//                            if (listResponse != null) {
-//                                listJobDeskAdapter.addList(listResponse)
-//                            }
-                            listJobDeskAdapter = ListJobDeskAdapter(list)
-                            rvItemJobDesk.adapter = listJobDeskAdapter
-                            rvItemJobDesk.layoutManager = layoutManager
-                            listJobDeskAdapter.notifyDataSetChanged()
+                        rvItemJobDesk.setHasFixedSize(true)
+                        listJobDeskAdapter = ListJobDeskAdapter(list)
+                        rvItemJobDesk.adapter = listJobDeskAdapter
+                        rvItemJobDesk.layoutManager = layoutManager
+                        listJobDeskAdapter.notifyDataSetChanged()
 
                     } else {
                         Toast.makeText(context, response.body()?.message, Toast.LENGTH_SHORT).show()
@@ -70,8 +72,8 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
         })
 
 
-        return binding.root
 
+        return binding.root
     }
 
     override fun getTheme(): Int {
