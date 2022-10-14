@@ -20,7 +20,6 @@
             android:background="@drawable/selamatdatang" />
 
         <ImageView
-            android:id="@+id/bg_theme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
@@ -34,8 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/bg_theme"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="429dp"
             android:background="@drawable/kolom"
             android:hint="Email / ID karyawan"
             android:inputType="textEmailAddress"

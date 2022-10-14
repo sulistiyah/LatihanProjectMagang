@@ -26,8 +26,7 @@
     <string name="submit">Submit</string>
 
     //Error
-    <string name="error"></string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="error"/>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
