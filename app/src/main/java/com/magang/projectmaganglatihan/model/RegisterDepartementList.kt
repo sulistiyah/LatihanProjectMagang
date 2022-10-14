@@ -2,7 +2,7 @@ package com.magang.projectmaganglatihan.model
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterDepartementList(
+class RegisterDepartementList(
     @SerializedName("company_id")
     var companyId: Int,
     @SerializedName("created_at")

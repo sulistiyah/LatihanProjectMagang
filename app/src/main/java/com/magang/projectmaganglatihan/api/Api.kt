@@ -10,9 +10,10 @@ interface Api {
 
     @Headers("Accept: application/json")
     @POST("v1/staff/authenticate")
-    fun userLogin(@Body loginParam: LoginParam,
-    @Header("Authorization")token:String
-                  ) : Call<LoginResponse>
+    fun userLogin(
+        @Body loginParam: LoginParam,
+        @Header("Authorization") token:String
+    ) : Call<LoginResponse>
 
     @Headers(
         "Accept: application/json",

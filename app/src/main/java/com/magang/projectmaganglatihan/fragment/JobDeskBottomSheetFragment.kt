@@ -29,8 +29,6 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var listJobDeskAdapter: ListJobDeskAdapter
     private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
     lateinit var layoutManager: LinearLayoutManager
-    lateinit var  recyclerView: RecyclerView
-
 
 
     override fun onCreateView(
@@ -41,7 +39,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
         _binding = FragmentJobDeskBottomSheetBinding.inflate(inflater, container, false)
 
 
-        layoutManager = LinearLayoutManager(context)
+        layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
 
