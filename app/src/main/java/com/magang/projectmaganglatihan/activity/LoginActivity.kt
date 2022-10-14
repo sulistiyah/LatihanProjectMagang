@@ -52,7 +52,10 @@ class LoginActivity : AppCompatActivity() {
             sharedPref = SharedPrefManager(this)
 
 
-            RetrofitClient.instance.userLogin(LoginParam(username = "${etEmail.text}", password = "${etPass.text}"), "Bearer ${sharedPref.token}")
+            RetrofitClient.instance.userLogin(LoginParam(
+                username = "${etEmail.text}",
+                password = "${etPass.text}"),
+                "Bearer ${sharedPref.token}")
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
@@ -66,10 +69,12 @@ class LoginActivity : AppCompatActivity() {
                                     Toast.makeText(applicationContext,"berhasil",Toast.LENGTH_SHORT).show()
 
                             } else {
-                                Toast.makeText(this@LoginActivity,response.errorBody()?.string(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,response.errorBody()?.string(),
+                                    Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this@LoginActivity, response.errorBody()?.string(), Toast.LENGTH_SHORT).show()
+                                 Toast.makeText(this@LoginActivity, response.errorBody()?.string(),
+                                    Toast.LENGTH_SHORT).show()
                               }
                     }
 
@@ -103,7 +108,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
     private fun init() {
-
+    sharedPref = SharedPrefManager(this)
+        sharedPref.token
 
 
     }
