@@ -8,6 +8,7 @@ import retrofit2.http.*
 
 interface Api {
 
+    //Login
     @Headers("Accept: application/json")
     @POST("v1/staff/authenticate")
     fun userLogin(
@@ -15,6 +16,8 @@ interface Api {
         @Header("Authorization") token:String
     ) : Call<LoginResponse>
 
+
+    //Token
     @Headers(
         "Accept: application/json",
         "X-APP-TOKEN: TWTpknTux7PzuqDh6qLJQPXNvRT3an7B"
@@ -22,16 +25,24 @@ interface Api {
     @POST("v1/auth/token")
     fun token(@Body tokenParam : TokenParam ) : Call<TokenResponse>
 
+
+    //Register
     @Headers("Accept: application/json")
     @POST("v1/register")
-    fun postDaftar(@Body registerParam: RegisterParam): Call<RegisterResponse>
+    fun postDaftar(
+        @Body registerParam: RegisterParam,
+        @Header("Authorization") token:String
+    ): Call<RegisterResponse>
 
 
+    //Kode Perusahaan - Register
     @GET("v1/company_check")
     fun getKodePerusahaan(
         @QueryMap parameters : HashMap<String, String>
     ): Call<RegisterCompanyCheck>
 
+
+    //Job Desk - Register
     @GET("v1/departement_list")
     fun getJobDeskDapartement(
         @QueryMap parameter: HashMap<String, Int>

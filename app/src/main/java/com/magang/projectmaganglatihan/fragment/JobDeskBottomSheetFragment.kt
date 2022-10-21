@@ -1,5 +1,6 @@
 package com.magang.projectmaganglatihan.fragment
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.magang.projectmaganglatihan.R
+import com.magang.projectmaganglatihan.activity.RegisterActivity
 import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.FragmentJobDeskBottomSheetBinding
@@ -27,9 +29,14 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
 
     var companyId = 0
     private lateinit var listJobDeskAdapter: ListJobDeskAdapter
-    private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
     lateinit var layoutManager: LinearLayoutManager
+    var listener : ((RegisterDepartementListResponse.Data) -> Unit?)? = null
 
+
+
+    override fun getTheme(): Int {
+        return R.style.BottomSheetDialogTheme
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +45,20 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         _binding = FragmentJobDeskBottomSheetBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        showListJobDesk()
+        actionClick()
+
+    }
+
+    private fun showListJobDesk() {
 
         layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -50,7 +71,8 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
                         rvItemJobDesk.setHasFixedSize(true)
-                        listJobDeskAdapter = ListJobDeskAdapter(list)
+                        showData(response.body()!!)
+//                        listJobDeskAdapter = ListJobDeskAdapter(response.body()!!.data)
                         rvItemJobDesk.adapter = listJobDeskAdapter
                         rvItemJobDesk.layoutManager = layoutManager
                         listJobDeskAdapter.notifyDataSetChanged()
@@ -69,17 +91,24 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
 
         })
 
-
-
-        return binding.root
     }
 
-    override fun getTheme(): Int {
-        return R.style.BottomSheetDialogTheme
+    private fun showData( data : RegisterDepartementListResponse) {
+        val results = data.data
+        listJobDeskAdapter.setData(results)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun actionClick() {
+
+        listJobDeskAdapter = ListJobDeskAdapter(arrayListOf(), object : ListJobDeskAdapter.OnAdapterListener {
+            override fun onClik(result: RegisterDepartementListResponse.Data) {
+
+                listener?.invoke(result)
+                this@JobDeskBottomSheetFragment.dismiss()
+
+            }
+        })
+
     }
 
 

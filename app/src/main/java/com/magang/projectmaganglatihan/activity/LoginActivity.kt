@@ -107,13 +107,14 @@ class LoginActivity : AppCompatActivity() {
             etPass.setSelection(etPass.text.toString().length)
         }
 
-    private fun init() {
-    sharedPref = SharedPrefManager(this)
-        sharedPref.token
+        private fun init() {
+        sharedPref = SharedPrefManager(this)
+            sharedPref.token
 
 
-    }
-    }
+        }
+
+}
 
 //    override fun onStart() {
 //        super.onStart()
