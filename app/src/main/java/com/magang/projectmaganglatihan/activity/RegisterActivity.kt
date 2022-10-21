@@ -9,17 +9,23 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
-import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
 import com.magang.projectmaganglatihan.databinding.ActivityRegisterBinding
 import com.magang.projectmaganglatihan.fragment.JobDeskBottomSheetFragment
 import com.magang.projectmaganglatihan.model.*
+import com.magang.projectmaganglatihan.storage.SharedPrefManager
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
+import kotlinx.android.synthetic.main.activity_register.etEmail
+import kotlinx.android.synthetic.main.activity_register.etIdKaryawan
+import kotlinx.android.synthetic.main.activity_register.etKodePerusahaan
+import kotlinx.android.synthetic.main.activity_register.etKonfirmasiPassword
+import kotlinx.android.synthetic.main.activity_register.etMasukanPassword
+import kotlinx.android.synthetic.main.activity_register.etNamaLengkap
+import kotlinx.android.synthetic.main.activity_register.etNomorTelepon
+import kotlinx.android.synthetic.main.activity_register.passwordContainer
+import kotlinx.android.synthetic.main.layout_percobaan.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,11 +38,12 @@ class RegisterActivity : AppCompatActivity() {
 //    private lateinit var dialog: BottomSheetDialog
 //    private lateinit var recyclerView: RecyclerView
 //    private lateinit var listJobDeskAdapter : ListJobDeskAdapter
-    private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
-    private var companyCode = 0
+//    private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
+//    private var companyCode = 0
     private var companyId = 0
     private var bottomSheetDialogFragment = JobDeskBottomSheetFragment()
     private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var sharedPref: SharedPrefManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +51,133 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         layoutManager = LinearLayoutManager(this)
+        sharedPref = SharedPrefManager(this)
+
+        backPage()
         kodePerusahaanFocusListener()
         showBottomSheetDialogFragment()
+        matchPasswordListener()
+        postDaftar()
+
+    }
 
 
+    private fun backPage() {
         binding.backTop.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
+
+
+    private fun kodePerusahaanFocusListener() {
+        binding.etKodePerusahaan.addTextChangedListener(object :TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null) {
+                    if (p0.isNotEmpty()) {
+                        validKodePerusahaan(p0.toString())
+                    }
+                }
+            }
+
+        })
+    }
+
+
+    private fun validKodePerusahaan(code : String){
+        val parameter = HashMap<String, String>()
+        parameter["company_code"] = "$code"
+        RetrofitClient.instance.getKodePerusahaan(parameter).enqueue(object : Callback<RegisterCompanyCheck> {
+            override fun onResponse(call: Call<RegisterCompanyCheck>, response: Response<RegisterCompanyCheck>) {
+                if (response.isSuccessful) {
+                    if (response.code() == 200) {
+
+                        companyId = response.body()?.data!!.id
+                        binding.kodeperusahaanContainer.isHelperTextEnabled = true
+                        binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
+
+                    } else {
+
+//                       Toast.makeText(this@RegisterActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Log.e("error", "onResponse: ${response.message()}" )
+                    binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Tidak Ditemukan"
+//                   Toast.makeText(this@RegisterActivity, response.code().toString() , Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            override fun onFailure(call: Call<RegisterCompanyCheck>, t: Throwable) {
+                Log.e("test", "onFailure: " + t.message )
+                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+    }
+
+
+    private fun showBottomSheetDialogFragment() {
+        val tvJobDesk = findViewById<TextView>(R.id.tvJobDeskDepartement)
+        tvJobDesk.setOnClickListener {
+            if (companyId != 0) {
+                bottomSheetDialogFragment.companyId = companyId
+                bottomSheetDialogFragment.show(supportFragmentManager, "")
+            } else {
+                Toast.makeText(this@RegisterActivity, "Masukan Kode Perusahaan dengan Benar", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        bottomSheetDialogFragment.listener = {
+            tvJobDesk.setText("${it.departementTitle}")
+        }
+    }
+
+
+
+    private fun matchPasswordListener() {
+        binding.etKonfirmasiPassword.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0 != null) {
+                    if (p0.isNotEmpty()) {
+                        if (!etMasukanPassword.text.toString().isEmpty() && !etKonfirmasiPassword.text.toString().isEmpty()) {
+
+                            if (etMasukanPassword.text.toString() == etKonfirmasiPassword.text.toString()) {
+                                binding.konfirmPassContainer.isHelperTextEnabled = true
+                                binding.konfirmPassContainer.helperText = "Password Oke"
+                            } else {
+                                binding.konfirmPassContainer.helperText = "Password Tidak Sama"
+                            }
+
+                        }
+                    }
+//
+                }
+            }
+
+        })
+
+    }
+
+    private fun postDaftar() {
 
         binding.btnDaftar.setOnClickListener {
 
@@ -113,31 +239,29 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val registerParam = RegisterParam(
+
+            RetrofitClient.instance.postDaftar(RegisterParam(
                 companyId = 1,
                 employeeDepartmentId = 1,
-                employeeEmail = "sulis@gmail.com",
-                employeeFullname = "Sulis Tiyah",
-                employeeNik = "987654321",
-                employeePassword = "12345",
-                employeePhoneNo = "081292323052"
-
-            )
-
-
-            RetrofitClient.instance.postDaftar(registerParam)
-                .enqueue(object  : Callback<RegisterResponse> {
+                employeeEmail = "${etEmail.text}",
+                employeeFullname = "${etNamaLengkap.text}",
+                employeeNik = "${etIdKaryawan.text}",
+                employeePassword = "${etMasukanPassword.text}",
+                employeePhoneNo = "${etNomorTelepon.text}"),
+                "Bearer ${sharedPref.token}")
+            .enqueue(object  : Callback<RegisterResponse> {
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
-                            
+
                             val intentDaftar = Intent(applicationContext, LoginActivity::class.java)
                             startActivity(intentDaftar)
+
                         } else {
                             Toast.makeText(this@RegisterActivity,response.code(), Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@RegisterActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterActivity, response.body()!!.message, Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
@@ -147,153 +271,19 @@ class RegisterActivity : AppCompatActivity() {
                 }
             })
 
-//            binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
-
-//            showBottomSheet()
-
         }
 
-
     }
 
-    private fun showBottomSheetDialogFragment() {
-        val tvJobDesk = findViewById<TextView>(R.id.tvJobDeskDepartement)
-        tvJobDesk.setOnClickListener {
-            bottomSheetDialogFragment.companyId = companyId
-            bottomSheetDialogFragment.show(supportFragmentManager, "")
-
-        }
-    }
-
-
-//    private fun showBottomSheet() {
-//        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet,null)
-//        dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
-//        dialog.setContentView(dialogView)
-//        recyclerView = dialogView.findViewById(R.id.rvItemJobDesk)
-//        listJobDeskAdapter = ListJobDeskAdapter(list)
-//        recyclerView.adapter = listJobDeskAdapter
-//        dialog.show()
-//
-
-//        RetrofitClient.instance.getJobDeskDapartemen("1").enqueue(object : Callback<RegisterDepartementList>{
-//            override fun onResponse(
-//                call: Call<RegisterDepartementList>,
-//                response: Response<RegisterDepartementList>
-//            ) {
-//                val listResponse = response.body()?.data
-//                if (listResponse != null) {
-//                    listJobDeskAdapter.addListJobDesk(listResponse)
-//
-//            }
-//
-//            override fun onFailure(call: Call<RegisterDepartementList>, t: Throwable) {
-//                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
-//            }
-//
-//        })
-//    }
-
-    private fun kodePerusahaanFocusListener() {
-        binding.etKodePerusahaan.addTextChangedListener(object :TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                if (p0 != null) {
-                    if (p0.isNotEmpty()) {
-                        validKodePerusahaan(p0.toString())
-                    }
-                }
-            }
-
-        })
-//        binding.etKodePerusahaan.setOnFocusChangeListener { _, focused ->
-//            if(!focused)
-//            {
-//                binding.kodeperusahaanContainer.helperText = validKodePerusahaan()
-//            }
-//        }
-    }
-
-
-    private fun validKodePerusahaan(code : String){
-        val parameter = HashMap<String, String>()
-            parameter["company_code"] = "$code"
-        RetrofitClient.instance.getKodePerusahaan(parameter).enqueue(object : Callback<RegisterCompanyCheck> {
-            override fun onResponse(call: Call<RegisterCompanyCheck>, response: Response<RegisterCompanyCheck>) {
-               if (response.isSuccessful) {
-                   if (response.code() == 200) {
-                       companyId = response.body()?.data!!.id
-                       binding.kodeperusahaanContainer.isHelperTextEnabled = true
-                       binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
-                   } else {
-                       Toast.makeText(this@RegisterActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
-                   }
-               } else {
-                   Log.e("error", "onResponse: ${response.message()}" )
-                   binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Tidak Ditemukan"
-                   Toast.makeText(this@RegisterActivity, response.code().toString() , Toast.LENGTH_SHORT).show()
-               }
-
-            }
-
-            override fun onFailure(call: Call<RegisterCompanyCheck>, t: Throwable) {
-                Log.e("test", "onFailure: " + t.message )
-                Toast.makeText(this@RegisterActivity, t.message, Toast.LENGTH_SHORT).show()
-            }
-
-        })
-
-//        val codeText = binding.etKodePerusahaan.text.toString()
-//        if(!codeText.matches("codelabs".toRegex())) {
-//            return "Kode Perusahaan Tidak Ditemukan"
-//        }
-//        return "Kode Perusahaan Ditemukan"
-    }
-
-//    fun listJobDesk(view: View) {
-//        val onClickJobDesk = AlertDialog.Builder(this)
-//        onClickJobDesk.setTitle("Job Desk")
-//
-//        onClickJobDesk.setItems(listJobDeskAdapter) {dialog, which ->
-//            Toast.makeText(applicationContext, listJobDeskAdapter[which], Toast.LENGTH_SHORT).show()
-//        }
-//
-//        val dialog = onClickJobDesk.create()
-//        dialog.show()
-//    }
-
-
-//    private fun getJobDeskDepartement() {
-//        rv_listJobDesk.setHasFixedSize(true)
-//        rv_listJobDesk.layoutManager = layoutManager
-//        listJobDeskAdapter = ListJobDeskAdapter(listJobDesk)
-//        rv_listJobDesk.adapter = registerAdapter
-//        etJobDeskDepartement.setOnClickListener {
-//            val parameter = HashMap<String, String>()
-//            parameter["company_id"] = "1"
-//            RetrofitClient.instance.getJobDeskDapartemen(parameter).enqueue(object : Callback<ArrayList<RegisterDepartementList>>{
-//                override fun onResponse(call: Call<ArrayList<RegisterDepartementList>>, response: Response<ArrayList<RegisterDepartementList>>) {
-//                    val listDepartementResponse = response.body()
-//                    if (listDepartementResponse != null) {
-//                        registerAdapter.addListJobDesk(listDepartementResponse)
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<ArrayList<RegisterDepartementList>>, t: Throwable) {
-//
-//                }
-//
-//            })
-//        }
-//
-//    }
 
 }
+
+
+
+
+
+
+
+
+
 

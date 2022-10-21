@@ -24,8 +24,6 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        etEmail.setText("aldos@gmail.com")
-        etPass.setText("123123")
 
 
         sharedPref = SharedPrefManager(this)
@@ -63,13 +61,11 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
 
-                                SharedPrefManager.getInstance(applicationContext).savelogin(true)
-                                SharedPrefManager.getInstance(applicationContext).saveToken(response.body()?.data!!.token)
-                                SharedPrefManager.getInstance(applicationContext).saveEmployeeFullname(
-                                    response.body()?.data!!.user.employeeFullname)
+                                    SharedPrefManager.getInstance(applicationContext).savelogin(true)
+                                    SharedPrefManager.getInstance(applicationContext).saveToken(response.body()?.data!!.token)
 
-                                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                                    startActivity(intent)
+                                    val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
+                                    startActivity(intentlogin)
                                     Toast.makeText(applicationContext,"berhasil",Toast.LENGTH_SHORT).show()
 
                             } else {
@@ -114,6 +110,7 @@ class LoginActivity : AppCompatActivity() {
     private fun init() {
     sharedPref = SharedPrefManager(this)
         sharedPref.token
+
 
     }
     }
