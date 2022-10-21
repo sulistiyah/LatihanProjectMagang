@@ -18,6 +18,14 @@ import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.etEmail
+import kotlinx.android.synthetic.main.activity_register.etIdKaryawan
+import kotlinx.android.synthetic.main.activity_register.etKodePerusahaan
+import kotlinx.android.synthetic.main.activity_register.etKonfirmasiPassword
+import kotlinx.android.synthetic.main.activity_register.etMasukanPassword
+import kotlinx.android.synthetic.main.activity_register.etNamaLengkap
+import kotlinx.android.synthetic.main.activity_register.etNomorTelepon
+import kotlinx.android.synthetic.main.activity_register.passwordContainer
+import kotlinx.android.synthetic.main.layout_percobaan.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -149,16 +157,19 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(p0: Editable?) {
                 if (p0 != null) {
-                    if (etMasukanPassword != etKonfirmasiPassword) {
-                        binding.konfirmPassContainer.isHelperTextEnabled = true
-                        binding.konfirmPassContainer.helperText = "Password Tidak Sama"
-//                        Toast.makeText(this@RegisterActivity, "Password Tidak Sama", Toast.LENGTH_SHORT).show()
-                    } else {
+                    if (p0.isNotEmpty()) {
+                        if (!etMasukanPassword.text.toString().isEmpty() && !etKonfirmasiPassword.text.toString().isEmpty()) {
 
-                        binding.konfirmPassContainer.helperText = "Password Oke"
-//                        Toast.makeText(this@RegisterActivity, "Password Oke", Toast.LENGTH_SHORT).show()
+                            if (etMasukanPassword.text.toString() == etKonfirmasiPassword.text.toString()) {
+                                binding.konfirmPassContainer.isHelperTextEnabled = true
+                                binding.konfirmPassContainer.helperText = "Password Oke"
+                            } else {
+                                binding.konfirmPassContainer.helperText = "Password Tidak Sama"
+                            }
+
+                        }
                     }
-
+//
                 }
             }
 
@@ -227,16 +238,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-//            val registerParam = RegisterParam(
-//                companyId = 1,
-//                employeeDepartmentId = 1,
-//                employeeEmail = "sulis@gmail.com",
-//                employeeFullname = "Sulis Tiyah",
-//                employeeNik = "987654321",
-//                employeePassword = "12345",
-//                employeePhoneNo = "081292323052"
-//
-//            )
+
             RetrofitClient.instance.postDaftar(RegisterParam(
                 companyId = 1,
                 employeeDepartmentId = 1,
@@ -255,10 +257,10 @@ class RegisterActivity : AppCompatActivity() {
                             startActivity(intentDaftar)
 
                         } else {
-                            Toast.makeText(this@RegisterActivity,response.body()?.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity,response.code(), Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@RegisterActivity, (response.body()!!.message), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterActivity, response.body()!!.message, Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
