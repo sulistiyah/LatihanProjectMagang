@@ -3,11 +3,10 @@
 package com.magang.projectmaganglatihan.activity
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.location.LocationManagerCompat.isLocationEnabled
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.magang.projectmaganglatihan.R
@@ -28,18 +27,27 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         sharedpref = SharedPrefManager(this)
-        showusername()
+        showUsername()
+        checkLogin()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         tvlokasi = findViewById(R.id.tvlokasi)
 //        getCurrentLocation()
 
     }
 
-    private fun showusername() {
+    private fun showUsername() {
         sharedpref = SharedPrefManager(this)
         employeeFullname = sharedpref.employeeFullname
         tvusername = findViewById(R.id.tvusername)
         tvusername.text = employeeFullname
+    }
+
+    private fun checkLogin() {
+        if (!sharedpref.islogin) {
+            val intentCheckLogin = Intent(this, LoginActivity::class.java)
+            startActivity(intentCheckLogin)
+            finish()
+        }
     }
 
     companion object {

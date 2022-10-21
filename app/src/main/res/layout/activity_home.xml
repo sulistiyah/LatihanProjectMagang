@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,208 +7,232 @@
     android:background="@drawable/background_login"
     tools:context=".activity.HomeActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectangle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvhi"
+        <ImageView
+            android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_alignBaseline="@id/linearlayoutlogo"
-            android:layout_alignTop="@id/linearlayoutlogo"
-            android:layout_alignBottom="@id/linearlayoutlogo"
-            android:gravity="center_vertical"
-            android:text="Hi,"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/home_top" />
 
-        <TextView
-            android:id="@+id/tvusername"
+        <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_alignBaseline="@id/linearlayoutlogo"
-            android:layout_alignTop="@id/linearlayoutlogo"
-            android:layout_alignBottom="@id/linearlayoutlogo"
-            android:gravity="center_vertical"
-            android:text="username"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            app:srcCompat="@drawable/rectangle" />
 
-        <LinearLayout
-            android:id="@+id/linearlayoutlogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/imgnotif"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <LinearLayout
+                android:id="@+id/llTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/notif" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_alignParentStart="true">
 
-            <ImageButton
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Hi, "
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Username"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llLogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/profileorang"/>
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical">
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/lgNotif"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/notif" />
 
-        <TextView
-            android:id="@+id/tvsemogaharimumenyenangkan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvusername"
-            android:layout_marginTop="9dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:text="@string/semoga"
-            android:textSize="16dp"
-            android:textColor="@color/white"/>
-
-        <LinearLayout
-            android:id="@+id/linearLayoutMaps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/tvsemogaharimumenyenangkan"
-            android:onClick="@+id/btnlokasi">
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/markerhome"
-                android:layout_below="@id/tvsemogaharimumenyenangkan"
-                android:layout_alignParentStart="true"/>
+                <ImageView
+                    android:id="@+id/lgProfil"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/profileorang"
+                    android:layout_marginStart="10dp"/>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvlokasi"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvUcapan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvsemogaharimumenyenangkan"
-                android:layout_alignParentStart="true"
-                android:text="Lokasi Saya"
-                android:textColor="@color/white"
-                android:layout_marginStart="10dp" />
-        </LinearLayout>
+                android:layout_below="@id/llTextView"
+                android:layout_marginTop="10dp"
+                android:text="@string/semoga_hari_mu_menyenangkan"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/linearLayoutkartu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_below="@id/linearLayoutMaps"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-        
-        <ImageButton
-            android:id="@+id/btninfo"
-            android:layout_width="166dp"
-            android:layout_height="196dp"
-            android:background="@drawable/img_1"
-            android:layout_below="@id/linearLayoutMaps"
-            android:layout_marginEnd="35dp"/>
-        
-        <ImageButton
-            android:id="@+id/btnrencana"
-            android:layout_width="166dp"
-            android:layout_height="196dp"
-            android:background="@drawable/img_2"/>
-        </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/imgkolomabsen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linearLayoutkartu"
-            android:background="@drawable/kolom_absen" />
-
-        <LinearLayout
-            android:id="@+id/linearLayoutabsen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@id/linearLayoutkartu"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center_horizontal">
-
-            <ImageView
-                android:id="@+id/ivabsensekarang"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/llMaps"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/absen_sekarang"/>
+                android:layout_below="@id/tvUcapan"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:layout_alignParentStart="true">
 
-            <ImageButton
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/markerhome" />
+
+                <TextView
+                    android:id="@+id/tvLokasi"
+                    android:layout_width="300dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:lines="2"
+                    android:text="@string/lokasi_saya"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llInformasiRencana"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btnabsen"
-                android:layout_margin="20dp"/>
-        </LinearLayout>
+                android:layout_below="@id/llMaps"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal">
 
 
-        <ImageView
-            android:id="@+id/iv_absen_harian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_absen_harian"
-            android:layout_below="@id/imgkolomabsen"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:foregroundGravity="center"/>
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="168dp"
+                    android:layout_height="188dp"
+                    app:srcCompat="@drawable/img_informasi"
+                    android:layout_marginHorizontal="10dp"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/imgkolomabsen"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_horizontal">
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="168dp"
+                    android:layout_height="188dp"
+                    app:srcCompat="@drawable/img_rencana"
+                    android:layout_marginHorizontal="10dp"/>
+            </LinearLayout>
 
-           <ImageView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/lihat_absensi_harian"
-               android:layout_marginTop="30dp"
-               android:layout_marginEnd="50dp"/>
-        </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_absensi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/llInformasiRencana"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="10dp">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_play"
-            android:layout_below="@+id/linearLayoutabsen"
-            android:layout_marginTop="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="60dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/klik_tombol"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="@string/absen_sekarang"
+                            android:textColor="@color/red"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/untuk_memulai_absensi_harian_anda"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"/>
+
+                    <ImageView
+                        android:id="@+id/btnAbsenSekarang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/btn_absen_sekarang"
+                        android:layout_marginTop="20dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</ScrollView>

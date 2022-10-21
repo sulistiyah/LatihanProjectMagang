@@ -19,14 +19,29 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
-    val token: String
+    val tokenSplash: String
         get() {
             val sharedPreferences =
                 mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return sharedPreferences.getString("token", null).toString()
         }
 
-    fun saveToken(token: String) {
+    fun saveTokenSplash(token: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("token", token)
+        editor.apply()
+    }
+
+    val tokenLogin: String
+        get() {
+            val sharedPreferences =
+                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("token", null).toString()
+        }
+
+    fun saveTokenLogin(token: String) {
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
@@ -47,7 +62,7 @@ class SharedPrefManager(private val mCtx: Context) {
         val editor = sharedPreferences.edit()
 
         editor.putBoolean(IS_LOGIN, islogin)
-        editor.commit()
+        editor.apply()
     }
 
     val register: String

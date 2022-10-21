@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         tvdaftar.setOnClickListener {
             intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-            init()
+            tokenSplash()
         }
 
         btnmasuk.setOnClickListener {
@@ -55,25 +55,25 @@ class LoginActivity : AppCompatActivity() {
             RetrofitClient.instance.userLogin(LoginParam(
                 username = "${etEmail.text}",
                 password = "${etPass.text}"),
-                "Bearer ${sharedPref.token}")
+                "Bearer ${sharedPref.tokenLogin}")
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
 
-                                    SharedPrefManager.getInstance(applicationContext).savelogin(true)
-                                    SharedPrefManager.getInstance(applicationContext).saveToken(response.body()?.data!!.token)
+                                SharedPrefManager.getInstance(applicationContext).savelogin(true)
+                                SharedPrefManager.getInstance(applicationContext).saveTokenLogin(response.body()?.data!!.token)
 
-                                    val intentlogin = Intent(this@LoginActivity, MainActivity::class.java)
-                                    startActivity(intentlogin)
-                                    Toast.makeText(applicationContext,"berhasil",Toast.LENGTH_SHORT).show()
+                                val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
+                                startActivity(intentlogin)
+
+                                Toast.makeText(applicationContext,"berhasil",Toast.LENGTH_SHORT).show()
 
                             } else {
-                                Toast.makeText(this@LoginActivity,response.errorBody()?.string(),
-                                    Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,response.code(), Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                                 Toast.makeText(this@LoginActivity, response.errorBody()?.string(),
+                                 Toast.makeText(this@LoginActivity, "${response.body()?.message}",
                                     Toast.LENGTH_SHORT).show()
                               }
                     }
@@ -96,30 +96,36 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-        private  fun showPassword(isShow: Boolean){
-            if (isShow){
-                etPass.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                imgeye.setImageResource(R.drawable.ic_hide_password)
-            }else{
-                etPass.transformationMethod = PasswordTransformationMethod.getInstance()
-                imgeye.setImageResource(R.drawable.ic_show_password)
-            }
-            etPass.setSelection(etPass.text.toString().length)
+
+    private  fun showPassword(isShow: Boolean){
+        if (isShow){
+            etPass.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            imgeye.setImageResource(R.drawable.ic_hide_password)
+        }else{
+            etPass.transformationMethod = PasswordTransformationMethod.getInstance()
+            imgeye.setImageResource(R.drawable.ic_show_password)
         }
+        etPass.setSelection(etPass.text.toString().length)
+    }
 
-    private fun init() {
+
+    private fun tokenSplash() {
     sharedPref = SharedPrefManager(this)
-        sharedPref.token
-
-
-    }
+        sharedPref.tokenSplash
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        if(SharedPrefManager.getInstance(this).islogin){
-//            val intentlogin = Intent(this@LoginActivity,MainActivity::class.java)
-//            startActivity(intentlogin)
-//            finish()
+
+    override fun onStart() {
+        super.onStart()
+        if (SharedPrefManager.getInstance(this).islogin) {
+            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
+            startActivity(intentlogin)
+            finish()
+        }
+    }
+
+
+}
+
 
 

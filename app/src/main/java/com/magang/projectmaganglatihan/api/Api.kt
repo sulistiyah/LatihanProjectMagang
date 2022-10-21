@@ -1,8 +1,7 @@
 package com.magang.projectmaganglatihan.api
 
-import android.content.Context
+
 import com.magang.projectmaganglatihan.model.*
-import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.http.*
 

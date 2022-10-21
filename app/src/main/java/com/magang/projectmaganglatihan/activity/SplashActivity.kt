@@ -15,27 +15,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-//@SuppressLint("CustomSplashScreen")
+
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
-
         RetrofitClient.instance.token(TokenParam(client = "app-android", secret = "TWTpknTux7PzuqDh6qLJQPXNvRT3an7B"))
             .enqueue(object : Callback<TokenResponse>{
-                override fun onResponse(
-                    call: Call<TokenResponse>,
-                    response: Response<TokenResponse>
-
-                ) {
+                override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
                     if(response.isSuccessful){
                         if (response.code()==200){
-                            SharedPrefManager.getInstance(this@SplashActivity)
-                                .saveToken(response.body()!!.data.token)
-                            val intent = Intent(this@SplashActivity,LoginActivity ::class.java)
-                            startActivity(intent)
+
+                            SharedPrefManager.getInstance(this@SplashActivity).saveTokenSplash(response.body()!!.data.token)
+
+                            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                            finish()
                         }
                     }
                 }

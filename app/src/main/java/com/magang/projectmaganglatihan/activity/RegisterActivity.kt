@@ -15,7 +15,6 @@ import com.magang.projectmaganglatihan.databinding.ActivityRegisterBinding
 import com.magang.projectmaganglatihan.fragment.JobDeskBottomSheetFragment
 import com.magang.projectmaganglatihan.model.*
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.etEmail
 import kotlinx.android.synthetic.main.activity_register.etIdKaryawan
@@ -24,8 +23,6 @@ import kotlinx.android.synthetic.main.activity_register.etKonfirmasiPassword
 import kotlinx.android.synthetic.main.activity_register.etMasukanPassword
 import kotlinx.android.synthetic.main.activity_register.etNamaLengkap
 import kotlinx.android.synthetic.main.activity_register.etNomorTelepon
-import kotlinx.android.synthetic.main.activity_register.passwordContainer
-import kotlinx.android.synthetic.main.layout_percobaan.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -105,7 +102,6 @@ class RegisterActivity : AppCompatActivity() {
                         binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
 
                     } else {
-
 //                       Toast.makeText(this@RegisterActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
                     }
                 } else {
@@ -248,14 +244,14 @@ class RegisterActivity : AppCompatActivity() {
                 employeeNik = "${etIdKaryawan.text}",
                 employeePassword = "${etMasukanPassword.text}",
                 employeePhoneNo = "${etNomorTelepon.text}"),
-                "Bearer ${sharedPref.token}")
+                "Bearer ${sharedPref.tokenSplash}")
             .enqueue(object  : Callback<RegisterResponse> {
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-                            val intentDaftar = Intent(applicationContext, LoginActivity::class.java)
-                            startActivity(intentDaftar)
+                            Toast.makeText(this@RegisterActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
+                            onBackPressed()
 
                         } else {
                             Toast.makeText(this@RegisterActivity,response.code(), Toast.LENGTH_SHORT).show()

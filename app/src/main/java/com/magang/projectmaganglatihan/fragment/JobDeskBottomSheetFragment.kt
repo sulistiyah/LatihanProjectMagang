@@ -7,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.magang.projectmaganglatihan.R
-import com.magang.projectmaganglatihan.activity.RegisterActivity
 import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.FragmentJobDeskBottomSheetBinding
-import com.magang.projectmaganglatihan.model.RegisterDepartementList
 import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
 import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
 import retrofit2.Call
@@ -78,10 +75,10 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
                         listJobDeskAdapter.notifyDataSetChanged()
 
                     } else {
-                        Toast.makeText(context, response.body()?.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, response.code(), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(context, response.code().toString() , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, response.body()?.message , Toast.LENGTH_SHORT).show()
                 }
             }
 
