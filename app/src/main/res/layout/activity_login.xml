@@ -72,7 +72,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="47dp"
-            android:background="@drawable/img"
+            android:background="@drawable/bg_absensi"
             android:onClick="@id/btnmasuk" />
 
         <TextView

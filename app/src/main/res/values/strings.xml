@@ -18,6 +18,9 @@
     <string name="konfirmasi_password">Konfirmasi Kata Sandi*</string>
     <string name="list_job_desk">List Job Desk</string>
 
+    //Home
+    <string name="semoga">Semoga hari mu menyenangkan</string>
+
     //Tumbal
     <string name="email_tumbal">Email</string>
     <string name="required">Required</string>
@@ -29,6 +32,7 @@
     <string name="error"></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 </resources>

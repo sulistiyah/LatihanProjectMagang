@@ -22,6 +22,9 @@ interface Api {
     @POST("v1/auth/token")
     fun token(@Body tokenParam : TokenParam ) : Call<TokenResponse>
 
+    @POST("user")
+    fun user(@Body loginParam: LoginParam) : Call<LoginResponse>
+
     @Headers("Accept: application/json")
     @POST("v1/register")
     fun postDaftar(@Body registerParam: RegisterParam): Call<RegisterResponse>

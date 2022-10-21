@@ -5,6 +5,20 @@ import android.content.SharedPreferences
 
 class SharedPrefManager(private val mCtx: Context) {
 
+    val employeeFullname : String
+    get() {
+        val sharedPreferences =
+            mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE)
+        return sharedPreferences.getString("employeeFullname",null).toString()
+    }
+    fun saveEmployeeFullname (employeeFullname: String){
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("employeeFullname",employeeFullname)
+        editor.apply()
+    }
+
     val token: String
         get() {
             val sharedPreferences =

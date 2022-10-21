@@ -92,6 +92,7 @@ class RegisterActivity : AppCompatActivity() {
                 tvJobDeskDepartement.error = getString(R.string.error)
                 tvJobDeskDepartement.requestFocus()
                 return@setOnClickListener
+
             }
 
             if (nomorTelepon.isEmpty()) {
