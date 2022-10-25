@@ -32,9 +32,20 @@
     //Home
     <string name="semoga_hari_mu_menyenangkan">Semoga hari mu menyenangkan</string>
     <string name="lokasi_saya">Lokasi Saya</string>
-    <string name="klik_tombol">Klik Tombol </string>
+    <string name="klik_tombol">Klik Tombol</string>
     <string name="absen_sekarang"> ABSEN SEKARANG</string>
     <string name="untuk_memulai_absensi_harian_anda">untuk memulai absensi harian anda</string>
+    <string name="username">Username</string>
+    <string name="hi">Hi,</string>
+    <string name="lihat_absensi_harian">Lihat Absensi harian</string>
+    <string name="sudah_absen_hari_ini">Sudah Absen hari ini</string>
+    <string name="_68">68</string>
+    <string name="tugas_kerja">Tugas Kerja</string>
+    <string name="laporan_kerja">Laporan Kerja</string>
+    <string name="infromasi_dan_berita">Infromasi dan berita</string>
+    <string name="info_tentang_hari_ini">Info tentang hari ini</string>
+    <string name="rencana_dan_tiba_tiba">Rencana dan Tiba-tiba</string>
+    <string name="saya_ada_rencana_izin">Saya Ada rencana izin</string>
 
 
 </resources>

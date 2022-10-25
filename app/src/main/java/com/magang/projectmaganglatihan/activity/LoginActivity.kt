@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun tokenSplash() {
-    sharedPref = SharedPrefManager(this)
+        sharedPref = SharedPrefManager(this)
         sharedPref.tokenSplash
     }
 

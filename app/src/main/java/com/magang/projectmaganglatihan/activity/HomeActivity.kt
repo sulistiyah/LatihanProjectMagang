@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
         showUsername()
         checkLogin()
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        tvlokasi = findViewById(R.id.tvlokasi)
+        tvlokasi = findViewById(R.id.tvLokasi)
 //        getCurrentLocation()
 
     }
@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
     private fun showUsername() {
         sharedpref = SharedPrefManager(this)
         employeeFullname = sharedpref.employeeFullname
-        tvusername = findViewById(R.id.tvusername)
+        tvusername = findViewById(R.id.tvUsername)
         tvusername.text = employeeFullname
     }
 
