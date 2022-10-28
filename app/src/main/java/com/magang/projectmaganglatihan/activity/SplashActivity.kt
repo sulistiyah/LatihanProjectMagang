@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
                     if(response.isSuccessful){
                         if (response.code()==200){
 
-                            SharedPrefManager.getInstance(this@SplashActivity).saveTokenSplash(response.body()!!.data.token)
+                            SharedPrefManager.getInstance(this@SplashActivity).saveTokenSplash(response.body()!!.data.token.toString())
 
                             startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                             finish()

@@ -19,10 +19,23 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+    val employeeId: String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("employeeId", null).toString()
+        }
+
+    fun saveEmployeeId(id: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("employeeId", id)
+        editor.apply()
+    }
+
     val tokenSplash: String
         get() {
-            val sharedPreferences =
-                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return sharedPreferences.getString("token", null).toString()
         }
 
@@ -36,8 +49,7 @@ class SharedPrefManager(private val mCtx: Context) {
 
     val tokenLogin: String
         get() {
-            val sharedPreferences =
-                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return sharedPreferences.getString("token", null).toString()
         }
 
@@ -62,21 +74,6 @@ class SharedPrefManager(private val mCtx: Context) {
         val editor = sharedPreferences.edit()
 
         editor.putBoolean(IS_LOGIN, islogin)
-        editor.apply()
-    }
-
-    val register: String
-        get() {
-            val sharedPreferences =
-                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return sharedPreferences.getString("register", null).toString()
-        }
-
-    fun saveDataRegister(dataRegister: String) {
-        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
-        editor.putString("register", dataRegister)
         editor.apply()
     }
 

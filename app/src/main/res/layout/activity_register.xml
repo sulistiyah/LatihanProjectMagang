@@ -22,16 +22,15 @@
 
       <ImageView
           android:id="@+id/back_top"
-          android:layout_width="35dp"
-          android:layout_height="35dp"
-          android:src="@drawable/ic_back"
-          android:background="@drawable/bg_back_top"/>
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:src="@drawable/back"/>
 
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Daftar"
-          android:textSize="25dp"
+          android:text="@string/daftarr"
+          android:textSize="25sp"
           android:textColor="@color/black"
           android:layout_gravity="center_vertical"
           android:layout_marginHorizontal="20dp"/>
@@ -44,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical">
 
       <com.google.android.material.textfield.TextInputLayout
@@ -211,14 +210,14 @@
 
       </com.google.android.material.textfield.TextInputLayout>
 
-      <ImageView
-          android:id="@+id/btn_daftar"
+      <androidx.appcompat.widget.AppCompatImageButton
+          android:id="@+id/btnDaftar"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:layout_below="@id/etKonfirmasiPassword"
+          android:background="@drawable/btn_daftar"
           android:layout_marginTop="20dp"
-          android:layout_marginBottom="40dp"
-          android:src="@drawable/button_daftar" />
+          android:layout_marginBottom="40dp"/>
+
 
     </LinearLayout>
 

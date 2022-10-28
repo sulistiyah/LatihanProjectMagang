@@ -46,6 +46,38 @@
     <string name="info_tentang_hari_ini">Info tentang hari ini</string>
     <string name="rencana_dan_tiba_tiba">Rencana dan Tiba-tiba</string>
     <string name="saya_ada_rencana_izin">Saya Ada rencana izin</string>
+    <string name="rencana_dan">Rencana dan</string>
+    <string name="tiba_tiba">Tiba-tiba</string>
+    <string name="berita">berita</string>
+    <string name="infromasi_dan">Infromasi dan</string>
+
+    //Profil
+    <string name="profil">Profil</string>
+    <string name="logout">Logout</string>
+    <string name="change_photo">change photo</string>
+    <string name="your_name">Your Name</string>
+    <string name="job_desk_user">Job Desk User</string>
+    <string name="nip">NIP</string>
+    <string name="daftarr">Daftar</string>
+    <string name="detail_kehadiran_izin_atau_sakit">Detail Kehadiran Izin atau Sakit</string>
+    <string name="detail_laporan_kerja">Detail Laporan Kerja</string>
+    <string name="perihal_kehadiran">Perihal Kehadiran</string>
+    <string name="_1234567890">1234567890</string>
+    <string name="buka_kurung">(</string>
+    <string name="tutup_kurung">)</string>
+    <string name="sangat_baik">Sangat Baik</string>
+    <string name="total_keseluruhan_permintaan_izin_sakit_dll">Total Keseluruhan Permintaan izin, sakit, dll</string>
+    <string name="perihal_absen">Perihal Absen</string>
+    <string name="perihal_izin">Perihal Izin</string>
+    <string name="perihal_sakit">Perihal Sakit</string>
+
+    //Edit Profil
+    <string name="edit_profil">Edit Profil</string>
+    <string name="masukan_id_karyawan">Masukan ID Karyawan</string>
+    <string name="masukan_nama_lengkap">Masukan Nama Lengkap</string>
+    <string name="masukan_email">Masukan Email</string>
+    <string name="masukan_job_desk_departement">Masukan Job Desk / Departement</string>
+    <string name="masukan_no_telepon">Masukan No Telepon</string>
 
 
 </resources>

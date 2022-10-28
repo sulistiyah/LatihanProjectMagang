@@ -48,4 +48,12 @@ interface Api {
     ): Call<RegisterDepartementListResponse>
 
 
+    //My Profile - Profil
+    @Headers("Accept: application/json")
+    @GET("v1/member/me")
+    fun getMyProfile(
+        @QueryMap parameter : HashMap<String, String>,
+        @Header("Authorization") token: String
+    ): Call<MyProfileResponse>
+
 }

@@ -4,8 +4,8 @@ package com.magang.projectmaganglatihan.model
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 
-@Keep
-data class TokenResponse(
+
+class TokenResponse(
     @SerializedName("Data")
     var `data`: Data,
     @SerializedName("Message")
@@ -13,9 +13,8 @@ data class TokenResponse(
     @SerializedName("StatusCode")
     var statusCode: Int
 ) {
-    @Keep
-    data class Data(
+    class Data(
         @SerializedName("token")
-        var token: String
+        var token: String?
     )
 }
