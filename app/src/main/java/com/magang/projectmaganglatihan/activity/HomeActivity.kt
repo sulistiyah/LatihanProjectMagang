@@ -16,10 +16,10 @@ import com.magang.projectmaganglatihan.storage.SharedPrefManager
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPrefManager
-    private lateinit var tvUsername: TextView
-    private lateinit var employeeFullname: String
+//    private lateinit var tvusername: TextView
+//    private lateinit var employeeFullname: String
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var tvLokasi: TextView
+    private lateinit var tvlokasi: TextView
     private lateinit var locationRequest: com.google.android.gms.location.LocationRequest
 
 
@@ -29,11 +29,10 @@ class HomeActivity : AppCompatActivity() {
 
         sharedPref = SharedPrefManager(this)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        tvLokasi = findViewById(R.id.tvLokasi)
-        showUsername()
+        tvlokasi = findViewById(R.id.tvLokasi)
+//        showUsername()
         checkLogin()
         getProfil()
-        tokenLogin()
 //        getCurrentLocation()
 
     }
@@ -61,12 +60,12 @@ class HomeActivity : AppCompatActivity() {
         sharedPref.tokenLogin
     }
 
-    private fun showUsername() {
-        sharedPref = SharedPrefManager(this)
-        employeeFullname = sharedPref.employeeFullname
-        tvUsername = findViewById(R.id.tvUsername)
-        tvUsername.text = employeeFullname
-    }
+//    private fun showUsername() {
+//        sharedpref = SharedPrefManager(this)
+//        employeeFullname = sharedpref.employeeFullname
+//        tvusername = findViewById(R.id.tvUsername)
+//        tvusername.text = employeeFullname
+//    }
 
 
 
