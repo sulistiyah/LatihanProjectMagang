@@ -17,8 +17,10 @@ class MyProfileAdapter (private val context: Activity, private var listProfile: 
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
 
-        val inflater = context.layoutInflater
-        val view = inflater.inflate(R.layout.activity_profil, null, true)
+//        val inflater = context.layoutInflater
+//        val vieww = inflater.inflate(R.layout.activity_profil, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_profil, parent, false)
+
 
         val username = view.findViewById<TextView>(R.id.tvUsername)
         val jobdesk = view.findViewById<TextView>(R.id.tvJobDeskUser)

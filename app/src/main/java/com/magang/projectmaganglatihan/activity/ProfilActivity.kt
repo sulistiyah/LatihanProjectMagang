@@ -29,9 +29,7 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPrefManager
     private lateinit var myProfileAdapter: MyProfileAdapter
     private lateinit var tokenLogin : String
-    lateinit var username : TextView
-    lateinit var jobdesk : TextView
-    lateinit var nip : TextView
+    private var list : ArrayList<MyProfileResponse.Data> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,9 +71,6 @@ class ProfilActivity : AppCompatActivity() {
 
 
     private fun getDataProfil() {
-        username = findViewById(R.id.tvUsername)
-        jobdesk = findViewById(R.id.tvJobDeskUser)
-        nip = findViewById(R.id.tvNipUser)
 
         val parameter = HashMap<String, String>()
         parameter["employee_id"] = "${sharedPref.employeeId}"
@@ -85,31 +80,15 @@ class ProfilActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
-//                            for (item in response.body()!!.data) {
-//                                val tvName = item.employeeFullname
-//                                    tvUsername.text = tvName
-//
-//                                val tvJobdesk = item.departement.departementTitle
-//                                    tvJobDeskUser.text = tvJobdesk
-//
-//                                val tvNip = item.employeeNik
-//                                    tvNipUser.text = tvNip
-//
-//                            }
 
-
-//                            val responseBody = response.body()!!.data
-//                            for (item in responseBody) {
-//                                Log.e("hasil", item.employeeFullname )
-//                            }
-//                            binding.tvUsername.text = responseBody.toString()
-
+                            myProfileAdapter = MyProfileAdapter(this@ProfilActivity, list)
+                            myProfileAdapter.notifyDataSetChanged()
 
                         } else {
                             Toast.makeText(this@ProfilActivity,response.code(), Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@ProfilActivity, response.body()?.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@ProfilActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
                     }
 
                 }

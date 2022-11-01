@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 class MyProfileResponse(
     @SerializedName("Data")
-    var `data`: ArrayList<Data>,
+    var `data`: Data,
     @SerializedName("Message")
     var message: String,
     @SerializedName("StatusCode")

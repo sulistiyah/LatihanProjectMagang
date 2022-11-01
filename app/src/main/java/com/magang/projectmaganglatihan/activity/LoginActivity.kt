@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
                                 SharedPrefManager.getInstance(this@LoginActivity).savelogin(true)
                                 SharedPrefManager.getInstance(this@LoginActivity).saveTokenLogin(response.body()?.data!!.token)
                                 SharedPrefManager.getInstance(this@LoginActivity).saveEmployeeId(response.body()?.data!!.user!!.employeeId.toString())
+                                SharedPrefManager.getInstance(this@LoginActivity).saveEmployeeFullname(response.body()?.data!!.user.employeeFullname)
 
                                 val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
                                 startActivity(intentlogin)
@@ -121,14 +122,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        if (SharedPrefManager.getInstance(this).islogin) {
-            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
-            startActivity(intentlogin)
-            finish()
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        if (SharedPrefManager.getInstance(this).islogin) {
+//            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
+//            startActivity(intentlogin)
+//            finish()
+//        }
+//    }
 
 
 }

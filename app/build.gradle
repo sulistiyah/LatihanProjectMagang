@@ -34,6 +34,7 @@ android {
     viewBinding{
         enabled = true
     }
+    namespace 'com.magang.projectmaganglatihan'
 }
 
 dependencies {
