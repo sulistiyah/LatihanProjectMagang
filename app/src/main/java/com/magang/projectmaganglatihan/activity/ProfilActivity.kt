@@ -81,8 +81,16 @@ class ProfilActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-                            myProfileAdapter = MyProfileAdapter(this@ProfilActivity, list)
-                            myProfileAdapter.notifyDataSetChanged()
+                            var username : String? = response.body()?.data!!.employeeFullname
+                            var jobDesk : String? = response.body()?.data!!.departement.departementTitle
+                            var nip : String? = response.body()?.data!!.employeeNik
+
+                            tvUsername.setText(username)
+                            tvJobDeskUser.setText(jobDesk)
+                            tvNipUser.setText(nip)
+
+//                            myProfileAdapter = MyProfileAdapter(this@ProfilActivity, list)
+//                            myProfileAdapter.notifyDataSetChanged()
 
                         } else {
                             Toast.makeText(this@ProfilActivity,response.code(), Toast.LENGTH_SHORT).show()
@@ -90,7 +98,6 @@ class ProfilActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this@ProfilActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
                     }
-
                 }
 
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {

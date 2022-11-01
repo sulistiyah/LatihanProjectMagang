@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 
 class SharedPrefManager(private val mCtx: Context) {
 
+
+    //Username di HomeActivity
     val employeeFullname : String
     get() {
         val sharedPreferences =
@@ -19,6 +21,9 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+
+
+    //Employee ID untuk Param ProfilActivity
     val employeeId: String
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
@@ -32,6 +37,23 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.putString("employeeId", id)
         editor.apply()
     }
+
+
+    val departementId: String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("departementId", null).toString()
+        }
+
+    fun saveDepartementId(id: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("departementId", id)
+        editor.apply()
+    }
+
+
 
     val tokenSplash: String
         get() {
@@ -47,6 +69,8 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+
+
     val tokenLogin: String
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
@@ -60,6 +84,8 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.putString("token", token)
         editor.apply()
     }
+
+
 
     val islogin: Boolean
         get() {

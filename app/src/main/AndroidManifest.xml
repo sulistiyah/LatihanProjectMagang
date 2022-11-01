@@ -43,7 +43,7 @@
         </activity>
 
         <activity
-            android:name=".LupaPassActivity"
+            android:name=".activity.LupaPassActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -56,6 +56,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".activity.EditProfilActivity"
             android:exported="false">
@@ -63,6 +64,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".activity.ProfilActivity"
             android:exported="false">
@@ -70,9 +72,20 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".activity.HomeActivity"
             android:exported="true">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true"
+            tools:ignore="MissingClass">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,26 +93,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
-        <activity
-            android:name=".activity.SplashActivity"
-            android:exported="true"
-            tools:ignore="MissingClass">
-        </activity>
+
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="true" />
+
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true"
             tools:ignore="MissingClass" />
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
             tools:ignore="MissingClass" />
+
     </application>
+
 
 </manifest>

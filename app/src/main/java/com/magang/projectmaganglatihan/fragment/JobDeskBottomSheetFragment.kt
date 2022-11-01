@@ -1,6 +1,7 @@
 package com.magang.projectmaganglatihan.fragment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.FragmentJobDeskBottomSheetBinding
 import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
+import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +26,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentJobDeskBottomSheetBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var sharedPref: SharedPrefManager
     var companyId = 0
     private lateinit var listJobDeskAdapter: ListJobDeskAdapter
     lateinit var layoutManager: LinearLayoutManager
@@ -57,6 +60,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun showListJobDesk() {
 
+        sharedPref = SharedPrefManager(this.requireActivity().applicationContext)
         layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
@@ -67,6 +71,9 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
             override fun onResponse(call: Call<RegisterDepartementListResponse>, response: Response<RegisterDepartementListResponse>) {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
+
+                        SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(response.body()?.data.toString())
+
                         rvItemJobDesk.setHasFixedSize(true)
                         showData(response.body()!!)
 //                        listJobDeskAdapter = ListJobDeskAdapter(response.body()!!.data)
@@ -78,7 +85,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
                         Toast.makeText(context, response.code(), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(context, response.body()?.message , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, response.body()?.message, Toast.LENGTH_SHORT).show()
                 }
             }
 

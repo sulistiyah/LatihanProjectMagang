@@ -55,20 +55,21 @@ class LoginActivity : AppCompatActivity() {
             RetrofitClient.instance.userLogin(LoginParam(
                 username = "${etEmail.text}",
                 password = "${etPass.text}"),
-                "Bearer ${sharedPref.tokenLogin}")
+                "Bearer ${sharedPref.tokenSplash}")
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
                             if (response.code() == 200) {
 
-                                SharedPrefManager.getInstance(applicationContext).savelogin(true)
-                                SharedPrefManager.getInstance(applicationContext).saveTokenLogin(response.body()?.data!!.token)
+                                SharedPrefManager.getInstance(this@LoginActivity).savelogin(true)
+                                SharedPrefManager.getInstance(this@LoginActivity).saveTokenLogin(response.body()?.data!!.token)
                                 SharedPrefManager.getInstance(this@LoginActivity).saveEmployeeFullname(response.body()?.data!!.user.employeeFullname)
+                                SharedPrefManager.getInstance(this@LoginActivity).saveEmployeeId(response.body()?.data!!.user.employeeId.toString())
 
                                 val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
                                 startActivity(intentlogin)
 
-                                Toast.makeText(applicationContext,"berhasil",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,"berhasil",Toast.LENGTH_SHORT).show()
 
                             } else {
                                 Toast.makeText(this@LoginActivity,response.code(), Toast.LENGTH_SHORT).show()
@@ -121,6 +122,7 @@ class LoginActivity : AppCompatActivity() {
 //        if (SharedPrefManager.getInstance(this).islogin) {
 //            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
 //            startActivity(intentlogin)
+//            sharedPref.tokenLogin
 //            finish()
 //        }
 //    }

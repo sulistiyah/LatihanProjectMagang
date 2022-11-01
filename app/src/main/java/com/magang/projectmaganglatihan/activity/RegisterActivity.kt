@@ -238,7 +238,7 @@ class RegisterActivity : AppCompatActivity() {
 
             RetrofitClient.instance.postDaftar(RegisterParam(
                 companyId = 1,
-                employeeDepartmentId = 1,
+                employeeDepartmentId = sharedPref.departementId,
                 employeeEmail = "${etEmail.text}",
                 employeeFullname = "${etNamaLengkap.text}",
                 employeeNik = "${etIdKaryawan.text}",
