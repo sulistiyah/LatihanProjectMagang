@@ -97,6 +97,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
 
+
                         companyId = response.body()?.data!!.id
                         binding.kodeperusahaanContainer.isHelperTextEnabled = true
                         binding.kodeperusahaanContainer.helperText = "Kode Perusahaan Ditemukan"
@@ -257,7 +258,7 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.makeText(this@RegisterActivity,response.code(), Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(this@RegisterActivity, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {

@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.magang.projectmaganglatihan.databinding.ItemListBinding
 import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
+import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.item_list.view.*
 
-class ListJobDeskAdapter (
+class ListJobDeskAdapter(
     private var listJobDesk: ArrayList<RegisterDepartementListResponse.Data>,
-    val listener : OnAdapterListener
+    val listener: OnAdapterListener
+
 ): RecyclerView.Adapter<ListJobDeskAdapter.RegisterViewHolder>() {
 
     inner class RegisterViewHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {

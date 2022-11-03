@@ -89,6 +89,8 @@ class ProfilActivity : AppCompatActivity() {
                             tvJobDeskUser.setText(jobDesk)
                             tvNipUser.setText(nip)
 
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeFullname(response.body()?.data!!.employeeFullname)
+
 //                            myProfileAdapter = MyProfileAdapter(this@ProfilActivity, list)
 //                            myProfileAdapter.notifyDataSetChanged()
 

@@ -1,7 +1,6 @@
 package com.magang.projectmaganglatihan.fragment
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter
+import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter.OnAdapterListener
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.FragmentJobDeskBottomSheetBinding
 import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
@@ -29,6 +29,8 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var sharedPref: SharedPrefManager
     var companyId = 0
     private lateinit var listJobDeskAdapter: ListJobDeskAdapter
+    lateinit var list : RegisterDepartementListResponse.Data
+    lateinit var listenerr : OnAdapterListener
     lateinit var layoutManager: LinearLayoutManager
     var listener : ((RegisterDepartementListResponse.Data) -> Unit?)? = null
 
@@ -45,24 +47,22 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         _binding = FragmentJobDeskBottomSheetBinding.inflate(inflater, container, false)
 
-        return binding.root
-    }
-
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPrefManager(requireActivity())
 
         showListJobDesk()
         actionClick()
 
+        return binding.root
     }
 
     private fun showListJobDesk() {
 
-        sharedPref = SharedPrefManager(this.requireActivity().applicationContext)
+        sharedPref = SharedPrefManager(requireActivity())
         layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
+
+
+
 
 
         val parameter = HashMap<String, Int>()
@@ -72,17 +72,18 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
 
-                        SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(response.body()?.data.toString())
+//                        SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(response.body()?.data!!.departementId.toString())
 
                         rvItemJobDesk.setHasFixedSize(true)
                         showData(response.body()!!)
-//                        listJobDeskAdapter = ListJobDeskAdapter(response.body()!!.data)
+//                        saveDepartementId(list)
+//                        listJobDeskAdapter = ListJobDeskAdapter(response.body()?.data!!.departementTitle, listenerr)
                         rvItemJobDesk.adapter = listJobDeskAdapter
                         rvItemJobDesk.layoutManager = layoutManager
                         listJobDeskAdapter.notifyDataSetChanged()
 
                     } else {
-                        Toast.makeText(context, response.code(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(context, response.body()?.message, Toast.LENGTH_SHORT).show()
@@ -102,9 +103,10 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
         listJobDeskAdapter.setData(results)
     }
 
+
     private fun actionClick() {
 
-        listJobDeskAdapter = ListJobDeskAdapter(arrayListOf(), object : ListJobDeskAdapter.OnAdapterListener {
+        listJobDeskAdapter = ListJobDeskAdapter(arrayListOf(), object : OnAdapterListener {
             override fun onClik(result: RegisterDepartementListResponse.Data) {
 
                 listener?.invoke(result)
@@ -114,6 +116,13 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
         })
 
     }
+
+//    private fun saveDepartementId(listResponse: RegisterDepartementListResponse.Data) {
+//        SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(listResponse.departementId.toString())
+//    }
+
+
+
 
 
 }

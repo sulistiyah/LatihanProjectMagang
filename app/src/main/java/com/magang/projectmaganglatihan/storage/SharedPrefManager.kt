@@ -53,6 +53,34 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+    val companyId: String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("companyId", null).toString()
+        }
+
+    fun saveCompanyId(id: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("companyId", id)
+        editor.apply()
+    }
+
+    val infoId: String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("infoId", null).toString()
+        }
+
+    fun saveInfoId(id: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("infoId", id)
+        editor.apply()
+    }
+
 
 
     val tokenSplash: String

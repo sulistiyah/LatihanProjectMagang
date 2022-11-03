@@ -56,4 +56,30 @@ interface Api {
         @Header("Authorization") token: String
     ): Call<MyProfileResponse>
 
+
+//    //Edit Profil
+//    @Headers("Accept: application/json")
+//    @POST("v1/member/me")
+//    fun postEditProfil(
+//        @Header("Authorization") token: String,
+//        @Field("company")
+//    ): Call<EditProfilResponse>
+
+
+    //Informasi Berita - HomeActivity
+    @Headers("Accept: application/json")
+    @GET("v1/info-list")
+    fun getListInfoBerita(
+        @QueryMap parameter : HashMap<String, String>,
+        @Header("Authorization") token: String
+    ): Call<InfoBeritaResponse>
+
+    //Detail Informasi Berita - InfoBeritaActivity
+    @Headers("Accept: application/json")
+    @GET("v1/info-detail")
+    fun getDetailListInfo(
+        @QueryMap parameter : HashMap<String, String>,
+        @Header("Authorization") token: String
+    ): Call<DetailInfoBeritaResponse>
+
 }

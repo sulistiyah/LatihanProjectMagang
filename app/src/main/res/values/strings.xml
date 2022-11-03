@@ -80,5 +80,8 @@
     <string name="masukan_email">Masukan Email</string>
     <string name="masukan_job_desk_departement">Masukan Job Desk / Departement</string>
     <string name="masukan_no_telepon">Masukan No Telepon</string>
+    <string name="digital_talent_scholarship_2021">Digital Talent Scholarship 2021</string>
+    <string name="info_berita"><![CDATA[Info & Berita]]></string>
+    <string name="detail_info">Detail Info</string>
 
 </resources>

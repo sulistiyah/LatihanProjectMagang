@@ -11,7 +11,6 @@ class RegisterDepartementListResponse(
     var statusCode: Int
 )
      {
-
     class Data(
         @SerializedName("company_id")
         var companyId: Int,
