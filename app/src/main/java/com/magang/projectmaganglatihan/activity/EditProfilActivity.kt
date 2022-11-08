@@ -71,9 +71,6 @@ class EditProfilActivity : AppCompatActivity() {
             val noTelp = binding.etNotelp.text.toString()
 
 
-
-
-
         }
     }
 

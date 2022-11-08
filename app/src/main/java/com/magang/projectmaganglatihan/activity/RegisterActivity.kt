@@ -38,6 +38,7 @@ class RegisterActivity : AppCompatActivity() {
 //    private var list : ArrayList<RegisterDepartementListResponse.Data> = arrayListOf()
 //    private var companyCode = 0
     private var companyId = 0
+    private var departementId = 0
     private var bottomSheetDialogFragment = JobDeskBottomSheetFragment()
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var sharedPref: SharedPrefManager
@@ -135,7 +136,8 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         bottomSheetDialogFragment.listener = {
-            tvJobDesk.setText("${it.departementTitle}")
+            tvJobDesk.setText(it.departementTitle)
+            departementId = it.departementId
         }
     }
 
@@ -237,8 +239,8 @@ class RegisterActivity : AppCompatActivity() {
 
 
             RetrofitClient.instance.postDaftar(RegisterParam(
-                companyId = 1,
-                employeeDepartmentId = sharedPref.departementId,
+                companyId = companyId,
+                employeeDepartmentId = departementId,
                 employeeEmail = "${etEmail.text}",
                 employeeFullname = "${etNamaLengkap.text}",
                 employeeNik = "${etIdKaryawan.text}",

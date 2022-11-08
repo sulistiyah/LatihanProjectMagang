@@ -52,10 +52,18 @@ interface Api {
     @Headers("Accept: application/json")
     @GET("v1/member/me")
     fun getMyProfile(
-        @QueryMap parameter : HashMap<String, String>,
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
+        @QueryMap parameter : HashMap<String, String>
     ): Call<MyProfileResponse>
 
+    //Update Avatar - ProfilActivity
+    @Headers("Accept: application/json")
+    @Multipart
+    @POST("v1/member/update_my_avatar")
+    fun postAvatar(
+        @Header("Authorization") token: String
+
+    ): Call<UpdateAvatarResponse>
 
     //Edit Profil
     @Headers("Accept: application/json")

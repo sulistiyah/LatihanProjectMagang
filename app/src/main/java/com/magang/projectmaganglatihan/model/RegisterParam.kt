@@ -6,7 +6,7 @@ class RegisterParam(
     @SerializedName("company_id")
     var companyId: Int,
     @SerializedName("employee_department_id")
-    var employeeDepartmentId: String,
+    var employeeDepartmentId: Int,
     @SerializedName("employee_email")
     var employeeEmail: String,
     @SerializedName("employee_fullname")
