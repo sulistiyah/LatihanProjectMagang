@@ -95,7 +95,7 @@ class ProfilActivity : AppCompatActivity() {
 //                            myProfileAdapter.notifyDataSetChanged()
 
                         } else {
-                            Toast.makeText(this@ProfilActivity,response.code(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@ProfilActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(this@ProfilActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()

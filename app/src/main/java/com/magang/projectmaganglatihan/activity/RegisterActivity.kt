@@ -61,8 +61,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun backPage() {
         binding.backTop.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
     }
 
@@ -255,7 +254,7 @@ class RegisterActivity : AppCompatActivity() {
                             onBackPressed()
 
                         } else {
-                            Toast.makeText(this@RegisterActivity,response.code(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(this@RegisterActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()

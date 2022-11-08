@@ -14,6 +14,7 @@ import com.magang.projectmaganglatihan.adapter.ListJobDeskAdapter.OnAdapterListe
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.FragmentJobDeskBottomSheetBinding
 import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
+import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse.Data
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
 import retrofit2.Call
@@ -29,10 +30,8 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var sharedPref: SharedPrefManager
     var companyId = 0
     private lateinit var listJobDeskAdapter: ListJobDeskAdapter
-    lateinit var list : RegisterDepartementListResponse.Data
-    lateinit var listenerr : OnAdapterListener
     lateinit var layoutManager: LinearLayoutManager
-    var listener : ((RegisterDepartementListResponse.Data) -> Unit?)? = null
+    var listener : ((Data) -> Unit)? = null
 
 
 
@@ -62,9 +61,6 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
 
-
-
-
         val parameter = HashMap<String, Int>()
         parameter["company_id"] = 1
         RetrofitClient.instance.getJobDeskDapartement(parameter).enqueue(object : Callback<RegisterDepartementListResponse> {
@@ -76,11 +72,12 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
 
                         rvItemJobDesk.setHasFixedSize(true)
                         showData(response.body()!!)
-//                        saveDepartementId(list)
-//                        listJobDeskAdapter = ListJobDeskAdapter(response.body()?.data!!.departementTitle, listenerr)
+//                        listJobDeskAdapter = ListJobDeskAdapter(response.body()?.data!!, listener)
                         rvItemJobDesk.adapter = listJobDeskAdapter
                         rvItemJobDesk.layoutManager = layoutManager
                         listJobDeskAdapter.notifyDataSetChanged()
+
+
 
                     } else {
                         Toast.makeText(context, response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
@@ -107,7 +104,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
     private fun actionClick() {
 
         listJobDeskAdapter = ListJobDeskAdapter(arrayListOf(), object : OnAdapterListener {
-            override fun onClik(result: RegisterDepartementListResponse.Data) {
+            override fun onClik(result: Data) {
 
                 listener?.invoke(result)
                 this@JobDeskBottomSheetFragment.dismiss()
@@ -116,12 +113,6 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
         })
 
     }
-
-//    private fun saveDepartementId(listResponse: RegisterDepartementListResponse.Data) {
-//        SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(listResponse.departementId.toString())
-//    }
-
-
 
 
 

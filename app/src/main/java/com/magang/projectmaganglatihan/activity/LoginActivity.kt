@@ -12,6 +12,8 @@ import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.model.LoginParam
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.etEmail
+import kotlinx.android.synthetic.main.activity_lupa_pass.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,12 +30,52 @@ class LoginActivity : AppCompatActivity() {
 
         sharedPref = SharedPrefManager(this)
 
-        tvdaftar.setOnClickListener {
-            intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-            tokenSplash()
-        }
 
+        btnLogin()
+        showLupaPass()
+        showRegister()
+        showHidePassword()
+
+    }
+
+//    override fun onStart() {
+//        super.onStart()
+//        if (SharedPrefManager.getInstance(this).islogin) {
+//            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
+//            startActivity(intentlogin)
+//            sharedPref.tokenLogin
+//            finish()
+//        }
+//    }
+
+    private fun showHidePassword() {
+        //on off visibility password
+        imgeye.setOnClickListener{
+            mIsShowPass =! mIsShowPass
+            showPassword(mIsShowPass)
+        }
+        showPassword(mIsShowPass)
+    }
+
+    private  fun showPassword(isShow: Boolean){
+        if (isShow){
+            etPass.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            imgeye.setImageResource(R.drawable.ic_hide_password)
+        }else{
+            etPass.transformationMethod = PasswordTransformationMethod.getInstance()
+            imgeye.setImageResource(R.drawable.ic_show_password)
+        }
+        etPass.setSelection(etPass.text.toString().length)
+    }
+
+
+    private fun tokenSplash() {
+        sharedPref = SharedPrefManager(this)
+        sharedPref.tokenSplash
+    }
+
+
+    private fun btnLogin() {
         btnmasuk.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPass.text.toString().trim()
@@ -73,12 +115,12 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.makeText(this@LoginActivity,"berhasil",Toast.LENGTH_SHORT).show()
 
                             } else {
-                                Toast.makeText(this@LoginActivity,response.code(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                                 Toast.makeText(this@LoginActivity, "${response.body()?.message}",
-                                    Toast.LENGTH_SHORT).show()
-                              }
+                            Toast.makeText(this@LoginActivity, "${response.body()?.message}",
+                                Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -88,45 +130,25 @@ class LoginActivity : AppCompatActivity() {
                 })
 
         }
+    }
 
 
-        //on off visibility password
-        imgeye.setOnClickListener{
-            mIsShowPass =! mIsShowPass
-            showPassword(mIsShowPass)
+    private fun showRegister() {
+        tvdaftar.setOnClickListener {
+            intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            tokenSplash()
         }
-        showPassword(mIsShowPass)
-
     }
 
-
-    private  fun showPassword(isShow: Boolean){
-        if (isShow){
-            etPass.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            imgeye.setImageResource(R.drawable.ic_hide_password)
-        }else{
-            etPass.transformationMethod = PasswordTransformationMethod.getInstance()
-            imgeye.setImageResource(R.drawable.ic_show_password)
+    private fun showLupaPass() {
+        lupa_kata_s.setOnClickListener {
+            intent = Intent(this, LupaPassActivity::class.java)
+            startActivity(intent)
+//            tokenSplash()
         }
-        etPass.setSelection(etPass.text.toString().length)
     }
 
-
-    private fun tokenSplash() {
-        sharedPref = SharedPrefManager(this)
-        sharedPref.tokenSplash
-    }
-
-
-//    override fun onStart() {
-//        super.onStart()
-//        if (SharedPrefManager.getInstance(this).islogin) {
-//            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
-//            startActivity(intentlogin)
-//            sharedPref.tokenLogin
-//            finish()
-//        }
-//    }
 
 
 }

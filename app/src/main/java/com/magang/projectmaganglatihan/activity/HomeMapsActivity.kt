@@ -23,11 +23,14 @@ import java.security.Permission
 
 class HomeMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityHomeMapsBinding
+
+
+    private lateinit var mMap: GoogleMap
     private lateinit var currentlocation:Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val  permissioncode= 101
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

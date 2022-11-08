@@ -69,26 +69,19 @@
 
     <TextView
         android:id="@+id/tvPesan"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Masukan alamat email untuk menerima"
-        android:textSize="18sp"
-        android:textColor="@color/abuabu"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:text="Masukan alamat email untuk menerima tautan pembuatan kata sandi baru"
+        android:textColor="@color/abuabu"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLupakataSandi" />
 
-    <TextView
-        android:id="@+id/tvPesann"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tautan pembuatan kata sandi baru."
-        android:textSize="18sp"
-        android:textColor="@color/abuabu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPesan" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -100,7 +93,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPesann" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPesan" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -120,9 +113,11 @@
         android:id="@+id/btnKirim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_kirim"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="35dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_kirim"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 

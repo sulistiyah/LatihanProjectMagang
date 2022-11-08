@@ -69,7 +69,7 @@ class DetailInfoActivity : AppCompatActivity() {
 
 
                         } else {
-                            Toast.makeText(this@DetailInfoActivity,response.code(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@DetailInfoActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(this@DetailInfoActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
@@ -82,8 +82,6 @@ class DetailInfoActivity : AppCompatActivity() {
                 }
 
             })
-
-
 
 
     }

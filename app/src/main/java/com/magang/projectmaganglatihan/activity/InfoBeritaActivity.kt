@@ -75,7 +75,7 @@ class InfoBeritaActivity : AppCompatActivity() {
                             infoBeritaAdapter.notifyDataSetChanged()
 
                         } else {
-                            Toast.makeText(this@InfoBeritaActivity,response.code(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@InfoBeritaActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         Toast.makeText(this@InfoBeritaActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()

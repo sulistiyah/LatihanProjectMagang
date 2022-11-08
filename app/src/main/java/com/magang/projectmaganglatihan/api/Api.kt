@@ -57,13 +57,17 @@ interface Api {
     ): Call<MyProfileResponse>
 
 
-//    //Edit Profil
-//    @Headers("Accept: application/json")
-//    @POST("v1/member/me")
-//    fun postEditProfil(
-//        @Header("Authorization") token: String,
-//        @Field("company")
-//    ): Call<EditProfilResponse>
+    //Edit Profil
+    @Headers("Accept: application/json")
+    @POST("v1/member/me")
+    fun postEditProfil(
+        @Header("Authorization") token: String,
+        @Field("company_id") companyId : String,
+        @Field("employee_id") employeeId : String,
+        @Field("employee_name") employeeName : String,
+        @Field("departement_id") departementId : String,
+        @Field("phone_no") phoneNo : String
+    ): Call<MyProfileResponse>
 
 
     //Informasi Berita - HomeActivity
