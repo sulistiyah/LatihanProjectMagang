@@ -4,32 +4,31 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.location.LocationRequest.create
 import com.magang.projectmaganglatihan.R
-import com.magang.projectmaganglatihan.adapter.MyProfileAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityProfilBinding
 import com.magang.projectmaganglatihan.model.MyProfileResponse
-import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_profil.*
 import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.MultipartBody.Part.Companion.createFormData
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+
 
 class ProfilActivity : AppCompatActivity() {
 
@@ -38,6 +37,7 @@ class ProfilActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPrefManager
     private lateinit var imageUri : Uri
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,8 +65,10 @@ class ProfilActivity : AppCompatActivity() {
 
     private fun logout() {
         binding.tvLogout.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            sharedPref.clear()
+            val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -135,7 +137,7 @@ class ProfilActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 10)
             }
-
+            
 
 
         }

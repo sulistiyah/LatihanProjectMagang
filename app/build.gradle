@@ -73,7 +73,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //Image Picker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+    implementation 'com.github.florent37:inline-activity-result-kotlin:1.0.4'
 
 
 

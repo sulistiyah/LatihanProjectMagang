@@ -38,15 +38,15 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        if (SharedPrefManager.getInstance(this).islogin) {
-//            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
-//            startActivity(intentlogin)
-//            sharedPref.tokenLogin
-//            finish()
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+        if (SharedPrefManager.getInstance(this).islogin) {
+            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
+            startActivity(intentlogin)
+            sharedPref.tokenLogin
+            finish()
+        }
+    }
 
     private fun showHidePassword() {
         //on off visibility password
@@ -112,7 +112,7 @@ class LoginActivity : AppCompatActivity() {
                                 val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
                                 startActivity(intentlogin)
 
-                                Toast.makeText(this@LoginActivity,"berhasil",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@LoginActivity,"Berhasil...",Toast.LENGTH_SHORT).show()
 
                             } else {
                                 Toast.makeText(this@LoginActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()

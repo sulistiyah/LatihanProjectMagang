@@ -62,7 +62,6 @@ class HomeActivity : AppCompatActivity() {
         if (!sharedPref.islogin) {
             val intentCheckLogin = Intent(this, LoginActivity::class.java)
             startActivity(intentCheckLogin)
-            tokenLogin()
             finish()
         }
     }

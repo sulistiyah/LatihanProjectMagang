@@ -39,6 +39,7 @@ class SplashActivity : AppCompatActivity() {
             if (sharedPref.islogin) {
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 RetrofitClient.instance.token(TokenParam(client = "app-android", secret = "TWTpknTux7PzuqDh6qLJQPXNvRT3an7B"))
                     .enqueue(object : Callback<TokenResponse>{
@@ -61,7 +62,7 @@ class SplashActivity : AppCompatActivity() {
 
                     })
             }
-        }, 1500)
+        }, 1000)
     }
 
 
