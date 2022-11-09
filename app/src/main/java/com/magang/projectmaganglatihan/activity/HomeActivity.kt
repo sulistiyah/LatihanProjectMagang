@@ -44,11 +44,10 @@ class HomeActivity : AppCompatActivity() {
         showUsername()
         getProfil()
         getListInfo()
+        getUserLocation()
 //        getCurrentLocation()
 
-        binding.tvLokasi.setOnClickListener {
-            checklocationPermission()
-        }
+
 
     }
 
@@ -95,72 +94,26 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun checklocationPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // saat perizinan nya sudah diberikan
-            checkGPS()
-        } else {
-            //saat perizinanan ditolak
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
-        }
-    }
-
-    private fun checkGPS() {
-        locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 5000
-        locationRequest.fastestInterval = 2000
-
-        val builder = LocationSettingsRequest.Builder()
-            .addLocationRequest(locationRequest)
-
-        builder.setAlwaysShow(true)
-
-        val result = LocationServices.getSettingsClient(this.applicationContext)
-            .checkLocationSettings(builder.build())
-        result.addOnCompleteListener { task ->
-            try {
-                //saat GPS nya aktif
-                val response = task.getResult(ApiException::class.java)
-                getUserLocation()
-            } catch (e: ApiException) {
-                //saat GPS nya tidak aktif
-                e.printStackTrace()
-                when (e.statusCode) {
-                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
-                        //tempat mengirim permintaan untuk GPS
-                        val resolveApiException = e as ResolvableApiException
-                        resolveApiException.startResolutionForResult(this, 200)
-
-                    } catch (sendIntentException: IntentSender.SendIntentException) {
-                    }
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                        //saat setting tidak tersedia
-                    }
-                }
-            }
-        }
-    }
-
     private fun getUserLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-        ) {   }
+        ) { return
+        }
         fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
             val location = task.getResult()
 
             if (location != null) {
                 try {
                     val geocoder = Geocoder(this, Locale.getDefault())
-                    val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                    //mengatur address pada text view
+
+                    val address = geocoder.getFromLocation(location.latitude,location.longitude,1)
                     val address_line = address!![0].getAddressLine(0)
                     binding.tvLokasi.setText(address_line)
-                    val address_location = address!![0].getAddressLine(0)
+
+                    val address_location = address[0].getAddressLine(0)
 
                     openLocation(address_location.toString())
 
@@ -179,7 +132,7 @@ class HomeActivity : AppCompatActivity() {
             if (!binding.tvLokasi.text.isEmpty()) {
                 val uri = Uri.parse("geo:0, 0?q=$location")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
-                intent.setPackage("com.google.android.app.maps")
+                intent.setPackage("com.google.android.apps.maps")
                 startActivity(intent)
             }
         }
