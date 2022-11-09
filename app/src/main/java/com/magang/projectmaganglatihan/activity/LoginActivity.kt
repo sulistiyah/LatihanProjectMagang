@@ -1,11 +1,22 @@
 package com.magang.projectmaganglatihan.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.IntentSender
+import android.content.IntentSender.SendIntentException
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.model.LoginResponse
 import com.magang.projectmaganglatihan.R
@@ -22,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
     private var mIsShowPass = false
     private lateinit var sharedPref: SharedPrefManager
+    private lateinit var  locationRequest:LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,18 +47,19 @@ class LoginActivity : AppCompatActivity() {
         showLupaPass()
         showRegister()
         showHidePassword()
+        checklocationPermission()
 
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        if (SharedPrefManager.getInstance(this).islogin) {
-//            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
-//            startActivity(intentlogin)
-//            sharedPref.tokenLogin
-//            finish()
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+        if (SharedPrefManager.getInstance(this).islogin) {
+            val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
+            startActivity(intentlogin)
+            sharedPref.tokenLogin
+            finish()
+        }
+    }
 
     private fun showHidePassword() {
         //on off visibility password
@@ -148,7 +161,67 @@ class LoginActivity : AppCompatActivity() {
 //            tokenSplash()
         }
     }
+        private fun checklocationPermission(){
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED)
+            {
+                //when permission is already grant
+                checkGPS()
+            }else{
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    100
+                )
+            }
+        }
 
+    private fun checkGPS() {
+        locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 5000
+        locationRequest.fastestInterval = 2000
+
+        val builder = LocationSettingsRequest.Builder()
+            .addLocationRequest(locationRequest)
+
+        builder.setAlwaysShow(true)
+        val result = LocationServices.getSettingsClient(
+            this.applicationContext)
+
+            .checkLocationSettings(builder.build())
+
+        result.addOnCompleteListener { task ->
+            try {
+                //saat GPS aktif
+                 val result = task.getResult(ApiException ::class.java)
+
+
+            }catch (e : ApiException){
+                //saat GPS tidak aktif
+
+                e.printStackTrace()
+                when(e.statusCode){
+
+                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try{
+                        //tempat mengizinkan GPS
+                        val resolveApiException = e as ResolvableApiException
+                        resolveApiException.startResolutionForResult(this,200)
+
+                    }catch (sendIntentException: IntentSender.SendIntentException){
+                        }
+                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE ->{
+
+                    }
+                }
+
+
+            }
+        }
+
+    }
 
 
 }
