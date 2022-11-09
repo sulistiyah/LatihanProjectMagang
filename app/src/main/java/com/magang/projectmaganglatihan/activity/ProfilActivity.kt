@@ -1,12 +1,18 @@
 package com.magang.projectmaganglatihan.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.adapter.MyProfileAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
@@ -16,20 +22,23 @@ import com.magang.projectmaganglatihan.model.RegisterDepartementListResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_profil.*
 import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class ProfilActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityProfilBinding
 
 
-
     private lateinit var sharedPref: SharedPrefManager
-    private lateinit var myProfileAdapter: MyProfileAdapter
-    private lateinit var tokenLogin : String
-    private var list : ArrayList<MyProfileResponse.Data> = arrayListOf()
+    private lateinit var imageUri : Uri
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +50,7 @@ class ProfilActivity : AppCompatActivity() {
         logout()
         editProfil()
         getDataProfil()
+        updateAvatar()
 
 
     }
@@ -109,6 +119,40 @@ class ProfilActivity : AppCompatActivity() {
 
             })
 
+    }
+
+
+    private fun updateAvatar() {
+        binding.tvChangePhoto.setOnClickListener {
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_GET_CONTENT
+
+                startActivityForResult(intent, 100)
+            } else {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 10)
+            }
+
+
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            imageUri = data?.data!!
+            binding.imgProfil.setImageURI(imageUri)
+        }
+//        if (requestCode == 100 && resultCode == RESULT_OK) {
+//
+//            imageUri = data?.data!!
+//            binding.viewFoto.setImageURI(imageUri)
+//
+//        }
     }
 
 

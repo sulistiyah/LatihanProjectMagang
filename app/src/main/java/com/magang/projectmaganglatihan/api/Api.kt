@@ -2,6 +2,8 @@ package com.magang.projectmaganglatihan.api
 
 
 import com.magang.projectmaganglatihan.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -52,18 +54,21 @@ interface Api {
     @Headers("Accept: application/json")
     @GET("v1/member/me")
     fun getMyProfile(
-        @Header("Authorization") token: String,
-        @QueryMap parameter : HashMap<String, String>
+        @QueryMap parameter : HashMap<String, String>,
+        @Header("Authorization") token: String
     ): Call<MyProfileResponse>
 
     //Update Avatar - ProfilActivity
-    @Headers("Accept: application/json")
     @Multipart
+    @Headers("Accept: application/json")
     @POST("v1/member/update_my_avatar")
     fun postAvatar(
-        @Header("Authorization") token: String
-
+        @Header("Authorization") token: String,
+        @Part image : MultipartBody.Part,
+        @Part ("employee_id") employeeId : RequestBody,
+        @Part ("company_id") companyId : RequestBody
     ): Call<UpdateAvatarResponse>
+
 
     //Edit Profil
     @Headers("Accept: application/json")
