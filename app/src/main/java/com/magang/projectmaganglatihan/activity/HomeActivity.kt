@@ -2,22 +2,35 @@ package com.magang.projectmaganglatihan.activity
 
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Geocoder
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.SyncStateContract.Constants
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.databinding.ActivityHomeBinding
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_profil.*
 import java.io.IOException
 import java.util.*
 
@@ -30,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var employeeFullname: String
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: com.google.android.gms.location.LocationRequest
-
+    val REQUEST_IMAGE_CAPTURE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +60,14 @@ class HomeActivity : AppCompatActivity() {
         getUserLocation()
 //        getCurrentLocation()
 
+        binding.btnAbsenSekarang.setOnClickListener{
 
+        }
 
     }
+
+
+
 
     private fun tokenLogin() {
         sharedPref = SharedPrefManager(this)
@@ -137,5 +155,4 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
-
 }

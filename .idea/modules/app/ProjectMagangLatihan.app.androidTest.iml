@@ -37,8 +37,11 @@
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.9.0/fc93484fc67ab52b1e0ccbdaa3922d8a6678e097/converter-gson-2.9.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-scalars/2.5.0/4a33cf3185767a7296eca385932668786e0c7772/converter-scalars-2.5.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.9.0/d8fdfbd5da952141a665a403348b74538efc05ff/retrofit-2.9.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/7eb6e89f8199fd9fb945085e2284ab40/transformed/coil-1.1.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/8034618fb5667493aaf73ecd51f4dcff/transformed/coil-base-1.1.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/4.10.0/cd63657ac15770ed1420647154c9f44645533bef/okhttp-4.10.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.0.0/ab5a73fa2ccb4a36b0b5c69fe10b16d0255bcf8/okio-jvm-3.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/59e14828dd16b3102273b634114f078f/transformed/dexter-6.2.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5d2f761696fce1afd8ff7b82b2945d56/transformed/material-1.8.0-alpha02-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/57b0dea5ffe542496491a53cf648a9fe/transformed/appcompat-1.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9ef7fc9992cbf77c8cb0289fcc0bd9fa/transformed/play-services-maps-18.1.0-api.jar</arg>
@@ -84,6 +87,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b2a197d1194a6601f3b2d8ec8687886e/transformed/gifdecoder-4.13.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/1dfd18c63caaa271fcfcb214d4535157/transformed/exifinterface-1.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/16c1049e2031c965e2dc8346d5669dd3/transformed/lifecycle-runtime-2.5.1-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.2.0/cd3478503da69b1a7e0319bd2d1389943db9b364/lifecycle-common-java8-2.2.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/91ffcb8133736d248460d8f129045106/transformed/lifecycle-livedata-2.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2f2e560c6fe2412c56d7d41403cfd94c/transformed/lifecycle-livedata-core-2.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.5.1/1fdb7349701e9cf2f0a69fc10642b6fef6bb3e12/lifecycle-common-2.5.1.jar</arg>
@@ -199,6 +203,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.bumptech.glide:disklrucache:4.13.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.bumptech.glide:annotations:4.13.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okhttp3:logging-interceptor:4.10.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.ext:junit:1.1.3@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:core:1.4.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.4.0@aar" level="project" />
@@ -253,6 +258,9 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.tracing:tracing:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-location:21.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: de.hdodenhof:circleimageview:3.1.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.karumi:dexter:6.2.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.coil-kt:coil:1.1.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.coil-kt:coil-base:1.1.1@aar" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="ProjectMagangLatihan.app.main" />
 </module>

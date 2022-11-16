@@ -72,6 +72,9 @@ dependencies {
     //Image Profil Circle
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //user permission & coil
+    implementation 'com.karumi:dexter:6.2.2'
+    implementation("io.coil-kt:coil:1.1.1")
 
 
 

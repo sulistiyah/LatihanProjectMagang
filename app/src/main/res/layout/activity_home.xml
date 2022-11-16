@@ -325,7 +325,8 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginEnd="20dp"
-                            android:src="@drawable/btnabsen" />
+                            android:src="@drawable/btnabsen"
+                            android:onClick="@+id/btnabsensekarang"/>
 
                     </LinearLayout>
 
