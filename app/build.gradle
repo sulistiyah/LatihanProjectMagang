@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'de.undercouch.download'
 }
 
 android {
@@ -24,10 +25,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -35,19 +42,41 @@ android {
     viewBinding{
         enabled = true
     }
+
     namespace 'com.magang.projectmaganglatihan'
+
+    buildFeatures {
+        mlModelBinding true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
-dependencies {
 
+// import DownloadModels task
+project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
+project.ext.TMP_DIR   = project.buildDir.toString() + '/downloads'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.android.material:material:1.8.0-alpha02'
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
+    implementation 'com.google.android.material:material:1.8.0-alpha03'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+    annotationProcessor 'androidx.room:room-compiler:2.4.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha03'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
+
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.4'
 
     //retrofit implementation
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -67,10 +96,34 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
     //google maps
-    implementation 'com.google.android.gms:play-services-location:21.0.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     //Image Profil Circle
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //user permission
+    implementation 'com.karumi:dexter:6.2.3'
+
+    //coil
+    implementation 'io.coil-kt:coil:2.0.0-rc02'
+
+    //Face Detector MLKit
+    implementation 'com.google.mlkit:face-detection:16.1.5'
+    implementation 'com.google.mlkit:pose-detection:17.0.0'
+    implementation 'com.google.mlkit:pose-detection-accurate:17.0.0'
+    implementation 'com.google.mlkit:segmentation-selfie:16.0.0-beta4'
+    implementation 'com.google.mlkit:camera:16.0.0-beta3'
+    implementation 'com.google.android.gms:play-services-mlkit-face-detection:17.1.0'
+
+    //TensorFlow
+    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
+//    implementation 'org.tensorflow:tensorflow-lite-camera:2.11.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+//    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite:2.10.0'
+//    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+//    implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
 
 
 

@@ -1,29 +1,37 @@
 package com.magang.projectmaganglatihan.activity
 
-import android.Manifest
+
+import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.google.android.gms.location.LocationRequest.create
+import androidx.core.content.FileProvider
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityProfilBinding
 import com.magang.projectmaganglatihan.model.MyProfileResponse
+import com.magang.projectmaganglatihan.model.UpdateAvatarResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_profil.*
-import kotlinx.android.synthetic.main.fragment_job_desk_bottom_sheet.*
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.MultipartBody.Part.Companion.createFormData
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +45,10 @@ class ProfilActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPrefManager
     private lateinit var imageUri : Uri
-
+    private val CAMERA_REQUEST_CODE = 1
+    private val GALLERY_REQUEST_CODE = 2
+    var filePath : String = " "
+    private lateinit var file : File
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,11 +57,12 @@ class ProfilActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPref = SharedPrefManager(this)
+//        imageUri = createImageUri()!!
+
         backPage()
         logout()
         editProfil()
         getDataProfil()
-        updateAvatar()
 
 
     }
@@ -85,7 +97,7 @@ class ProfilActivity : AppCompatActivity() {
     private fun getDataProfil() {
 
         val parameter = HashMap<String, String>()
-        parameter["employee_id"] = "${sharedPref.employeeId}"
+        parameter["employee_id"] = sharedPref.employeeId
 
         RetrofitClient.instance.getMyProfile(parameter, "Bearer ${sharedPref.tokenLogin}")
             .enqueue(object : Callback<MyProfileResponse> {
@@ -93,9 +105,9 @@ class ProfilActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-                            var username : String? = response.body()?.data!!.employeeFullname
-                            var jobDesk : String? = response.body()?.data!!.departement.departementTitle
-                            var nip : String? = response.body()?.data!!.employeeNik
+                            val username : String = response.body()?.data!!.employeeFullname
+                            val jobDesk : String = response.body()?.data!!.departement.departementTitle
+                            val nip : String = response.body()?.data!!.employeeNik
 
                             tvUsername.setText(username)
                             tvJobDeskUser.setText(jobDesk)
@@ -123,39 +135,198 @@ class ProfilActivity : AppCompatActivity() {
 
     }
 
+    fun onClickTvChangePhoto(view: View) {
 
-    private fun updateAvatar() {
-        binding.tvChangePhoto.setOnClickListener {
+        openDialog()
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent()
-                intent.type = "image/*"
-                intent.action = Intent.ACTION_GET_CONTENT
+    }
 
-                startActivityForResult(intent, 100)
-            } else {
-                ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 10)
-            }
-            
-
+    private fun openDialog() {
+        val openDialog = AlertDialog.Builder(this)
+        openDialog.setTitle("Pilih Foto Profil...")
+        openDialog.setPositiveButton("Ambil Dari Kamera") {
+                dialog,_->
+            cameraPermission()
+            openCamera()
+            dialog.dismiss()
 
         }
+        openDialog.setNegativeButton("Ambil dari Galeri") {
+                dialog,_->
+            galleryPermission()
+            openGallery()
+            postAvatar()
+            dialog.dismiss()
+
+        }
+        openDialog.setNeutralButton("Cancel") {
+                dialog,_->
+            dialog.dismiss()
+
+        }
+        openDialog.create()
+        openDialog.show()
+    }
+
+
+    private fun openCamera() {
+
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMERA_REQUEST_CODE)
+
+
+    }
+
+    private fun openGallery() {
+        Intent(Intent.ACTION_PICK).also {
+            it.type = "image/*"
+            val imageTypes = arrayOf("image/jpeg", "image/png", "image/jpg")
+            it.putExtra(Intent.EXTRA_MIME_TYPES, imageTypes)
+            startActivityForResult(it, GALLERY_REQUEST_CODE)
+
+        }
+
+    }
+
+    private fun cameraPermission() {
+        Dexter.withContext(this).withPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    p0?.let {
+                        if (p0.areAllPermissionsGranted()) {
+                            openCamera()
+                        }
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?,
+                ) {
+                    openDialog()
+                }
+            })
+    }
+
+    private fun galleryPermission() {
+        Dexter.withContext(this).withPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    openGallery()
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?,
+                ) {
+                    openDialog()
+                }
+            })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100 && resultCode == RESULT_OK) {
-            imageUri = data?.data!!
-            binding.imgProfil.setImageURI(imageUri)
+
+        if (resultCode == Activity.RESULT_OK) {
+            when(requestCode) {
+                CAMERA_REQUEST_CODE -> {
+                    binding.imgProfil.setImageBitmap(data?.extras!!.get("data") as Bitmap)
+//                    val bitmap = data?.extras!!.get("data") as Bitmap
+//                    binding.imgProfil.load(bitmap) {
+//                        crossfade(true)
+//                        crossfade(1000)
+//                        transformations(CircleCropTransformation())
+//                    }
+                }
+
+                GALLERY_REQUEST_CODE -> {
+                    imageUri = data?.data!!
+                    binding.imgProfil.setImageURI(imageUri)
+                }
+            }
         }
-//        if (requestCode == 100 && resultCode == RESULT_OK) {
-//
-//            imageUri = data?.data!!
-//            binding.viewFoto.setImageURI(imageUri)
-//
-//        }
+
     }
+
+    private fun createImageUri() : Uri? {
+        val image = File(applicationContext.filesDir, "image.photo.png")
+        return FileProvider.getUriForFile(
+            applicationContext,
+            "com.magang.projectmaganglatihan.fileProvider",
+            image
+        )
+    }
+
+
+    private fun postAvatar() {
+
+//        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//        val file = File(path, "DemoPicture.png")
+
+//        val file : File = File(filePath)
+//        val filesDir = applicationContext.filesDir
+//        val file = File(filesDir, "image.photo.png")
+
+
+//        val fileUri = Uri.parse(surveyResponse.imageUri)
+//        String path = getPath(context, uri);
+//        if (path != null && isLocal(path)) {
+//            return new File(path);
+//        }
+//        val file = LocalStorageProvider.getFile(activity, fileUri)
+
+        file = File(
+            Environment.getExternalStorageDirectory(),
+            "file" + System.currentTimeMillis().toString() + ".jpg"
+        )
+
+
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val image = MultipartBody.Part.createFormData("image", file.name, requestBody)
+
+        val employeeId: RequestBody =
+            sharedPref.employeeId.toRequestBody("text/plain".toMediaTypeOrNull())
+        val companyId: RequestBody =
+            sharedPref.companyId.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        RetrofitClient.instance.postAvatar(
+            "Bearer ${sharedPref.tokenLogin}",
+            image,
+            employeeId,
+            companyId)
+            .enqueue(object : Callback<UpdateAvatarResponse> {
+                override fun onResponse(
+                    call: Call<UpdateAvatarResponse>,
+                    response: Response<UpdateAvatarResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        if (response.code() == 200) {
+
+                            Toast.makeText(this@ProfilActivity,
+                                "Foto Profil Berhasil Diubah",
+                                Toast.LENGTH_SHORT).show()
+
+                        } else {
+                            Toast.makeText(this@ProfilActivity,
+                                response.body()!!.statusCode,
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@ProfilActivity,
+                            "${response.body()?.message}",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<UpdateAvatarResponse>, t: Throwable) {
+                    Log.e("avatar", "onFailure: " + t.message)
+                    Toast.makeText(this@ProfilActivity, t.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
+    }
+
 
 
 }

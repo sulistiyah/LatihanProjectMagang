@@ -9,12 +9,9 @@ import android.util.Log
 import android.widget.Toast
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
-import com.magang.projectmaganglatihan.model.LoginParam
-import com.magang.projectmaganglatihan.model.LoginResponse
 import com.magang.projectmaganglatihan.model.TokenParam
 import com.magang.projectmaganglatihan.model.TokenResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
-import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
