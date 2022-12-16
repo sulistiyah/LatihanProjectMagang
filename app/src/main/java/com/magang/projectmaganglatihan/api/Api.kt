@@ -99,4 +99,20 @@ interface Api {
         @Header("Authorization") token: String
     ): Call<DetailInfoBeritaResponse>
 
+    //AttendanceList - DaftarHadirActivity
+    @Headers("Accept: application/json")
+    @GET("v1/member/attendance/list")
+    fun getAttendanceList(
+        @QueryMap parameter: HashMap<String, String>
+    ):Call <AttendanceListResponse>
+
+    //Membuat jadwal activity
+    @Multipart
+    @Headers("Accept:application/json")
+    @POST("v1/member/attendance/absence_request")
+    fun getreasonabsen(
+        @Header("Authorization") token: String,
+        @Part ("employee_id") employeeId : RequestBody,
+        @Part ("company_id") companyId : RequestBody
+    ): Call<RegisterDepartementListResponse>
 }
