@@ -131,6 +131,22 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+    val checkData: Boolean
+        get() {
+            val sharedPreferences =
+                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getBoolean(CHECK_DATA, false)
+
+        }
+
+    fun saveCheckData(checkData: Boolean) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putBoolean(CHECK_DATA, checkData)
+        editor.apply()
+    }
+
 
     fun clear() {
         val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
@@ -142,6 +158,7 @@ class SharedPrefManager(private val mCtx: Context) {
     companion object {
         private const val SHARED_PREF_NAME = "my_shared_preff"
         private var IS_LOGIN = "isLogin"
+        private var CHECK_DATA = "checkData"
         private var mInstance: SharedPrefManager? = null
 
         @Synchronized

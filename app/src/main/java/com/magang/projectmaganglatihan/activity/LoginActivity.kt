@@ -3,7 +3,6 @@ package com.magang.projectmaganglatihan.activity
 import android.Manifest
 import android.content.Intent
 import android.content.IntentSender
-import android.content.IntentSender.SendIntentException
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +23,6 @@ import com.magang.projectmaganglatihan.model.LoginParam
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.etEmail
-import kotlinx.android.synthetic.main.activity_lupa_pass.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (SharedPrefManager.getInstance(this).islogin) {
+        if (sharedPref.islogin) {
             val intentlogin = Intent(this@LoginActivity, HomeActivity::class.java)
             startActivity(intentlogin)
             sharedPref.tokenLogin
