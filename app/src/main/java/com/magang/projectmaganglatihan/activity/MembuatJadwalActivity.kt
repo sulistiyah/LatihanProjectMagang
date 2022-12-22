@@ -15,6 +15,7 @@ class MembuatJadwalActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         backPage()
+
     }
 
     private fun backPage() {
@@ -22,4 +23,6 @@ class MembuatJadwalActivity : AppCompatActivity() {
             onBackPressed()
         }
     }
+
+
 }

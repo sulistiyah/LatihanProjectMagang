@@ -97,7 +97,13 @@ interface Api {
     @GET("v1/info-detail")
     fun getDetailListInfo(
         @QueryMap parameter : HashMap<String, String>,
-        @Header("Authorization") token: String
-    ): Call<DetailInfoBeritaResponse>
+        @Header("Authorization") token: String,
+        @Part ("days_count") days_count :Int,
+        @Part ("company_id")companyId: String,
+        @Part ("ar_start_date")ar_start_date:String,
+        @Part ("ar_end_date")ar_end_date:String,
+        @Part ("ar_reason")ar_reason:String,
+        @Part ("ar_type")ar_type:Int
+    ): Call<MembuatIzinResponse>
 
 }
