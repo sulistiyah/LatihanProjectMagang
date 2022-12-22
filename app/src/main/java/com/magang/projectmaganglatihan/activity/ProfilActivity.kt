@@ -151,8 +151,7 @@ class ProfilActivity : AppCompatActivity() {
             dialog.dismiss()
 
         }
-        openDialog.setNegativeButton("Ambil dari Galeri") {
-                dialog,_->
+        openDialog.setNegativeButton("Ambil dari Galeri") { dialog,_->
             galleryPermission()
             openGallery()
             postAvatar()
