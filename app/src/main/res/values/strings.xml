@@ -83,6 +83,8 @@
     <string name="digital_talent_scholarship_2021">Digital Talent Scholarship 2021</string>
     <string name="info_berita"><![CDATA[Info & Berita]]></string>
     <string name="detail_info">Detail Info</string>
+    <string name="alasan_izin">Alasan Izin</string>
+    <string name="membuat_izin">Membuat Izin</string>
 
 
     <string name="tfe_od_app_name" translation_description="Object Detection demo app [CHAR_LIMIT=40]">Face Recognition</string>

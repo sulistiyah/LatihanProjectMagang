@@ -42,40 +42,12 @@ interface Api {
         @QueryMap parameters : HashMap<String, String>
     ): Call<RegisterCompanyCheck>
 
+
     //Job Desk - Register
     @GET("v1/departement_list")
     fun getJobDeskDapartement(
         @QueryMap parameter: HashMap<String, Int>
     ): Call<RegisterDepartementListResponse>
-
-    //SetDataWajah - Home Activity
-    @Multipart
-    @Headers("Accept: application/json")
-    @POST("v1/member/attribute")
-    fun postSetDataWajah(
-        @Header("Authorization") token: String,
-        @Part ("employee_id") employeeId: RequestBody
-    ): Call<SetDataWajahResponse>
-
-
-    //Absen - HomeActivity
-    @Headers("Accept: application/json")
-    @POST("v1/member/save-attribute")
-    fun postAbsenSekarang(
-        @Header("Authorization") token:String,
-        @Body attributeParam: AttributeParam
-    ): Call<AttributeResponse>
-
-
-    //ListKehadiran - Home Activity
-    @Headers("Accept: application/json")
-    @GET("v1/member/attendance/list")
-    fun getListKehadiran(
-        @Header("Authorization") token: String,
-        @QueryMap parameter : HashMap<String, String>
-    ): Call<SetDataWajahResponse>
-
-
 
 
     //My Profile - Profil
@@ -127,6 +99,5 @@ interface Api {
         @QueryMap parameter : HashMap<String, String>,
         @Header("Authorization") token: String
     ): Call<DetailInfoBeritaResponse>
-
 
 }
