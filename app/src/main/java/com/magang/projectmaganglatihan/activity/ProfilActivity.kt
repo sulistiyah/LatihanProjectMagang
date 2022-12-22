@@ -1,25 +1,16 @@
 package com.magang.projectmaganglatihan.activity
 
-
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
+import android.os.Environment.DIRECTORY_PICTURES
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityProfilBinding
@@ -35,7 +26,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 class ProfilActivity : AppCompatActivity() {
@@ -44,12 +38,6 @@ class ProfilActivity : AppCompatActivity() {
 
 
     private lateinit var sharedPref: SharedPrefManager
-    private lateinit var imageUri : Uri
-    private val CAMERA_REQUEST_CODE = 1
-    private val GALLERY_REQUEST_CODE = 2
-    var filePath : String = " "
-    private lateinit var file : File
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +51,7 @@ class ProfilActivity : AppCompatActivity() {
         logout()
         editProfil()
         getDataProfil()
+        changeAvatar()
 
 
     }
@@ -89,6 +78,11 @@ class ProfilActivity : AppCompatActivity() {
         val editProfil = findViewById<ImageView>(R.id.imgEditProfil)
         editProfil.setOnClickListener{
             val intent = Intent(this, EditProfilActivity::class.java)
+            intent.putExtra("nikKaryawan", sharedPref.employeeNik)
+            intent.putExtra("nama", sharedPref.employeeFullname)
+            intent.putExtra("email", sharedPref.employeeEmail)
+            intent.putExtra("jobDesk", sharedPref.departementTitle)
+            intent.putExtra("noTelp", sharedPref.noTelp)
             startActivity(intent)
         }
     }
@@ -109,11 +103,19 @@ class ProfilActivity : AppCompatActivity() {
                             val jobDesk : String = response.body()?.data!!.departement.departementTitle
                             val nip : String = response.body()?.data!!.employeeNik
 
-                            tvUsername.setText(username)
-                            tvJobDeskUser.setText(jobDesk)
-                            tvNipUser.setText(nip)
+                            tvUsername.text = username
+                            tvJobDeskUser.text = jobDesk
+                            tvNipUser.text = nip
 
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveCompanyId(response.body()?.data!!.companyId.toString())
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeId(response.body()?.data!!.employeeId.toString())
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeNik(response.body()?.data!!.employeeNik)
                             SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeFullname(response.body()?.data!!.employeeFullname)
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeEmail(response.body()?.data!!.employeeEmail)
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveDepartementId(response.body()?.data!!.employeeDepartmentId.toString())
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveDepartementTitle(response.body()?.data!!.departement.departementTitle)
+                            SharedPrefManager.getInstance(this@ProfilActivity).saveNoTelepon(response.body()?.data!!.profile.phoneNo.toString())
+
 
 //                            myProfileAdapter = MyProfileAdapter(this@ProfilActivity, list)
 //                            myProfileAdapter.notifyDataSetChanged()
@@ -135,152 +137,58 @@ class ProfilActivity : AppCompatActivity() {
 
     }
 
-    fun onClickTvChangePhoto(view: View) {
-
-        openDialog()
-
-    }
-
-    private fun openDialog() {
-        val openDialog = AlertDialog.Builder(this)
-        openDialog.setTitle("Pilih Foto Profil...")
-        openDialog.setPositiveButton("Ambil Dari Kamera") {
-                dialog,_->
-            cameraPermission()
-            openCamera()
-            dialog.dismiss()
-
+    private fun changeAvatar() {
+        binding.tvChangePhoto.setOnClickListener {
+            ImagePicker.with(this@ProfilActivity)
+                .crop() //Crop image(Optional), Check Customization for more option
+                .compress(1024) //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(
+                    1080,
+                    1080
+                ) //Final image resolution will be less than 1080 x 1080(Optional)
+//                .saveDir(File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!, "ImagePicker"))
+                .start(10)
         }
-        openDialog.setNegativeButton("Ambil dari Galeri") {
-                dialog,_->
-            galleryPermission()
-            openGallery()
-            postAvatar()
-            dialog.dismiss()
-
-        }
-        openDialog.setNeutralButton("Cancel") {
-                dialog,_->
-            dialog.dismiss()
-
-        }
-        openDialog.create()
-        openDialog.show()
-    }
-
-
-    private fun openCamera() {
-
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, CAMERA_REQUEST_CODE)
-
-
-    }
-
-    private fun openGallery() {
-        Intent(Intent.ACTION_PICK).also {
-            it.type = "image/*"
-            val imageTypes = arrayOf("image/jpeg", "image/png", "image/jpg")
-            it.putExtra(Intent.EXTRA_MIME_TYPES, imageTypes)
-            startActivityForResult(it, GALLERY_REQUEST_CODE)
-
-        }
-
-    }
-
-    private fun cameraPermission() {
-        Dexter.withContext(this).withPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    p0?.let {
-                        if (p0.areAllPermissionsGranted()) {
-                            openCamera()
-                        }
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?,
-                ) {
-                    openDialog()
-                }
-            })
-    }
-
-    private fun galleryPermission() {
-        Dexter.withContext(this).withPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    openGallery()
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?,
-                ) {
-                    openDialog()
-                }
-            })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 10) {
+            val imageUri: Uri = data?.data!!
+            val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, Uri.parse(imageUri.toString()))
+            val profil = findViewById<ImageView>(R.id.imgProfil)
+            profil.setImageBitmap(bitmap)
+            postAvatar(bitmap)
 
-        if (resultCode == Activity.RESULT_OK) {
-            when(requestCode) {
-                CAMERA_REQUEST_CODE -> {
-                    binding.imgProfil.setImageBitmap(data?.extras!!.get("data") as Bitmap)
-//                    val bitmap = data?.extras!!.get("data") as Bitmap
-//                    binding.imgProfil.load(bitmap) {
-//                        crossfade(true)
-//                        crossfade(1000)
-//                        transformations(CircleCropTransformation())
-//                    }
-                }
-
-                GALLERY_REQUEST_CODE -> {
-                    imageUri = data?.data!!
-                    binding.imgProfil.setImageURI(imageUri)
-                }
-            }
         }
 
     }
 
-    private fun createImageUri() : Uri? {
-        val image = File(applicationContext.filesDir, "image.photo.png")
-        return FileProvider.getUriForFile(
-            applicationContext,
-            "com.magang.projectmaganglatihan.fileProvider",
-            image
+
+
+    private fun createTempFile(bitmap: Bitmap): File {
+        val file = File(
+            getExternalFilesDir(DIRECTORY_PICTURES),
+            System.currentTimeMillis().toString() + "_image.webp"
         )
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.WEBP, 0, bos)
+        val bitmapData = bos.toByteArray()
+        //write the bytes in file
+        try {
+            val fos = FileOutputStream(file)
+            fos.write(bitmapData)
+            fos.flush()
+            fos.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return file
     }
 
+    private fun postAvatar(gambarBitmap: Bitmap) {
 
-    private fun postAvatar() {
-
-//        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//        val file = File(path, "DemoPicture.png")
-
-//        val file : File = File(filePath)
-//        val filesDir = applicationContext.filesDir
-//        val file = File(filesDir, "image.photo.png")
-
-
-//        val fileUri = Uri.parse(surveyResponse.imageUri)
-//        String path = getPath(context, uri);
-//        if (path != null && isLocal(path)) {
-//            return new File(path);
-//        }
-//        val file = LocalStorageProvider.getFile(activity, fileUri)
-
-        file = File(
-            Environment.getExternalStorageDirectory(),
-            "file" + System.currentTimeMillis().toString() + ".jpg"
-        )
-
-
+        val file = createTempFile(gambarBitmap)
         val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
         val image = MultipartBody.Part.createFormData("image", file.name, requestBody)
 
@@ -326,7 +234,5 @@ class ProfilActivity : AppCompatActivity() {
             })
 
     }
-
-
 
 }

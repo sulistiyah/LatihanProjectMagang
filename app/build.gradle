@@ -75,8 +75,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha03'
     implementation 'com.google.android.gms:play-services-vision:20.1.3'
 
-    implementation 'androidx.activity:activity-ktx:1.6.1'
-    implementation 'androidx.fragment:fragment-ktx:1.5.4'
+
 
     //retrofit implementation
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -124,6 +123,11 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:2.10.0'
 //    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
 //    implementation('org.tensorflow:tensorflow-lite:0.0.0-nightly') { changing = true }
+
+    //Image Picker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.4'
 
 
 
