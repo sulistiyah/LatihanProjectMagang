@@ -287,9 +287,7 @@ abstract class CameraActivity : AppCompatActivity(),
 //          continue;
 //        }
                 val facing = characteristics.get(CameraCharacteristics.LENS_FACING)
-                if (cameraFacing != null && facing != null &&
-                    facing != cameraFacing
-                ) {
+                if (cameraFacing != null && facing != null && facing != cameraFacing) {
                     continue
                 }
                 useCamera2API = (facing == CameraCharacteristics.LENS_FACING_EXTERNAL

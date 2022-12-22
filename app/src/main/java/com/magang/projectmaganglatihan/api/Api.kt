@@ -71,16 +71,17 @@ interface Api {
 
 
     //Edit Profil
+    @Multipart
     @Headers("Accept: application/json")
     @POST("v1/member/me")
     fun postEditProfil(
         @Header("Authorization") token: String,
-        @Field("company_id") companyId : String,
-        @Field("employee_id") employeeId : String,
-        @Field("employee_name") employeeName : String,
-        @Field("departement_id") departementId : String,
-        @Field("phone_no") phoneNo : String
-    ): Call<MyProfileResponse>
+        @Part("company_id") companyId : RequestBody,
+        @Part("employee_id") employeeId : RequestBody,
+        @Part("employee_name") employeeName : RequestBody,
+        @Part("departement_id") departementId : RequestBody,
+        @Part("phone_no") phoneNo : RequestBody
+    ): Call<EditProfilResponse>
 
 
     //Informasi Berita - HomeActivity

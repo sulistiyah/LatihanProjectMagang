@@ -8,14 +8,25 @@ import android.location.Geocoder
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import com.magang.projectmaganglatihan.R
+import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityHomeBinding
+import com.magang.projectmaganglatihan.model.SetDataWajahResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
-import kotlinx.android.synthetic.main.activity_home.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 import java.io.IOException
 import java.util.*
 
@@ -27,8 +38,12 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var tvUsername: TextView
     private lateinit var employeeFullname: String
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var locationRequest: com.google.android.gms.location.LocationRequest
-    val REQUEST_IMAGE_CAPTURE = 100
+    private lateinit var imageUri : Uri
+    private lateinit var file : File
+    private lateinit var cameraIntent : Intent
+    private val CAMERA_REQUEST_CODE = 1
+//    private lateinit var locationRequest: com.google.android.gms.location.LocationRequest
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,23 +58,119 @@ class HomeActivity : AppCompatActivity() {
         getProfil()
         getListInfo()
         getUserLocation()
-        getAttendance()
-        getIzin()
-//        getCurrentLocation()
+        setAbsen()
+        checkAvatar()
 
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        if (!sharedPref.checkData) {
+//            openDialog()
+//            finish()
+//        }
+
+//        openDialog()
+
+
+//        val intent = Intent(this, DetectorActivity::class.java)
+//        startActivity(intent)
+
+    }
+
+    private fun setAbsen() {
         binding.btnAbsenSekarang.setOnClickListener{
-
+            val intent = Intent(this, DetectorActivity::class.java)
+            startActivity(intent)
         }
+    }
+
+    private fun openDialog() {
+        val openDialog = AlertDialog.Builder(this)
+        openDialog.setTitle("Wajah anda belum terdaftar")
+        openDialog.setMessage("Daftarkan data wajah anda.")
+        openDialog.setPositiveButton("OK") { dialog,_->
+//            setDataWajah()
+            val intent = Intent(this@HomeActivity, DetectorActivity::class.java)
+            startActivity(intent)
+            dialog.dismiss()
+        }
+        openDialog.create()
+        openDialog.show()
+    }
+
+    private fun setDataWajah() {
+
+        val employeeId : RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedPref.employeeId)
+
+        RetrofitClient.instance.postSetDataWajah("Bearer ${sharedPref.tokenLogin}", employeeId)
+            .enqueue(object : Callback<SetDataWajahResponse> {
+                override fun onResponse(
+                    call: Call<SetDataWajahResponse>,
+                    response: Response<SetDataWajahResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        if (response.code() == 200) {
+
+                            SharedPrefManager.getInstance(this@HomeActivity).saveCheckData(true)
+//                            openCamera()
+                            val intent = Intent(this@HomeActivity, DetectorActivity::class.java)
+                            startActivity(intent)
+
+
+                        } else {
+                            Toast.makeText(this@HomeActivity,
+                                response.body()!!.statusCode,
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@HomeActivity,
+                            "${response.body()?.message}",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<SetDataWajahResponse>, t: Throwable) {
+                    Log.e("data", "onFailure: " + t.message)
+                    Toast.makeText(this@HomeActivity, t.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
 
     }
 
-    private fun getIzin() {
-        llrencanaizin.setOnClickListener {
-            val intentrencana = Intent(this@HomeActivity, JadwalizinActivity::class.java)
-            startActivity(intentrencana)
-        }
+//    private fun openCamera() {
+//        cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        file = File(
+//            Environment.getExternalStorageDirectory(),
+//            "file"+System.currentTimeMillis().toString()+"text/*"
+//        )
+////        imageUri = Uri.fromFile(file)
+//        imageUri = FileProvider.getUriForFile(
+//            applicationContext,
+//            "com.magang.projectmaganglatihan.provider",
+//            file)
+//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+//        cameraIntent.putExtra("return-data", true)
+//        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (resultCode == Activity.RESULT_OK) {
+//            when(requestCode) {
+//                CAMERA_REQUEST_CODE -> {
+//                    binding.imgProfil.setImageBitmap(data?.extras!!.get("data") as Bitmap)
+//                }
+//
+//            }
+//        }
+//
+//    }
 
-    }
 
 
     private fun tokenLogin() {
@@ -72,6 +183,14 @@ class HomeActivity : AppCompatActivity() {
         if (!sharedPref.islogin) {
             val intentCheckLogin = Intent(this, LoginActivity::class.java)
             startActivity(intentCheckLogin)
+            finish()
+        }
+    }
+
+    private fun checkAvatar() {
+        if (!sharedPref.avatar) {
+            val intent = Intent(this, ProfilActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }
@@ -111,10 +230,10 @@ class HomeActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-        ) { return
-        }
+        ) { return }
+
         fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-            val location = task.getResult()
+            val location = task.result
 
             if (location != null) {
                 try {
@@ -122,13 +241,13 @@ class HomeActivity : AppCompatActivity() {
 
                     val address = geocoder.getFromLocation(location.latitude,location.longitude,1)
                     val address_line = address!![0].getAddressLine(0)
-                    binding.tvLokasi.setText(address_line)
+                    binding.tvLokasi.text = address_line
 
                     val address_location = address[0].getAddressLine(0)
 
                     openLocation(address_location.toString())
 
-                } catch (e: IOException) {
+                } catch (_: IOException) {
 
                 }
             }
@@ -140,7 +259,7 @@ class HomeActivity : AppCompatActivity() {
 
         //atur button click
         binding.tvLokasi.setOnClickListener {
-            if (!binding.tvLokasi.text.isEmpty()) {
+            if (binding.tvLokasi.text.isNotEmpty()) {
                 val uri = Uri.parse("geo:0, 0?q=$location")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 intent.setPackage("com.google.android.apps.maps")
@@ -148,11 +267,5 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
-    private fun getAttendance() {
-        clLihatAbsen.setOnClickListener {
-            intent = Intent(this, AttendanceListActivity::class.java)
-            startActivity(intent)
-            tokenLogin()
-        }
-    }
+
 }

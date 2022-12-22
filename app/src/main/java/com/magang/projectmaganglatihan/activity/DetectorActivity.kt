@@ -50,7 +50,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
     private var lastProcessingTimeMs: Long = 0
     private var rgbFrameBitmap: Bitmap? = null
     private var croppedBitmap: Bitmap? = null
-    private lateinit var cropCopyBitmap: Bitmap
+    private var cropCopyBitmap: Bitmap? = null
     private var computingDetection = false
     private var addPending = false
 
@@ -71,14 +71,16 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
 
     // here the face is cropped and drawn
     private var faceBmp: Bitmap? = null
-    private lateinit var addPicture : FloatingActionButton
+    private var addPicture : FloatingActionButton? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle??) {
         super.onCreate(savedInstanceState)
+
         sharedPref = SharedPrefManager(this)
+
         addPicture = findViewById(R.id.fabCamera)
-        addPicture.setOnClickListener{
+        addPicture!!.setOnClickListener{
             onAddClick()
         }
 
@@ -104,7 +106,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
 
         val textSizePx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, resources.displayMetrics)
         borderedText = BorderedText(textSizePx)
-        borderedText!!.setTypeface(Typeface.MONOSPACE)
+        borderedText?.setTypeface(Typeface.MONOSPACE)
         tracker = MultiBoxTracker(this)
         try {
             detector = TFLiteObjectDetectionAPIModel.create(
@@ -128,13 +130,13 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888)
         val targetW: Int
         val targetH: Int
-            if (sensorOrientation == 90 || sensorOrientation == 270) {
-                targetH = previewWidth
-                targetW = previewHeight
-            } else {
-                targetW = previewWidth
-                targetH = previewHeight
-            }
+        if (sensorOrientation == 90 || sensorOrientation == 270) {
+            targetH = previewWidth
+            targetW = previewHeight
+        } else {
+            targetW = previewWidth
+            targetH = previewHeight
+        }
         val cropW = (targetW / 2.0).toInt()
         val cropH = (targetH / 2.0).toInt()
         croppedBitmap = Bitmap.createBitmap(cropW, cropH, Bitmap.Config.ARGB_8888)
@@ -163,7 +165,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         trackingOverlay!!.addCallback(
             object : OverlayView.DrawCallback {
                 override fun drawCallback(canvas: Canvas?) {
-                    tracker!!.draw(canvas)
+                    tracker!!.draw(canvas!!)
                     if (isDebug) {
                         tracker!!.drawDebug(canvas)
                     }
@@ -185,7 +187,8 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         }
         computingDetection = true
         LOGGER.i("Preparing image $currTimestamp for detection in bg thread.")
-        rgbFrameBitmap!!.setPixels(getRgbBytes(),
+        rgbFrameBitmap!!.setPixels(
+            getRgbBytes(),
             0,
             previewWidth,
             0,
@@ -215,12 +218,12 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
     }
 
 
-    override fun getLayoutId(): Int {
+    override fun getLayoutId(): Int? {
         return R.layout.camera_connection_fragment
     }
 
 
-    override fun getDesiredPreviewFrameSize(): Size {
+    override fun getDesiredPreviewFrameSize(): Size? {
         return DESIRED_PREVIEW_SIZE
     }
 
@@ -310,7 +313,6 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
                         if (response.code() == 200) {
 
                             SharedPrefManager.getInstance(this@DetectorActivity).saveCheckData(true)
-//                            openCamera()
 
 
                         } else {
@@ -350,7 +352,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
 
     private fun onFacesDetected(currTimestamp: Long, faces: List<Face>, add: Boolean) {
         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap!!)
-        Canvas(cropCopyBitmap)
+        Canvas(cropCopyBitmap!!)
         val paint = Paint()
         paint.color = Color.RED
         paint.style = Paint.Style.STROKE
@@ -421,7 +423,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
                 val startTime = SystemClock.uptimeMillis()
                 val resultsAux = detector!!.recognizeImage(faceBmp, add)
                 lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime
-                if (resultsAux.size > 0) {
+                if (resultsAux.isNotEmpty()) {
                     val result = resultsAux[0]
                     extra = result?.extra
 

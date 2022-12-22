@@ -53,6 +53,22 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+    val departementTitle: String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("departementTitle", null).toString()
+        }
+
+    fun saveDepartementTitle(departementTitle: String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("departementTitle", departementTitle)
+        editor.apply()
+    }
+
+
+
     val companyId: String
         get() {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
@@ -78,6 +94,48 @@ class SharedPrefManager(private val mCtx: Context) {
         val editor = sharedPreferences.edit()
 
         editor.putString("infoId", id)
+        editor.apply()
+    }
+
+    val noTelp : String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("noTelepon", null).toString()
+        }
+
+    fun saveNoTelepon (noTelepon : String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("noTelepon", noTelepon)
+        editor.apply()
+    }
+
+    val employeeEmail : String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("employeeEmail", null).toString()
+        }
+
+    fun saveEmployeeEmail (employeeEmail : String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("employeeEmail", employeeEmail)
+        editor.apply()
+    }
+
+    val employeeNik : String
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getString("employeeNik", null).toString()
+        }
+
+    fun saveEmployeeNik (employeeNik : String) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putString("employeeNik", employeeNik)
         editor.apply()
     }
 
@@ -131,6 +189,22 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+    val avatar: Boolean
+        get() {
+            val sharedPreferences =
+                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getBoolean(SAVE_AVATAR, false)
+
+        }
+
+    fun saveAvatar(avatar: Boolean) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putBoolean(SAVE_AVATAR, avatar)
+        editor.apply()
+    }
+
     val checkData: Boolean
         get() {
             val sharedPreferences =
@@ -159,6 +233,7 @@ class SharedPrefManager(private val mCtx: Context) {
         private const val SHARED_PREF_NAME = "my_shared_preff"
         private var IS_LOGIN = "isLogin"
         private var CHECK_DATA = "checkData"
+        private var SAVE_AVATAR = "saveAvatar"
         private var mInstance: SharedPrefManager? = null
 
         @Synchronized
