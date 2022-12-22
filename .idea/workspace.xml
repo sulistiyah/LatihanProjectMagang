@@ -17,33 +17,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8008edf5-989d-47ef-a42e-77a8d90e2ea0" name="Changes" comment="Project Magang Latihan">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tracking/MultiBoxTracker.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_down.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ProjectMagangLatihan.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/CameraActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/CameraActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/DetectorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/DetectorActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/EditProfilActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/EditProfilActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/HomeActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/ProfilActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/ProfilActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/MyProfileAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/MyProfileAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/CameraConnectionFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/CameraConnectionFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/LegacyCameraConnectionFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/LegacyCameraConnectionFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/EditProfilResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/EditProfilResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/storage/SharedPrefManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/storage/SharedPrefManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tracking/MultiBoxTracker.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profil.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profil.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +91,6 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android-custom-viewC:/Users/Windows/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.2.1/f0f93e67af3f7417bdd560d5142f6dec4fe629c3/recyclerview-1.2.1-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
     <property name="android-custom-viewC:/Users/Windows/AppData/Local/Android/Sdk/sources/android-33/android/view/View.java_SELECTED" value="View" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/AutoFitTextureView.java_SELECTED" value="AutoFitTextureView" />
@@ -373,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670308009833</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Project Magang Latihan">
+      <created>1671683821808</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1671683821809</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

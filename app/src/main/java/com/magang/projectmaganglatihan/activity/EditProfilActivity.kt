@@ -1,31 +1,27 @@
 package com.magang.projectmaganglatihan.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityEditProfilBinding
-import com.magang.projectmaganglatihan.databinding.ActivityRegisterBinding
 import com.magang.projectmaganglatihan.fragment.JobDeskBottomSheetFragment
 import com.magang.projectmaganglatihan.model.EditProfilResponse
-import com.magang.projectmaganglatihan.model.MyProfileResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_profil.*
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Field
+
 
 class EditProfilActivity : AppCompatActivity() {
 
@@ -98,20 +94,19 @@ class EditProfilActivity : AppCompatActivity() {
 
     private fun saveEditProfil() {
         binding.btnSimpan.setOnClickListener {
-//            val idKaryawan = binding.etIdKaryawan.text.toString()
-//            val namaLengkap = binding.etNama.text.toString()
-//            val email = binding.etEmail.text.toString()
-//            val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
-//            val noTelp = binding.etNotelp.text.toString()
+            val idKaryawan = binding.tvIdKaryawan.text.toString()
+            val namaLengkap = binding.etNama.text.toString()
+            val email = binding.tvEmail.text.toString()
+            val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
+            val noTelp = binding.etNotelp.text.toString()
 
 
-            val companyId : RequestBody =
-                sharedPref.companyId.toRequestBody("text/plain".toMediaTypeOrNull())
-            val employeeId: RequestBody =
-                sharedPref.employeeId.toRequestBody("text/plain".toMediaTypeOrNull())
-            val employeeFullName: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedPref.employeeFullname)
-            val departementId : RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedPref.departementId)
-            val noTelepon : RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedPref.noTelp)
+
+            val companyId : RequestBody = sharedPref.companyId.toRequestBody("text/plain".toMediaTypeOrNull())
+            val employeeId: RequestBody = sharedPref.employeeId.toRequestBody("text/plain".toMediaTypeOrNull())
+            val employeeFullName: RequestBody = namaLengkap.toRequestBody("text/plain".toMediaTypeOrNull())
+            val departementId : RequestBody = jobDeskDepartement.toRequestBody("text/plain".toMediaTypeOrNull())
+            val noTelepon : RequestBody = noTelp.toRequestBody("text/plain".toMediaTypeOrNull())
 
             RetrofitClient.instance.postEditProfil(
                 "Bearer ${sharedPref.tokenLogin}",
@@ -127,7 +122,7 @@ class EditProfilActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-                            Toast.makeText(this@EditProfilActivity, "SUCCESS", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@EditProfilActivity, "Berhasil", Toast.LENGTH_SHORT).show()
                             onBackPressed()
 
                         } else {
