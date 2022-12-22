@@ -59,6 +59,7 @@ class HomeActivity : AppCompatActivity() {
         getListInfo()
         getUserLocation()
         setAbsen()
+        checkAvatar()
 
 
 
@@ -71,7 +72,9 @@ class HomeActivity : AppCompatActivity() {
 //            finish()
 //        }
 
-        openDialog()
+//        openDialog()
+
+
 //        val intent = Intent(this, DetectorActivity::class.java)
 //        startActivity(intent)
 
@@ -180,6 +183,14 @@ class HomeActivity : AppCompatActivity() {
         if (!sharedPref.islogin) {
             val intentCheckLogin = Intent(this, LoginActivity::class.java)
             startActivity(intentCheckLogin)
+            finish()
+        }
+    }
+
+    private fun checkAvatar() {
+        if (!sharedPref.avatar) {
+            val intent = Intent(this, ProfilActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }

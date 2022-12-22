@@ -30,6 +30,8 @@ class MyProfileAdapter (private val context: Activity, private var listProfile: 
         nip.text = item.employeeNik
 
 
+
+
         return view
     }
 

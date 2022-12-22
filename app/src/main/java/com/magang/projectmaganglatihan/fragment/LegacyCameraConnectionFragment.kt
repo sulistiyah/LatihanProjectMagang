@@ -26,7 +26,8 @@ class LegacyCameraConnectionFragment @SuppressLint("ValidFragment") constructor(
     private val imageListener: PreviewCallback,
     /** The layout identifier to inflate for this Fragment.  */
     private val layout: Int,
-    private val desiredSize: Size, private var facing: Int,
+    private val desiredSize: Size,
+    private var facing: Int,
 ) :
     Fragment() {
     lateinit var camera: Camera

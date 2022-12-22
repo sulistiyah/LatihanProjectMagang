@@ -56,96 +56,133 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvIdKaryawan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="20dp"
-                    android:orientation="vertical"
+                    android:background="@drawable/bg_input_etprofil"
+                    android:gravity="center_vertical"
+                    android:hint="@string/id_karyawann"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/abuabu"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/llEtProfil">
+                    app:layout_constraintTop_toBottomOf="@+id/llEtProfil" />
 
-                    <EditText
-                        android:id="@+id/etIdKaryawan"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_input_etprofil"
-                        android:hint="@string/masukan_id_karyawan"
-                        android:paddingStart="15dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/abuabu"/>
+                <EditText
+                    android:id="@+id/etNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bg_input_etprofil"
+                    android:hint="Nama Lengkap"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/abuabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvIdKaryawan" />
 
-                    <EditText
-                        android:id="@+id/etNama"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_input_etprofil"
-                        android:hint="@string/masukan_nama_lengkap"
-                        android:paddingStart="15dp"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="20dp"
-                        android:textColorHint="@color/abuabu"/>
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bg_input_etprofil"
+                    android:gravity="center_vertical"
+                    android:hint="Email"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/abuabu"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etNama" />
 
-                    <EditText
-                        android:id="@+id/etEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_input_etprofil"
-                        android:hint="@string/masukan_email"
-                        android:paddingStart="15dp"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="20dp"
-                        android:textColorHint="@color/abuabu"/>
-
-                    <TextView
-                        android:id="@+id/tvJobDeskDepartement"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_input_etprofil"
-                        android:hint="@string/job_desk_departement"
-                        android:inputType="text"
-                        android:textColor="@color/black"
-                        android:lines="1"
-                        android:textSize="16sp"
-                        android:paddingStart="16dp"
-                        android:gravity="center_vertical"
-                        android:textColorHint="@color/abuabu"
-                        android:layout_marginTop="15dp"/>
-
-                    <EditText
-                        android:id="@+id/etNotelp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/bg_input_etprofil"
-                        android:hint="@string/masukan_no_telepon"
-                        android:paddingStart="15dp"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="20dp"
-                        android:inputType="number"
-                        android:textColorHint="@color/abuabu"/>
+                <TextView
+                    android:id="@+id/tvJobDeskDepartement"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input_etprofil"
+                    android:gravity="center_vertical"
+                    android:hint="Job Desk / Departement "
+                    android:lines="1"
+                    android:paddingStart="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/abuabu"
+                    android:textSize="16sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
 
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/btnSimpan"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/btn_simpan"
-                        android:layout_marginTop="50dp"/>
+                <ImageView
+                    android:id="@+id/imgDropDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvJobDeskDepartement"
+                    app:layout_constraintEnd_toEndOf="@+id/tvJobDeskDepartement"
+                    app:layout_constraintTop_toTopOf="@+id/tvJobDeskDepartement"
+                    app:srcCompat="@drawable/ic_down" />
+
+                <EditText
+                    android:id="@+id/etNotelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input_etprofil"
+                    android:hint="No Telepon"
+                    android:inputType="number"
+                    android:paddingStart="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/abuabu"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobDeskDepartement" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnSimpan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_simpan"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etNotelp" />
 
 
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/btnGantiPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginBottom="40dp"
-                        android:background="@drawable/btn_ganti_password"/>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnGantiPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_ganti_password"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnSimpan" />
 
 
-                </LinearLayout>
 
 
 

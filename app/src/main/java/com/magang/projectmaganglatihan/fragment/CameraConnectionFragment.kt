@@ -44,7 +44,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 @SuppressLint("ValidFragment")
-class CameraConnectionFragment private constructor(
+class CameraConnectionFragment (
     private val cameraConnectionCallback: ConnectionCallback,
     /** A OnImageAvailableListener to receive frames as they are available.  */
     private val imageListener: ImageReader.OnImageAvailableListener,
