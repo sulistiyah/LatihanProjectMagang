@@ -1,11 +1,14 @@
 package com.magang.projectmaganglatihan.activity
 
+import android.R.string
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment.DIRECTORY_PICTURES
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
@@ -38,6 +41,7 @@ class ProfilActivity : AppCompatActivity() {
 
 
     private lateinit var sharedPref: SharedPrefManager
+    private var myProfileResponse : MyProfileResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +49,21 @@ class ProfilActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPref = SharedPrefManager(this)
-//        imageUri = createImageUri()!!
 
         backPage()
         logout()
         editProfil()
-        getDataProfil()
         changeAvatar()
 
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        getDataProfil()
+
+    }
+
 
 
     private fun backPage() {
@@ -78,63 +87,79 @@ class ProfilActivity : AppCompatActivity() {
         val editProfil = findViewById<ImageView>(R.id.imgEditProfil)
         editProfil.setOnClickListener{
             val intent = Intent(this, EditProfilActivity::class.java)
-            intent.putExtra("nikKaryawan", sharedPref.employeeNik)
-            intent.putExtra("nama", sharedPref.employeeFullname)
-            intent.putExtra("email", sharedPref.employeeEmail)
-            intent.putExtra("jobDesk", sharedPref.departementTitle)
-            intent.putExtra("noTelp", sharedPref.noTelp)
+            intent.putExtra("NIK_KARYAWAN", myProfileResponse?.data!!.employeeNik)
+            intent.putExtra("NAMA", myProfileResponse?.data!!.employeeFullname)
+            intent.putExtra("EMAIL", myProfileResponse?.data!!.employeeEmail)
+            intent.putExtra("JOB_DESK", myProfileResponse?.data!!.departement.departementTitle)
+//            intent.putExtra("NO_TELP", myProfileResponse?.data!!.profile.phoneNo)
             startActivity(intent)
         }
     }
 
 
     private fun getDataProfil() {
-
         val parameter = HashMap<String, String>()
         parameter["employee_id"] = sharedPref.employeeId
 
         RetrofitClient.instance.getMyProfile(parameter, "Bearer ${sharedPref.tokenLogin}")
             .enqueue(object : Callback<MyProfileResponse> {
-                override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {
+                override fun onResponse(
+                    call: Call<MyProfileResponse>,
+                    response: Response<MyProfileResponse>
+                ) {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
+
+                            myProfileResponse = response.body()
+
+                            val avatar : String = response.body()?.data!!.profile.employeeAvatar
+
+
 
                             val username : String = response.body()?.data!!.employeeFullname
                             val jobDesk : String = response.body()?.data!!.departement.departementTitle
                             val nip : String = response.body()?.data!!.employeeNik
 
+//                            imgProfil.setImageBitmap(stringToBitmap(avatar))
                             tvUsername.text = username
                             tvJobDeskUser.text = jobDesk
                             tvNipUser.text = nip
 
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveCompanyId(response.body()?.data!!.companyId.toString())
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeId(response.body()?.data!!.employeeId.toString())
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeNik(response.body()?.data!!.employeeNik)
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeFullname(response.body()?.data!!.employeeFullname)
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveEmployeeEmail(response.body()?.data!!.employeeEmail)
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveDepartementId(response.body()?.data!!.employeeDepartmentId.toString())
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveDepartementTitle(response.body()?.data!!.departement.departementTitle)
-                            SharedPrefManager.getInstance(this@ProfilActivity).saveNoTelepon(response.body()?.data!!.profile.phoneNo.toString())
-
-
-//                            myProfileAdapter = MyProfileAdapter(this@ProfilActivity, list)
-//                            myProfileAdapter.notifyDataSetChanged()
+//                                myProfileAdapter = MyProfileAdapter(this@HomeActivity, list)
+//                                myProfileAdapter.notifyDataSetChanged()
 
                         } else {
-                            Toast.makeText(this@ProfilActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this@ProfilActivity,
+                                response.body()!!.statusCode,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
-                        Toast.makeText(this@ProfilActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@ProfilActivity,
+                            "${response.body()?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
-                    Log.e("profil", "onFailure: " + t.message )
+                    Log.e("profil", "onFailure: " + t.message)
                     Toast.makeText(this@ProfilActivity, t.message, Toast.LENGTH_SHORT).show()
                 }
 
             })
 
+    }
+
+
+    private fun stringToBitmap(avatar: String): Bitmap? {
+        val byteArray1: ByteArray = Base64.decode(avatar, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(
+            byteArray1, 0,
+            byteArray1.size
+        )
     }
 
     private fun changeAvatar() {

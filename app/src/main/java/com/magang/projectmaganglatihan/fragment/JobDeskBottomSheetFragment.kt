@@ -68,7 +68,6 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
 
-//                        SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(response.body()?.data!!.departementId.toString())
 
                         rvItemJobDesk.setHasFixedSize(true)
                         showData(response.body()!!)
@@ -107,6 +106,7 @@ class JobDeskBottomSheetFragment : BottomSheetDialogFragment() {
             override fun onClik(result: Data) {
 
                 listener?.invoke(result)
+                SharedPrefManager.getInstance(context?.applicationContext!!).saveDepartementId(result.departementId.toString())
                 this@JobDeskBottomSheetFragment.dismiss()
 
             }

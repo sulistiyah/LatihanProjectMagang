@@ -33,8 +33,9 @@ import com.magang.projectmaganglatihan.tflite.SimilarityClassifier
 import com.magang.projectmaganglatihan.tflite.SimilarityClassifier.Recognition
 import com.magang.projectmaganglatihan.tflite.TFLiteObjectDetectionAPIModel
 import com.magang.projectmaganglatihan.tracking.MultiBoxTracker
-import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,7 +75,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
     private var addPicture : FloatingActionButton? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle??) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sharedPref = SharedPrefManager(this)
@@ -124,7 +125,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         }
         previewWidth = size?.width!!
         previewHeight = size.height
-//        sensorOrientation = rotation - screenOrientation
+        sensorOrientation = rotation!! - getScreenOrientation()
         LOGGER.i("Camera orientation relative to screen canvas: %d", sensorOrientation)
         LOGGER.i("Initializing at size %dx%d", previewWidth, previewHeight)
         rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888)
@@ -147,11 +148,11 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
             cropW, cropH,
             sensorOrientation!!, MAINTAIN_ASPECT)
 
-//    frameToCropTransform =
+//        frameToCropTransform =
 //            ImageUtils.getTransformationMatrix(
 //                    previewWidth, previewHeight,
 //                    previewWidth, previewHeight,
-//                    sensorOrientation, MAINTAIN_ASPECT);
+//                sensorOrientation!!, MAINTAIN_ASPECT);
 
         cropToFrameTransform = Matrix()
         frameToCropTransform?.invert(cropToFrameTransform)
@@ -161,16 +162,14 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
             targetW, targetH,
             sensorOrientation!!, MAINTAIN_ASPECT)
 
+
         trackingOverlay = findViewById(R.id.tracking_overlay)
-        trackingOverlay!!.addCallback(
-            object : OverlayView.DrawCallback {
-                override fun drawCallback(canvas: Canvas?) {
-                    tracker!!.draw(canvas!!)
-                    if (isDebug) {
-                        tracker!!.drawDebug(canvas)
-                    }
-                }
-            })
+        trackingOverlay!!.addCallback { canvas ->
+            tracker!!.draw(canvas!!)
+            if (isDebug) {
+                tracker!!.drawDebug(canvas)
+            }
+        }
 
         tracker!!.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation!!)
     }
@@ -202,28 +201,30 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         if (SAVE_PREVIEW_BITMAP) {
             ImageUtils.saveBitmap(croppedBitmap!!)
         }
-        val image = InputImage.fromBitmap(croppedBitmap!!, 0)
+        val image : InputImage = InputImage.fromBitmap(croppedBitmap!!, 0)
         faceDetector
             ?.process(image)
             ?.addOnSuccessListener(OnSuccessListener { faces ->
-                if (faces.size == 0) {
-                    updateResults(currTimestamp, LinkedList())
-                    return@OnSuccessListener
-                }
-                runInBackground {
-                    onFacesDetected(currTimestamp, faces, addPending)
-                    addPending = false
+                fun onSuccess(faces: List<Face?>) {
+                    if (faces.size == 0) {
+                        updateResults(currTimestamp, LinkedList())
+                        return
+                    }
+                    runInBackground {
+                        onFacesDetected(currTimestamp, faces as List<Face>, addPending)
+                        addPending = false
+                    }
                 }
             })
     }
 
 
-    override fun getLayoutId(): Int? {
+    override fun getLayoutId(): Int {
         return R.layout.camera_connection_fragment
     }
 
 
-    override fun getDesiredPreviewFrameSize(): Size? {
+    override fun getDesiredPreviewFrameSize(): Size {
         return DESIRED_PREVIEW_SIZE
     }
 
@@ -285,11 +286,12 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         val dialogLayout: View = inflater.inflate(R.layout.facedetector_image_dialog, null)
         val ivFace = dialogLayout.findViewById<ImageView>(R.id.dlg_image)
         val tvTitle = dialogLayout.findViewById<TextView>(R.id.dlg_title)
+
         tvTitle.text = "Pastikan ini wajah anda"
         ivFace.setImageBitmap(rec.crop)
         builder.setPositiveButton("OK") { dlg, _ ->
             detector!!.register(rec)
-            setDataWajah()
+//            setDataWajah()
             dlg.dismiss()
         }
         builder.setNegativeButton("CANCEL") { dlg, _ ->
@@ -301,7 +303,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
 
     private fun setDataWajah() {
 
-        val employeeId : RequestBody = RequestBody.create("text/plain".toMediaType(), sharedPref.employeeId)
+        val employeeId: RequestBody = sharedPref.employeeId.toRequestBody("text/plain".toMediaTypeOrNull())
 
         RetrofitClient.instance.postSetDataWajah("Bearer ${sharedPref.tokenLogin}", employeeId)
             .enqueue(object : Callback<SetDataWajahResponse> {
@@ -341,12 +343,19 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         computingDetection = false
         //adding = false;
 //        if (mappedRecognitions.size > 0) {
-        if (mappedRecognitions.isNotEmpty()) {
+        if (mappedRecognitions.size > 0) {
             LOGGER.i("Adding results")
-            val rec = mappedRecognitions[0]
+            val rec : Recognition = mappedRecognitions[0]
             if (rec.extra != null) {
                 showAddFaceDialog(rec)
+                setDataWajah()
             }
+        }
+
+        runOnUiThread {
+            showFrameInfo(previewWidth.toString() + "x" + previewHeight)
+            showCropInfo(croppedBitmap!!.width.toString() + "x" + croppedBitmap!!.height)
+            showInference(lastProcessingTimeMs.toString() + "ms")
         }
     }
 
@@ -454,7 +463,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
                 val result = Recognition(
                     "0", label, confidence, boundingBox)
                 result.color = color
-                result.setLocation(boundingBox)
+                result.location = boundingBox
                 result.extra = extra!!
                 result.crop = crop
                 mappedRecognitions.add(result)

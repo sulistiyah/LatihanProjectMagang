@@ -29,6 +29,7 @@ class EditProfilActivity : AppCompatActivity() {
 
 
     private var companyId = 0
+    private var departementId = 0
     private var bottomSheetDialogFragment = JobDeskBottomSheetFragment()
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var sharedPref: SharedPrefManager
@@ -39,6 +40,7 @@ class EditProfilActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        sharedPref = SharedPrefManager(this)
 
         backPage()
         setText()
@@ -47,6 +49,7 @@ class EditProfilActivity : AppCompatActivity() {
         showBottomSheetDialogFragment()
 
     }
+
 
     private fun backPage() {
         binding.backTop.setOnClickListener {
@@ -71,33 +74,37 @@ class EditProfilActivity : AppCompatActivity() {
 
         bottomSheetDialogFragment.listener = {
             tvJobDesk.text = it.departementTitle
+            departementId = it.departementId
         }
+
     }
 
 
     private fun setText() {
 
         val nik : TextView = findViewById(R.id.tvIdKaryawan)
-//        val nama : EditText = findViewById(R.id.etNama)
+        val nama : EditText = findViewById(R.id.etNama)
         val email : TextView = findViewById(R.id.tvEmail)
         val jobDesk : TextView = findViewById(R.id.tvJobDeskDepartement)
-//        val telp : EditText = findViewById(R.id.etNomorTelepon)
+        val telp : EditText = findViewById(R.id.etNotelp)
 
-        nik.text = intent.getStringExtra("nikKaryawan")
-//        nama.text = intent.getStringExtra("nama")
-        email.text = intent.getStringExtra("email")
-        jobDesk.text = intent.getStringExtra("jobDesk")
-//        telp.text = intent.getStringExtra("noTelepon")
+        nik.setText(intent.getStringExtra("NIK_KARYAWAN"))
+        nama.setText(intent.getStringExtra("NAMA"))
+        email.setText(intent.getStringExtra("EMAIL"))
+        jobDesk.setText(intent.getStringExtra("JOB_DESK"))
+        telp.setText(intent.getStringExtra("NO_TELP"))
+
+
 
     }
 
 
     private fun saveEditProfil() {
         binding.btnSimpan.setOnClickListener {
-            val idKaryawan = binding.tvIdKaryawan.text.toString()
+//            val idKaryawan = binding.tvIdKaryawan.text.toString()
+//            val email = binding.tvEmail.text.toString()
+//            val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
             val namaLengkap = binding.etNama.text.toString()
-            val email = binding.tvEmail.text.toString()
-            val jobDeskDepartement = binding.tvJobDeskDepartement.text.toString()
             val noTelp = binding.etNotelp.text.toString()
 
 
@@ -105,7 +112,7 @@ class EditProfilActivity : AppCompatActivity() {
             val companyId : RequestBody = sharedPref.companyId.toRequestBody("text/plain".toMediaTypeOrNull())
             val employeeId: RequestBody = sharedPref.employeeId.toRequestBody("text/plain".toMediaTypeOrNull())
             val employeeFullName: RequestBody = namaLengkap.toRequestBody("text/plain".toMediaTypeOrNull())
-            val departementId : RequestBody = jobDeskDepartement.toRequestBody("text/plain".toMediaTypeOrNull())
+            val departementId : RequestBody = sharedPref.departementId.toRequestBody("text/plain".toMediaTypeOrNull())
             val noTelepon : RequestBody = noTelp.toRequestBody("text/plain".toMediaTypeOrNull())
 
             RetrofitClient.instance.postEditProfil(
@@ -122,8 +129,12 @@ class EditProfilActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-                            Toast.makeText(this@EditProfilActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+//                            val intent = Intent(this@EditProfilActivity, ProfilActivity::class.java)
+//                            startActivity(intent)
+
                             onBackPressed()
+                            Toast.makeText(this@EditProfilActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+
 
                         } else {
                             Toast.makeText(this@EditProfilActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()

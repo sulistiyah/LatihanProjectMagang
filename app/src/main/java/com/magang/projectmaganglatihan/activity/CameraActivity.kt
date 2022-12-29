@@ -5,10 +5,10 @@ import android.app.Fragment
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Camera
-import android.hardware.Camera.PreviewCallback
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
+import android.media.Image
 import android.media.Image.Plane
 import android.media.ImageReader
 import android.os.*
@@ -16,6 +16,7 @@ import android.util.Size
 import android.view.Surface
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,7 +28,7 @@ import com.magang.projectmaganglatihan.fragment.LegacyCameraConnectionFragment
 
 abstract class CameraActivity : AppCompatActivity(),
     ImageReader.OnImageAvailableListener,
-    PreviewCallback,
+    Camera.PreviewCallback,
     View.OnClickListener {
 
     protected var previewWidth = 0
@@ -40,8 +41,12 @@ abstract class CameraActivity : AppCompatActivity(),
     private val yuvBytes = arrayOfNulls<ByteArray>(3)
     private var rgbBytes: IntArray? = null
     private var luminanceStride = 0
+    private var yRowStride = 0
     private var postInferenceCallback: Runnable? = null
     private var imageConverter: Runnable? = null
+    private var frameValueTextView: TextView? = null
+    private var cropValueTextView:TextView? = null
+    private var inferenceTimeTextView:TextView? = null
     private var btnSwitchCam: FloatingActionButton? = null
     protected var cameraFacing: Int? = null
     private var cameraId: String? = null
@@ -61,6 +66,7 @@ abstract class CameraActivity : AppCompatActivity(),
         } else {
             requestPermission()
         }
+        btnSwitchCam = findViewById(R.id.fabSwitchCamera)
         btnSwitchCam?.setOnClickListener{
             onSwitchCamClick()
         }
@@ -94,8 +100,14 @@ abstract class CameraActivity : AppCompatActivity(),
         return rgbBytes
     }
 
-    protected val luminance: ByteArray?
-        get() = yuvBytes[0]
+    protected open fun getLuminanceStride(): Int {
+        return yRowStride
+    }
+
+    protected open fun getLuminance(): ByteArray? {
+        return yuvBytes[0]
+    }
+
 
     /** Callback for android.hardware.Camera API  */
     @Deprecated("Deprecated in Java")
@@ -123,9 +135,11 @@ abstract class CameraActivity : AppCompatActivity(),
             LOGGER.e(e, "Exception!")
             return
         }
+
         isProcessingFrame = true
         yuvBytes[0] = bytes
-        luminanceStride = previewWidth
+        yRowStride = previewWidth
+
         imageConverter = Runnable {
             ImageUtils.convertYUV420SPToARGB8888(
                 bytes!!,
@@ -151,7 +165,7 @@ abstract class CameraActivity : AppCompatActivity(),
             rgbBytes = IntArray(previewWidth * previewHeight)
         }
         try {
-            val image = reader!!.acquireLatestImage() ?: return
+            val image : Image = reader!!.acquireLatestImage() ?: return
             if (isProcessingFrame) {
                 image.close()
                 return
@@ -160,9 +174,10 @@ abstract class CameraActivity : AppCompatActivity(),
             Trace.beginSection("imageAvailable")
             val planes = image.planes
             fillBytes(planes, yuvBytes)
-            luminanceStride = planes[0].rowStride
+            yRowStride = planes[0].rowStride
             val uvRowStride = planes[1].rowStride
             val uvPixelStride = planes[1].pixelStride
+
             imageConverter = Runnable {
                 ImageUtils.convertYUV420ToARGB8888(
                     yuvBytes[0]!!,
@@ -170,7 +185,7 @@ abstract class CameraActivity : AppCompatActivity(),
                     yuvBytes[2]!!,
                     previewWidth,
                     previewHeight,
-                    luminanceStride,
+                    yRowStride,
                     uvRowStride,
                     uvPixelStride,
                     rgbBytes!!
@@ -271,7 +286,7 @@ abstract class CameraActivity : AppCompatActivity(),
     }
 
     private fun chooseCamera(): String? {
-        val manager = getSystemService(CAMERA_SERVICE) as CameraManager
+        val manager : CameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
         try {
             for (cameraId in manager.cameraIdList) {
                 val characteristics = manager.getCameraCharacteristics(cameraId)
@@ -308,12 +323,10 @@ abstract class CameraActivity : AppCompatActivity(),
         val fragment: Fragment
         if (useCamera2API) {
             val camera2Fragment: CameraConnectionFragment = CameraConnectionFragment.newInstance(
-                object : CameraConnectionFragment.ConnectionCallback {
-                    override fun onPreviewSizeChosen(size: Size, cameraRotation: Int) {
-                        previewHeight = size.height
-                        previewWidth = size.width
-                        this@CameraActivity.onPreviewSizeChosen(size, cameraRotation)
-                    }
+                { size, cameraRotation ->
+                    previewHeight = size.height
+                    previewWidth = size.width
+                    this@CameraActivity.onPreviewSizeChosen(size, cameraRotation)
                 },
                 this,
                 getLayoutId()!!,
@@ -338,6 +351,9 @@ abstract class CameraActivity : AppCompatActivity(),
     private fun fillBytes(planes: Array<Plane>, yuvBytes: Array<ByteArray?>) {
         // Because of the variable row stride it's not possible to know in
         // advance the actual necessary dimensions of the yuv planes.
+
+        // Because of the variable row stride it's not possible to know in
+        // advance the actual necessary dimensions of the yuv planes.
         for (i in planes.indices) {
             val buffer = planes[i].buffer
             if (yuvBytes[i] == null) {
@@ -354,13 +370,26 @@ abstract class CameraActivity : AppCompatActivity(),
         }
     }
 
-    private val screenOrientation: Int
-        get() = when (windowManager.defaultDisplay.rotation) {
+    protected open fun getScreenOrientation(): Int {
+        return when (windowManager.defaultDisplay.rotation) {
             Surface.ROTATION_270 -> 270
             Surface.ROTATION_180 -> 180
             Surface.ROTATION_90 -> 90
             else -> 0
         }
+    }
+
+    protected open fun showFrameInfo(frameInfo: String?) {
+        frameValueTextView?.setText(frameInfo)
+    }
+
+    protected open fun showCropInfo(cropInfo: String?) {
+        cropValueTextView?.setText(cropInfo)
+    }
+
+    protected open fun showInference(inferenceTime: String?) {
+        inferenceTimeTextView?.setText(inferenceTime)
+    }
 
 
     protected abstract fun processImage()

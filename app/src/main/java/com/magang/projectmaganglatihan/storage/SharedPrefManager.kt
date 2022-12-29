@@ -189,6 +189,23 @@ class SharedPrefManager(private val mCtx: Context) {
         editor.apply()
     }
 
+
+    val changePass: Boolean
+        get() {
+            val sharedPreferences =
+                mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getBoolean(CHANGE_PASSWORD, false)
+
+        }
+
+    fun saveChangePass(changePass: Boolean) {
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor.putBoolean(CHANGE_PASSWORD, changePass)
+        editor.apply()
+    }
+
     val avatar: Boolean
         get() {
             val sharedPreferences =
@@ -234,6 +251,7 @@ class SharedPrefManager(private val mCtx: Context) {
         private var IS_LOGIN = "isLogin"
         private var CHECK_DATA = "checkData"
         private var SAVE_AVATAR = "saveAvatar"
+        private var CHANGE_PASSWORD = "changePassword"
         private var mInstance: SharedPrefManager? = null
 
         @Synchronized

@@ -17,18 +17,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8008edf5-989d-47ef-a42e-77a8d90e2ea0" name="Changes" comment="Project Magang Latihan">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/AutoFitTextureView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/OverlayView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/RecognitionScoreView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/ResultsView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/BorderedText.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/ImageUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/Logger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/Size.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/CameraConnectionFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/LegacyCameraConnectionFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/model/ChangePasswordResponse.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tflite/SimilarityClassifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tflite/TFLiteObjectDetectionAPIModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tracking/MultiBoxTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/CameraActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/CameraActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/ChangePasswordActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/ChangePasswordActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/DetectorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/DetectorActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/EditProfilActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/EditProfilActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/HomeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/HomeActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/ProfilActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/ProfilActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/RegisterActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/activity/RegisterActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/MyProfileAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/adapter/MyProfileAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/api/Api.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/AutoFitTextureView.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/OverlayView.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/RecognitionScoreView.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/customview/ResultsView.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/BorderedText.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/ImageUtils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/Logger.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/env/Size.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/CameraConnectionFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/JobDeskBottomSheetFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/JobDeskBottomSheetFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment/LegacyCameraConnectionFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/storage/SharedPrefManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/storage/SharedPrefManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tflite/SimilarityClassifier.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tflite/TFLiteObjectDetectionAPIModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/tracking/MultiBoxTracker.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profil.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profil.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profil.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RR8R401FCDE]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RRCTC04KJCF]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -95,17 +133,21 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="android-custom-viewC:/Users/Windows/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.2.1/f0f93e67af3f7417bdd560d5142f6dec4fe629c3/recyclerview-1.2.1-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
     <property name="android-custom-viewC:/Users/Windows/AppData/Local/Android/Sdk/sources/android-33/android/view/View.java_SELECTED" value="View" />
+    <property name="android-custom-viewC:/Users/Windows/AppData/Local/Android/Sdk/sources/android-33/android/widget/EditText.java_SELECTED" value="EditText" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/AutoFitTextureView.java_SELECTED" value="AutoFitTextureView" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/AutoFitTextureView.kt_SELECTED" value="AutoFitTextureView" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/OverlayView.java_SELECTED" value="OverlayView" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/OverlayView.kt_SELECTED" value="OverlayView" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/RecognitionScoreView.java_SELECTED" value="RecognitionScoreView" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/RecognitionScoreView.kt_SELECTED" value="RecognitionScoreView" />
+    <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/customview/AutoFitTextureView.java_SELECTED" value="AutoFitTextureView" />
+    <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/customview/OverlayView.java_SELECTED" value="OverlayView" />
+    <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/customview/customview/RecognitionScoreView.java_SELECTED" value="RecognitionScoreView" />
     <property name="android-custom-viewD:/POLITEKNIK NEGERI PADANG/SEMESTER 5/PKL/PROJECTMAGANG/ProjectMagangLatihan/app/src/main/java/com/magang/projectmaganglatihan/facedetector/CameraSourcePreview.kt_SELECTED" value="CameraSourcePreview" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TUMBALLLLLLL/ImagePickerDemo/ImagePickerDemo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/magang/projectmaganglatihan/fragment" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -137,16 +179,16 @@
       <recent name="com.magang.projectmaganglatihan.activity" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.magang.projectmaganglatihan.tflite" />
       <recent name="com.magang.projectmaganglatihan.tracking" />
+      <recent name="com.magang.projectmaganglatihan.tflite" />
       <recent name="com.magang.projectmaganglatihan.fragment" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\java\com\magang\projectmaganglatihan\fragment" />
+      <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\java\com\magang\projectmaganglatihan" />
+      <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\java\com\magang\projectmaganglatihan\customview" />
       <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\ml" />
       <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\res\layout" />
-      <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\java\com\magang\projectmaganglatihan" />
-      <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main\assets" />
-      <recent name="D:\POLITEKNIK NEGERI PADANG\SEMESTER 5\PKL\PROJECTMAGANG\ProjectMagangLatihan\app\src\main" />
     </key>
     <key name="android.template.-951316558">
       <recent name="com.magang.projectmaganglatihan.activity" />
@@ -364,7 +406,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671689718534</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Project Magang Latihan">
+      <created>1671691386437</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1671691386437</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

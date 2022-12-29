@@ -14,12 +14,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.*
 import com.magang.projectmaganglatihan.R
+import com.magang.projectmaganglatihan.adapter.InfoBeritaAdapter
+import com.magang.projectmaganglatihan.adapter.MyProfileAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityHomeBinding
+import com.magang.projectmaganglatihan.model.InfoBeritaResponse
+import com.magang.projectmaganglatihan.model.MyProfileResponse
 import com.magang.projectmaganglatihan.model.SetDataWajahResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
+import kotlinx.android.synthetic.main.activity_profil.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
@@ -29,12 +35,16 @@ import retrofit2.Response
 import java.io.File
 import java.io.IOException
 import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
     private lateinit var sharedPref: SharedPrefManager
+    private lateinit var myProfileAdapter: MyProfileAdapter
+    private lateinit var layoutManager: LinearLayoutManager
+    private var list: ArrayList<MyProfileResponse.Data> = arrayListOf()
     private lateinit var tvUsername: TextView
     private lateinit var employeeFullname: String
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -60,6 +70,7 @@ class HomeActivity : AppCompatActivity() {
         getUserLocation()
         setAbsen()
         checkAvatar()
+        checkChangePass()
 
 
 
@@ -78,6 +89,15 @@ class HomeActivity : AppCompatActivity() {
 //        val intent = Intent(this, DetectorActivity::class.java)
 //        startActivity(intent)
 
+    }
+
+    private fun getProfil() {
+        binding.imgProfil.setOnClickListener {
+            intent = Intent(this, ProfilActivity::class.java)
+            startActivity(intent)
+            sharedPref.employeeId
+            tokenLogin()
+        }
     }
 
     private fun setAbsen() {
@@ -141,37 +161,6 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-//    private fun openCamera() {
-//        cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        file = File(
-//            Environment.getExternalStorageDirectory(),
-//            "file"+System.currentTimeMillis().toString()+"text/*"
-//        )
-////        imageUri = Uri.fromFile(file)
-//        imageUri = FileProvider.getUriForFile(
-//            applicationContext,
-//            "com.magang.projectmaganglatihan.provider",
-//            file)
-//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-//        cameraIntent.putExtra("return-data", true)
-//        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (resultCode == Activity.RESULT_OK) {
-//            when(requestCode) {
-//                CAMERA_REQUEST_CODE -> {
-//                    binding.imgProfil.setImageBitmap(data?.extras!!.get("data") as Bitmap)
-//                }
-//
-//            }
-//        }
-//
-//    }
-
-
 
     private fun tokenLogin() {
         sharedPref = SharedPrefManager(this)
@@ -188,11 +177,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun checkAvatar() {
-        if (!sharedPref.avatar) {
-            val intent = Intent(this, ProfilActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        if (!sharedPref.avatar) {
+//            val intent = Intent(this, ProfilActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+    }
+
+    private fun checkChangePass() {
+//        if (sharedPref.changePass) {
+//            val intent = Intent(this, HomeActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
     }
 
 
@@ -204,15 +201,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun getProfil() {
-        val profil = findViewById<ImageView>(R.id.imgProfil)
-        profil.setOnClickListener {
-            intent = Intent(this, ProfilActivity::class.java)
-            startActivity(intent)
-            sharedPref.employeeId
-            tokenLogin()
-        }
-    }
+
 
 
     private fun getListInfo() {

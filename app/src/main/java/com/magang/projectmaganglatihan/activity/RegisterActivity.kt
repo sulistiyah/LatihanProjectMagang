@@ -254,6 +254,18 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.makeText(this@RegisterActivity, "${response.body()?.message}", Toast.LENGTH_SHORT).show()
                             onBackPressed()
 
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveCompanyId(response.body()?.data!!.companyId.toString())
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveEmployeeId(response.body()?.data!!.employeeId.toString())
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveEmployeeNik(response.body()?.data!!.employeeNik)
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveEmployeeFullname(response.body()?.data!!.employeeFullname)
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveEmployeeEmail(response.body()?.data!!.employeeEmail)
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveDepartementId(response.body()?.data!!.employeeDepartmentId.toString())
+                            SharedPrefManager.getInstance(this@RegisterActivity).saveDepartementTitle(response.body()?.data!!.departement.departementTitle)
+//                            SharedPrefManager.getInstance(this@RegisterActivity).saveNoTelepon(response.body()?.data!!.profile.phoneNo.toString())
+
+
+
+
                         } else {
                             Toast.makeText(this@RegisterActivity,response.body()!!.statusCode, Toast.LENGTH_SHORT).show()
                         }

@@ -50,7 +50,7 @@ interface Api {
     ): Call<RegisterDepartementListResponse>
 
 
-    //My Profile - Profil
+    //My Profile - Home Activity
     @Headers("Accept: application/json")
     @GET("v1/member/me")
     fun getMyProfile(
@@ -100,6 +100,19 @@ interface Api {
         @QueryMap parameter : HashMap<String, String>,
         @Header("Authorization") token: String,
     ): Call<DetailInfoBeritaResponse>
+
+
+    //Change Password - ChangePassword Activity
+    @Multipart
+    @Headers("Accept: application/json")
+    @POST("v1/staff/authenticate/change_password")
+    fun postChangePassword(
+        @Header("Authorization") token : String,
+        @Part("employee_id") employeeId: RequestBody,
+        @Part("current_password") currentPass : RequestBody,
+        @Part("new_password") newPass : RequestBody,
+        @Part("new_password_confirmation") newPassConfirm : RequestBody
+    ): Call<ChangePasswordResponse>
 
 
     //Set Data Wajah - Home Activity

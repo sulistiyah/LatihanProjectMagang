@@ -124,6 +124,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_marginVertical="25dp"
+                        android:layout_marginHorizontal="20dp"
                         app:layout_constraintBottom_toBottomOf="@id/clProfil"
                         app:layout_constraintEnd_toEndOf="@id/clProfil"
                         app:layout_constraintStart_toStartOf="@id/clProfil"
@@ -150,12 +151,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:layout_marginHorizontal="20dp"
                             android:text="@string/your_name"
-                            android:gravity="center"
+                            android:gravity="center_horizontal"
                             android:maxLines="2"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
+                            android:textSize="17sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -175,25 +175,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp">
 
-                            <ImageView
-                                android:id="@+id/bgTable"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/bg_table" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@drawable/bg_table"
                                 android:gravity="center"
                                 android:orientation="horizontal"
-                                app:layout_constraintBottom_toBottomOf="@+id/bgTable"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/bgTable">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:layout_width="wrap_content"
