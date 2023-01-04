@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".activity.CameraActivity">
+    tools:context="activity.CameraActivity">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
             android:layout_above="@+id/llCamera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".activity.CameraActivity">
+            tools:context="org.tensorflow.lite.examples.detection.CameraActivity">
 
         </FrameLayout>
 

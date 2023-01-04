@@ -1,6 +1,5 @@
 package com.magang.projectmaganglatihan.activity
 
-import android.R.string
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,6 +12,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
@@ -54,7 +54,6 @@ class ProfilActivity : AppCompatActivity() {
         logout()
         editProfil()
         changeAvatar()
-
 
     }
 
@@ -112,18 +111,25 @@ class ProfilActivity : AppCompatActivity() {
 
                             myProfileResponse = response.body()
 
+
                             val avatar : String = response.body()?.data!!.profile.employeeAvatar
-
-
+                            val imageBytes = Base64.decode(avatar, Base64.DEFAULT)
+                            val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
                             val username : String = response.body()?.data!!.employeeFullname
                             val jobDesk : String = response.body()?.data!!.departement.departementTitle
                             val nip : String = response.body()?.data!!.employeeNik
 
+
+                            imgProfil.setImageBitmap(image)
 //                            imgProfil.setImageBitmap(stringToBitmap(avatar))
                             tvUsername.text = username
                             tvJobDeskUser.text = jobDesk
                             tvNipUser.text = nip
+
+//                            val avatar = findViewById<ImageView>(R.id.imgProfil)
+//                            val image = response.body()?.data!!.employeeImage
+//                            avatar.setImageBitmap(stringToBitmap(image))
 
 //                                myProfileAdapter = MyProfileAdapter(this@HomeActivity, list)
 //                                myProfileAdapter.notifyDataSetChanged()
@@ -154,12 +160,11 @@ class ProfilActivity : AppCompatActivity() {
     }
 
 
-    private fun stringToBitmap(avatar: String): Bitmap? {
-        val byteArray1: ByteArray = Base64.decode(avatar, Base64.DEFAULT)
-        return BitmapFactory.decodeByteArray(
-            byteArray1, 0,
-            byteArray1.size
-        )
+    fun stringToBitmap(avatar: String): Bitmap? {
+        val imageBytes = Base64.decode(avatar, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+        return decodedImage
     }
 
     private fun changeAvatar() {
@@ -184,6 +189,19 @@ class ProfilActivity : AppCompatActivity() {
             val profil = findViewById<ImageView>(R.id.imgProfil)
             profil.setImageBitmap(bitmap)
             postAvatar(bitmap)
+
+//            Uri uri = data.getData();
+//            byte[] imageBytes = getBytesfromURI(getApplicationContext(), uri);
+//            String base64Encoded = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+//            byte[] decodedString = Base64.decode(base64Encoded, Base64.DEFAULT)
+//            Bitmap decodeByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//            imgProfil.setImageBitmap(decodeByte)
+
+//            val uri : Uri = data?.data!!
+//            val imageBytes : ByteArray = get(applicationContext, uri);
+
+
+
 
         }
 
@@ -259,5 +277,9 @@ class ProfilActivity : AppCompatActivity() {
             })
 
     }
+
+
+
+
 
 }

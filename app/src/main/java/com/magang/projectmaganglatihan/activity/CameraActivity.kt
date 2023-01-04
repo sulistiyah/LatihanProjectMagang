@@ -16,6 +16,7 @@ import android.util.Size
 import android.view.Surface
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -69,6 +70,15 @@ abstract class CameraActivity : AppCompatActivity(),
         btnSwitchCam = findViewById(R.id.fabSwitchCamera)
         btnSwitchCam?.setOnClickListener{
             onSwitchCamClick()
+        }
+
+        backPage()
+    }
+
+    private fun backPage() {
+        val back = findViewById<ImageView>(R.id.back_top)
+        back.setOnClickListener {
+            onBackPressed()
         }
     }
 

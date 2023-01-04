@@ -53,7 +53,6 @@ class InfoBeritaActivity : AppCompatActivity() {
     }
 
 
-
     private fun showListInfo() {
 
         val parameter = HashMap<String, String>()
@@ -105,31 +104,8 @@ class InfoBeritaActivity : AppCompatActivity() {
                 intent.putExtra("image", result.imageUrl)
                 intent.putExtra("content", result.content)
                 startActivity(intent)
-//                startActivity(
-//                    Intent(this@InfoBeritaActivity, DetailInfoActivity::class.java)
-//                        .putExtra("title", result.title)
-//                        .putExtra("subTitle", result.subTitle)
-//                        .putExtra("image", result.imageUrl)
-//                        .putExtra("content", result.content)
-//                )
             }
         })
-
-//        infoBeritaAdapter.setOnClickItemListener(object : InfoBeritaAdapter.OnItemClickListener {
-//            override fun onItemClick(item: View, position: Int) {
-//                var intent = Intent(this@InfoBeritaActivity, DetailInfoActivity::class.java)
-//                intent.putExtra("title", infoBeritaAdapter.getData().get(position), tit)
-//                intent.putExtra("subTitle", infoBeritaAdapter.getData().get(position), tvSubTitle)
-//            }
-//        })
-
-//        infoBeritaAdapter.onItemClick = {
-//            val intent = Intent(this, DetailInfoActivity::class.java)
-//            intent.putExtra("listDetail", it)
-//            intent.putExtra("title", infoBeritaAdapter.getData().ti)
-//            startActivity(intent)
-//        }
-
     }
 
 

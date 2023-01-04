@@ -500,4 +500,3 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         private const val TEXT_SIZE_DIP = 10f
     }
 }
-

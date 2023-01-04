@@ -56,14 +56,33 @@
                     app:layout_constraintTop_toBottomOf="@+id/llInfoBerita">
 
 
-                    <ImageView
-                        android:id="@+id/imgSementara"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="20dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
-                        app:srcCompat="@drawable/sementara_info_berita" />
+                        android:layout_marginBottom="10dp">
+
+                        <Spinner
+                            android:id="@+id/sp_this_month"
+                            android:entries="@array/this_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imgSementara"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        app:srcCompat="@drawable/sementara_info_berita" />-->
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvInfoBerita"

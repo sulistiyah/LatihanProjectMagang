@@ -83,7 +83,7 @@ class HomeActivity : AppCompatActivity() {
 //            finish()
 //        }
 
-//        openDialog()
+        openDialog()
 
 
 //        val intent = Intent(this, DetectorActivity::class.java)

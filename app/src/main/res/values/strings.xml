@@ -51,7 +51,7 @@
     <string name="rencana_dan">Rencana dan</string>
     <string name="tiba_tiba">Tiba-tiba</string>
     <string name="berita">berita</string>
-    <string name="infromasi_dan">Infromasi dan</string>
+    <string name="informasi_dan">Informasi dan</string>
 
     //Profil
     <string name="profil">Profil</string>
@@ -91,5 +91,22 @@
     <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
     <string name="ok">OK</string>
     <string name="id_karyawann">ID Karyawan</string>
+
+    //Spinner Bulan - Informasi Dan Berita Activity
+    <string-array name="this_month">
+        <item>This Month</item>
+        <item>Januari</item>
+        <item>Februari</item>
+        <item>Maret</item>
+        <item>April</item>
+        <item>Mei</item>
+        <item>Juni</item>
+        <item>Juli</item>
+        <item>Agustus</item>
+        <item>September</item>
+        <item>Oktober</item>
+        <item>November</item>
+        <item>Desember</item>
+    </string-array>
 
 </resources>
