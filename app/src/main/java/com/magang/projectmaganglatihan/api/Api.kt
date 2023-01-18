@@ -125,5 +125,21 @@ interface Api {
     ): Call<SetDataWajahResponse>
 
 
+    //Daftar Tugas Kerja - Home Activity => Tugas Kerja Activity
+    @Headers("Accept: application/json")
+    @GET("v1/project-list")
+    fun getListTugasKerja(
+        @QueryMap parameter : HashMap<String, String>,
+        @Header("Authorization") token: String,
+    ): Call<ListTugasKerjaResponse>
+
+    //ListTugasKerja - TugsKerjaActibity
+    @Headers("Accept: application/json")
+    @GET("v1/report-list")
+    fun getTugasKerja(
+        @QueryMap parameter : HashMap<String, String>,
+        @Header("Authorization") token: String,
+    ): Call<TugasKerjaResponse>
+
 
 }

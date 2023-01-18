@@ -91,6 +91,9 @@
     <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
     <string name="ok">OK</string>
     <string name="id_karyawann">ID Karyawan</string>
+    <string name="daftar_tugas_kerja">Daftar Tugas Kerja</string>
+    <string name="dev">DEV</string>
+    <string name="title_tugas_kerja">Title Tugas Kerja</string>
 
     //Spinner Bulan - Informasi Dan Berita Activity
     <string-array name="this_month">

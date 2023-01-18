@@ -9,7 +9,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -17,16 +16,12 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.*
 import com.magang.projectmaganglatihan.R
-import com.magang.projectmaganglatihan.adapter.InfoBeritaAdapter
 import com.magang.projectmaganglatihan.adapter.MyProfileAdapter
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityHomeBinding
-import com.magang.projectmaganglatihan.model.InfoBeritaResponse
 import com.magang.projectmaganglatihan.model.MyProfileResponse
 import com.magang.projectmaganglatihan.model.SetDataWajahResponse
 import com.magang.projectmaganglatihan.storage.SharedPrefManager
-import kotlinx.android.synthetic.main.activity_profil.*
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -67,29 +62,28 @@ class HomeActivity : AppCompatActivity() {
         showUsername()
         getProfil()
         getListInfo()
+        getTugasKerja()
         getUserLocation()
         setAbsen()
         checkAvatar()
         checkChangePass()
-
-
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        if (!sharedPref.checkData) {
-//            openDialog()
-//            finish()
-//        }
-
         openDialog()
 
 
-//        val intent = Intent(this, DetectorActivity::class.java)
-//        startActivity(intent)
 
     }
+
+//    override fun onStart() {
+//        super.onStart()
+////        if (!sharedPref.checkData) {
+////            openDialog()
+////            finish()
+////        }
+//
+////        openDialog()
+//
+//
+//    }
 
     private fun getProfil() {
         binding.imgProfil.setOnClickListener {
@@ -201,12 +195,18 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
-
-
     private fun getListInfo() {
         binding.cvInfromasi.setOnClickListener {
             intent = Intent(this, InfoBeritaActivity::class.java)
+            startActivity(intent)
+            sharedPref.companyId
+            tokenLogin()
+        }
+    }
+
+    private fun getTugasKerja() {
+        binding.cvTugasKerja.setOnClickListener {
+            intent = Intent(this, ListTugasKerjaActivity::class.java)
             startActivity(intent)
             sharedPref.companyId
             tokenLogin()

@@ -301,6 +301,28 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         builder.show()
     }
 
+    private fun updateResults(currTimestamp: Long, mappedRecognitions: List<Recognition>) {
+        tracker!!.trackResults(mappedRecognitions, currTimestamp)
+        trackingOverlay!!.postInvalidate()
+        computingDetection = false
+        //adding = false;
+//        if (mappedRecognitions.size > 0) {
+        if (mappedRecognitions.size > 0) {
+            LOGGER.i("Adding results")
+            val rec : Recognition = mappedRecognitions[0]
+            if (rec.extra != null) {
+                showAddFaceDialog(rec)
+                setDataWajah()
+            }
+        }
+
+        runOnUiThread {
+            showFrameInfo(previewWidth.toString() + "x" + previewHeight)
+            showCropInfo(croppedBitmap!!.width.toString() + "x" + croppedBitmap!!.height)
+            showInference(lastProcessingTimeMs.toString() + "ms")
+        }
+    }
+
     private fun setDataWajah() {
 
         val employeeId: RequestBody = sharedPref.employeeId.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -337,28 +359,6 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
             })
     }
 
-    private fun updateResults(currTimestamp: Long, mappedRecognitions: List<Recognition>) {
-        tracker!!.trackResults(mappedRecognitions, currTimestamp)
-        trackingOverlay!!.postInvalidate()
-        computingDetection = false
-        //adding = false;
-//        if (mappedRecognitions.size > 0) {
-        if (mappedRecognitions.size > 0) {
-            LOGGER.i("Adding results")
-            val rec : Recognition = mappedRecognitions[0]
-            if (rec.extra != null) {
-                showAddFaceDialog(rec)
-                setDataWajah()
-            }
-        }
-
-        runOnUiThread {
-            showFrameInfo(previewWidth.toString() + "x" + previewHeight)
-            showCropInfo(croppedBitmap!!.width.toString() + "x" + croppedBitmap!!.height)
-            showInference(lastProcessingTimeMs.toString() + "ms")
-        }
-    }
-
     private fun onFacesDetected(currTimestamp: Long, faces: List<Face>, add: Boolean) {
         cropCopyBitmap = Bitmap.createBitmap(croppedBitmap!!)
         Canvas(cropCopyBitmap!!)
@@ -379,7 +379,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         val sourceH = rgbFrameBitmap!!.height
         val targetW = portraitBmp!!.width
         val targetH = portraitBmp!!.height
-        val transform = createTransform(
+        val transform : Matrix = createTransform(
             sourceW,
             sourceH,
             targetW,
@@ -389,8 +389,9 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
 
         // draws the original image in portrait mode.
         cv.drawBitmap(rgbFrameBitmap!!, transform, null)
+
         val cvFace = Canvas(faceBmp!!)
-        for (face in faces) {
+        for (face : Face  in faces) {
             LOGGER.i("FACE$face")
             LOGGER.i("Running detection on face $currTimestamp")
             //results = detector.recognizeImage(croppedBitmap);
@@ -464,7 +465,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
                     "0", label, confidence, boundingBox)
                 result.color = color
                 result.location = boundingBox
-                result.extra = extra!!
+                result.extra = extra
                 result.crop = crop
                 mappedRecognitions.add(result)
             }
@@ -482,6 +483,7 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         //  private static final boolean TF_OD_API_IS_QUANTIZED = false;
         //  private static final String TF_OD_API_MODEL_FILE = "facenet.tflite";
         //  //private static final String TF_OD_API_MODEL_FILE = "facenet_hiroki.tflite";
+
         // MobileFaceNet
         private const val TF_OD_API_INPUT_SIZE = 112
         private const val TF_OD_API_IS_QUANTIZED = false

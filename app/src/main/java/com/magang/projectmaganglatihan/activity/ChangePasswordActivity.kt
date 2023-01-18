@@ -1,10 +1,14 @@
 package com.magang.projectmaganglatihan.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.magang.projectmaganglatihan.R
 import com.magang.projectmaganglatihan.api.RetrofitClient
 import com.magang.projectmaganglatihan.databinding.ActivityChangePasswordBinding
@@ -60,6 +64,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                 currentPassword,
                 newPassword,
                 newPasswordConfirm).enqueue(object : Callback<ChangePasswordResponse> {
+                @SuppressLint("ResourceType")
                 override fun onResponse(
                     call: Call<ChangePasswordResponse>,
                     response: Response<ChangePasswordResponse>
@@ -67,12 +72,26 @@ class ChangePasswordActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         if (response.code() == 200) {
 
-//                            val intent = Intent(this@ChangePasswordActivity, SplashActivity::class.java)
-//                            startActivity(intent)
+//                            val openDialog = AlertDialog.Builder(this@ChangePasswordActivity)
+//                            val inflater = layoutInflater
+//                            val dialogLayout: View = inflater.inflate(R.layout.dialog_change_password, null)
+//
+//                            openDialog.setItems(R.id.btnMasuk) {dialog, _ ->
+//                                val intent = Intent(this@ChangePasswordActivity, LoginActivity::class.java)
+//                                startActivity(intent)
+//                                dialog.dismiss()
+//                            }
+
+//                            openDialog.setPositiveButton(R.id.btnMasuk) { dialog,_->
+//                                val intent = Intent(this@ChangePasswordActivity, LoginActivity::class.java)
+//                                startActivity(intent)
+//                                dialog.dismiss()
+//                            }
+//                            openDialog.setView(dialogLayout)
+//                            openDialog.show()
 
 
                             Toast.makeText(this@ChangePasswordActivity, "Berhasil", Toast.LENGTH_SHORT).show()
-
                             SharedPrefManager.getInstance(this@ChangePasswordActivity).saveChangePass(true)
 
 

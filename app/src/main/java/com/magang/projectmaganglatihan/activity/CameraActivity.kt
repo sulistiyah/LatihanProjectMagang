@@ -390,15 +390,15 @@ abstract class CameraActivity : AppCompatActivity(),
     }
 
     protected open fun showFrameInfo(frameInfo: String?) {
-        frameValueTextView?.setText(frameInfo)
+        frameValueTextView?.text = frameInfo
     }
 
     protected open fun showCropInfo(cropInfo: String?) {
-        cropValueTextView?.setText(cropInfo)
+        cropValueTextView?.text = cropInfo
     }
 
     protected open fun showInference(inferenceTime: String?) {
-        inferenceTimeTextView?.setText(inferenceTime)
+        inferenceTimeTextView?.text = inferenceTime
     }
 
 

@@ -15,6 +15,7 @@ limitations under the License.
 
 package com.magang.projectmaganglatihan.env;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.util.HashSet;
@@ -48,55 +49,31 @@ public final class Logger {
     this(clazz.getSimpleName());
   }
 
-  /**
-   * Creates a Logger using the specified message prefix.
-   *
-   * @param messagePrefix is prepended to the text of every message.
-   */
+
+
   public Logger(final String messagePrefix) {
     this(DEFAULT_TAG, messagePrefix);
   }
 
-  /**
-   * Creates a Logger with a custom tag and a custom message prefix. If the message prefix is set to
-   *
-   * <pre>null</pre>
-   *
-   * , the caller's class name is used as the prefix.
-   *
-   * @param tag identifies the source of a log message.
-   * @param messagePrefix prepended to every message if non-null. If null, the name of the caller is
-   *     being used
-   */
+
   public Logger(final String tag, final String messagePrefix) {
     this.tag = tag;
     final String prefix = messagePrefix == null ? getCallerSimpleName() : messagePrefix;
     this.messagePrefix = (prefix.length() > 0) ? prefix + ": " : prefix;
   }
 
-  /** Creates a Logger using the caller's class name as the message prefix. */
+
   public Logger() {
     this(DEFAULT_TAG, null);
   }
 
-  /** Creates a Logger using the caller's class name as the message prefix. */
+
   public Logger(final int minLogLevel) {
     this(DEFAULT_TAG, null);
     this.minLogLevel = minLogLevel;
   }
 
-  /**
-   * Return caller's simple name.
-   *
-   * <p>Android getStackTrace() returns an array that looks like this: stackTrace[0]:
-   * dalvik.system.VMStack stackTrace[1]: java.lang.Thread stackTrace[2]:
-   * com.google.android.apps.unveil.env.UnveilLogger stackTrace[3]:
-   * com.google.android.apps.unveil.BaseApplication
-   *
-   * <p>This function returns the simple version of the first non-filtered name.
-   *
-   * @return caller's simple name
-   */
+
   private static String getCallerSimpleName() {
     // Get the current callstack so we can pull the class of the caller off of it.
     final StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -125,60 +102,70 @@ public final class Logger {
     return messagePrefix + (args.length > 0 ? String.format(format, args) : format);
   }
 
+  @SuppressLint("LogTagMismatch")
   public void v(final String format, final Object... args) {
     if (isLoggable(Log.VERBOSE)) {
       Log.v(tag, toMessage(format, args));
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void v(final Throwable t, final String format, final Object... args) {
     if (isLoggable(Log.VERBOSE)) {
       Log.v(tag, toMessage(format, args), t);
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void d(final String format, final Object... args) {
     if (isLoggable(Log.DEBUG)) {
       Log.d(tag, toMessage(format, args));
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void d(final Throwable t, final String format, final Object... args) {
     if (isLoggable(Log.DEBUG)) {
       Log.d(tag, toMessage(format, args), t);
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void i(final String format, final Object... args) {
     if (isLoggable(Log.INFO)) {
       Log.i(tag, toMessage(format, args));
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void i(final Throwable t, final String format, final Object... args) {
     if (isLoggable(Log.INFO)) {
       Log.i(tag, toMessage(format, args), t);
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void w(final String format, final Object... args) {
     if (isLoggable(Log.WARN)) {
       Log.w(tag, toMessage(format, args));
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void w(final Throwable t, final String format, final Object... args) {
     if (isLoggable(Log.WARN)) {
       Log.w(tag, toMessage(format, args), t);
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void e(final String format, final Object... args) {
     if (isLoggable(Log.ERROR)) {
       Log.e(tag, toMessage(format, args));
     }
   }
 
+  @SuppressLint("LogTagMismatch")
   public void e(final Throwable t, final String format, final Object... args) {
     if (isLoggable(Log.ERROR)) {
       Log.e(tag, toMessage(format, args), t);
